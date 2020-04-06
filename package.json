@@ -93,11 +93,11 @@
       {
         "label": "WeChat Dark",
         "uiTheme": "vs-dark",
-        "path": "./themes/editor-theme-dark-color-theme.json"
+        "path": "./themes/dark.json"
       }, {
         "label": "WeChat Light",
         "uiTheme": "vs",
-        "path": "./themes/editor-theme-color-theme.json"
+        "path": "./themes/light.json"
       }
     ]
   },
