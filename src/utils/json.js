@@ -1,8 +1,12 @@
 const fs = require('fs');
 
-function updateJSON(filePath, key, value, method = '') {
+function readJSON(filePath) {
   const content = fs.readFileSync(filePath);
-  const appConfig = JSON.parse(content);
+  return JSON.parse(content);
+}
+
+function updateJSON(filePath, key, value, method = '') {
+  const appConfig = readJSON(filePath);
 
   if (method) {
     appConfig[key][method](value);
@@ -13,4 +17,5 @@ function updateJSON(filePath, key, value, method = '') {
   fs.writeFileSync(filePath, JSON.stringify(appConfig, null, 2));
 }
 
+exports.readJSON = readJSON;
 exports.updateJSON = updateJSON;
