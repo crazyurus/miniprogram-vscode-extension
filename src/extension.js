@@ -1,14 +1,15 @@
 const WxmlExtension = require('./wxml');
+const plugins = [
+  WxmlExtension,
+];
 
 function activate(context) {
-  const plugins = [
-    WxmlExtension,
-  ];
-
   plugins.forEach(plugin => plugin.activate(context));
 }
 
-exports.activate = activate;
+function deactivate() {
+  plugins.forEach(plugin => plugin.deactivate());
+}
 
-function deactivate() {}
+exports.activate = activate;
 exports.deactivate = deactivate;
