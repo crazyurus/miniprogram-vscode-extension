@@ -58,15 +58,15 @@
     ],
     "jsonValidation": [
       {
-        "url": "./validations/app.json", 
+        "url": "./validations/app.json",
         "fileMatch": "*/app.json"
       },
       {
-        "url": "./validations/page.json", 
+        "url": "./validations/page.json",
         "fileMatch": "*/pages/*.json"
       },
       {
-        "url": "./validations/project.json", 
+        "url": "./validations/project.json",
         "fileMatch": "*/project.json"
       }
     ],
@@ -108,7 +108,8 @@
         "label": "WeChat Dark",
         "uiTheme": "vs-dark",
         "path": "./themes/dark.json"
-      }, {
+      },
+      {
         "label": "WeChat Light",
         "uiTheme": "vs",
         "path": "./themes/light.json"
@@ -117,17 +118,17 @@
     "menus": {
       "explorer/context": [
         {
-          "when": "explorerResourceIsFolder == true", 
+          "when": "explorerResourceIsFolder == true",
           "command": "MiniProgram.commands.config.compileDir",
           "group": "compile"
         },
         {
-          "when": "explorerResourceIsFolder == true", 
+          "when": "explorerResourceIsFolder == true",
           "command": "MiniProgram.commands.create.page",
           "group": "file"
         },
         {
-          "when": "explorerResourceIsFolder == true", 
+          "when": "explorerResourceIsFolder == true",
           "command": "MiniProgram.commands.create.component",
           "group": "file"
         }
@@ -149,8 +150,7 @@
     ]
   },
   "activationEvents": [
-    "onLanguage:xml",
-    "onLanguage:xsl"
+    "*"
   ],
   "main": "./src/extension.js",
   "dependencies": {
