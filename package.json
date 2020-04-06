@@ -7,7 +7,7 @@
   "publisher": "Crazy Urus",
   "license": "GPL-3.0",
   "engines": {
-    "vscode": "^1.28.0"
+    "vscode": "*"
   },
   "categories": [
     "Snippets",
@@ -63,6 +63,15 @@
         ],
         "extensions": [
           ".wxs"
+        ]
+      },
+      {
+        "id": "css",
+        "aliases": [
+          "CSS"
+        ],
+        "extensions": [
+          ".wxss"
         ]
       }
     ]
