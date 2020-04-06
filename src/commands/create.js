@@ -48,12 +48,19 @@ function create(type, value, uri) {
   vscode.window.showInformationMessage(name + ' ' + value + ' 创建成功');
 }
 
+function validate(name) {
+  if (/^[a-zA-Z0-9-]+$/.test(name)) return null;
+  return '名称只能包含数字、字母、中划线';
+}
+
 function activate(context) {
   vscode.commands.registerCommand('MiniProgram.commands.create.page', e => {
     const uri = vscode.Uri.parse(e.fsPath);	
     	
     vscode.window.showInputBox({
+      prompt: '页面名称',
       placeHolder: '请输入页面名称，如：index',
+      validateInput: validate
     }).then(value => {
       if (value) {
         create('page', value, uri);
@@ -65,7 +72,9 @@ function activate(context) {
     const uri = vscode.Uri.parse(e.fsPath);	
     	
     vscode.window.showInputBox({
+      prompt: '组件名称',
       placeHolder: '请输入组件名称，如：input',
+      validateInput: validate
     }).then(value => {
       if (value) {
         create('component', value, uri);
