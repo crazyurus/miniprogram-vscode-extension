@@ -1,0 +1,116 @@
+{
+  "***": "***",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "pages": {
+      "***": "***",
+      "type": "array"
+    },
+    "window": {
+      "type": "object",
+      "properties": {
+        "navigationBarBackgroundColor": {
+          "type": "string",
+          "default": "#000000"
+        },
+        "navigationBarTextStyle": {
+          "type": "string",
+          "default": "white",
+          "enum": ["black", "white"]
+        },
+        "navigationBarTitleText": {
+          "type": "string"
+        },
+        "transparentTitle": {
+          "type": "string",
+          "default": "none"
+        },
+        "navigationStyle": {
+          "default": "default",
+          "type": "string",
+          "enum": ["default", "custom"]
+        },
+        "backgroundColor": {
+          "type": "string",
+          "default": "#ffffff"
+        },
+        "backgroundTextStyle": {
+          "type": "string",
+          "default": "dark",
+          "enum": ["dark", "light"]
+        },
+        "backgroundColorTop": {
+          "type": "string",
+          "default": "#ffffff"
+        },
+        "backgroundColorBottom": {
+          "type": "string",
+          "default": "#ffffff"
+        },
+        "enablePullDownRefresh": {
+          "type": "boolean",
+          "default": false,
+          "enum": [true, false]
+        },
+        "onReachBottomDistance": {
+          "type": "number",
+          "default": 50
+        }
+      }
+    },
+    "tabBar": {
+      "type": "object",
+      "required": ["color", "selectedColor"],
+      "properties": {
+        "color": {
+          "type": "string",
+          "default": "#ffffff"
+        },
+        "selectedColor": {
+          "type": "string",
+          "default": "#ffffff"
+        },
+        "backgroundColor": {
+          "type": "string",
+          "default": "#ffffff"
+        },
+        "borderStyle": {
+          "type": "string",
+          "default": "black",
+          "enum": ["black", "white"]
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pagePath": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "iconPath": {
+                "type": "string"
+              },
+              "selectedIconPath": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "position": {
+          "description": "tabBar的位置",
+          "default": "bottom",
+          "type": "string",
+          "enum": ["bottom", "top"]
+        }
+      }
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

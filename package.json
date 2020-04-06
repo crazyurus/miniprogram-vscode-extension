@@ -56,6 +56,20 @@
         "path": "./snippets/json.json"
       }
     ],
+    "jsonValidation": [
+      {
+        "url": "./validations/app.json", 
+        "fileMatch": "*/app.json"
+      },
+      {
+        "url": "./validations/page.json", 
+        "fileMatch": "*/pages/*.json"
+      },
+      {
+        "url": "./validations/project.json", 
+        "fileMatch": "*/project.json"
+      }
+    ],
     "languages": [
       {
         "id": "xml",
