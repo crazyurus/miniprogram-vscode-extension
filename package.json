@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "icon": "./assets/logo.png",
   "publisher": "Crazy Urus",
+  "license": "GPL-3.0",
   "engines": {
     "vscode": "^1.28.0"
   },
@@ -51,6 +52,17 @@
         ],
         "extensions": [
           ".wxml"
+        ]
+      },
+      {
+        "id": "javascript",
+        "aliases": [
+          "JavaScript",
+          "javascript",
+          "js"
+        ],
+        "extensions": [
+          ".wxs"
         ]
       }
     ]
