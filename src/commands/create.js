@@ -1,6 +1,8 @@
 const vscode = require('vscode');
 const path = require('path');
 const fs = require('fs');
+const { updateJSON } = require('../utils/json');
+
 const pageTemplate = require('../templates/page');
 const componentTemplate = require('../templates/component');
 
@@ -33,15 +35,11 @@ function create(type, value, uri) {
     const appConfigFile = currentPath + path.sep + 'app.json';
 
     if (fs.existsSync(appConfigFile)) {
-      const content = fs.readFileSync(appConfigFile);
-      const appConfig = JSON.parse(content);
       const pagePath = uri.path
         .replace(currentPath, '')
         .slice(1);
 
-      appConfig.pages.push(pagePath + '/' + value);
-
-      fs.writeFileSync(appConfigFile, JSON.stringify(appConfig, null, 2));
+      updateJSON(appConfigFile, 'pages', pagePath + '/' + value, 'push');
     }
   }
 

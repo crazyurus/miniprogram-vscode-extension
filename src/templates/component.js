@@ -30,7 +30,7 @@ Component({
 exports.json = `
 {
   "component": true,
-  "usingComponents": {},
+  "usingComponents": {}
 }
 `;
 

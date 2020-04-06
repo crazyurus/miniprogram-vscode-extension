@@ -20,6 +20,13 @@
 - 支持 `WXML` `WXSS` `WXS` 的语法高亮
 - 支持快速创建 `Page` 及 `Component`
 
+### 组件支持
+
+> 开发中
+
+- 支持点击自定义组件跳转到对应文件
+- 支持点击绑定的函数名跳转到对应函数定义
+
 ### 预览和上传小程序
 
 > 开发中
@@ -41,6 +48,8 @@
 ## 致谢
 
 感谢以下开源项目：
+
+- [minapp-vscode](https://github.com/wx-minapp/minapp-vscode)
 
 - [vscode-miniapp-helper](https://github.com/overtrue/vscode-miniapp-helper)
 

@@ -29,7 +29,7 @@ Page({
 exports.json = `
 {
   "navigationBarTitleText": "",
-  "usingComponents": {},
+  "usingComponents": {}
 }
 `;
 
