@@ -1,7 +1,7 @@
 {
   "name": "miniprogram-vscode-extension",
   "displayName": "微信小程序开发工具",
-  "description": "提供代码补全、语法高亮、打包上传等特性",
+  "description": "提供代码补全、语法高亮、项目模版、打包上传等功能",
   "version": "1.0.0",
   "icon": "./assets/logo.png",
   "publisher": "Crazy Urus",
