@@ -1,0 +1,43 @@
+{
+  "name": "miniprogram-vscode-extension",
+  "displayName": "微信小程序开发工具",
+  "description": "提供代码补全、语法高亮、打包上传等特性",
+  "version": "1.0.0",
+  "icon": "assets/logo.png",
+  "publisher": "Crazy Urus",
+  "engines": {
+    "vscode": "^1.28.0"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "keywords": [
+    "小程序",
+    "微信",
+    "wechat",
+    "miniprogram",
+    "wxml"
+  ],
+  "author": {
+    "email": "crazyurus@vip.qq.com",
+    "name": "Crazy Urus",
+    "url": "https://github.com/crazyurus"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crazyurus/miniprogram-vscode-extension"
+  },
+  "bugs": {
+    "url": "https://github.com/crazyurus/miniprogram-vscode-extension/issues",
+    "email": "crazyurus@vip.qq.com"
+  },
+  "contributes": {
+    "snippets": [{
+      "language": "javascript",
+      "path": "./snippets/snippets.js.json"
+    }, {
+      "language": "typescript",
+      "path": "./snippets/snippets.ts.json"
+    }]
+  }
+}
