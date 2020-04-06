@@ -18,6 +18,9 @@
     "小程序",
     "微信",
     "wechat",
+    "weixin",
+    "weapp",
+    "mina",
     "miniprogram",
     "wxml"
   ],
@@ -60,7 +63,8 @@
           "XML"
         ],
         "extensions": [
-          ".wxml"
+          ".wxml",
+          ".ttml"
         ]
       },
       {
@@ -80,7 +84,8 @@
           "CSS"
         ],
         "extensions": [
-          ".wxss"
+          ".wxss",
+          ".ttss"
         ]
       }
     ],
