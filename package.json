@@ -38,11 +38,19 @@
     "snippets": [
       {
         "language": "javascript",
-        "path": "./snippets/snippets.js.json"
+        "path": "./snippets/js.json"
       },
       {
         "language": "typescript",
-        "path": "./snippets/snippets.ts.json"
+        "path": "./snippets/ts.json"
+      },
+      {
+        "language": "xml",
+        "path": "./snippets/wxml.json"
+      },
+      {
+        "language": "json",
+        "path": "./snippets/json.json"
       }
     ],
     "languages": [

@@ -1,0 +1,67 @@
+{
+  "app-debug": {
+    "prefix": "debug",
+    "description": "App 对应的 JSON 文件 debug 配置项，是否是调试模式",
+    "body": "\"debug\":true,\n  "
+  },
+  "app-functionalPages": {
+    "prefix": "functionalPages",
+    "description": "是否启用插件功能页",
+    "body": "\"functionalPages\":false,\n  "
+  },
+  "app-network": {
+    "prefix": "networktimeout",
+    "description": "App 对应的 JSON 文件 networktimeout 配置项，超时设置",
+    "body": "\"networkTimeout\": {\n\t\"request\": ${1:10000},\n\t\"connectSocket\": ${2:10000},\n\t\"uploadFile\": ${3:10000},\n\t\"downloadFile\": ${4:10000}\n},\n${5}\n  "
+  },
+  "app-pages": {
+    "prefix": "pages",
+    "description": "App 对应的 JSON 文件 pages 配置项",
+    "body": "\"pages\": [\n\t\"pages/index/index\"\n],\n${1}\n  "
+  },
+  "app-plugins": {
+    "prefix": "plugins",
+    "description": "使用到的插件",
+    "body": "\"plugins\":{},\n  "
+  },
+  "app-preloadRule": {
+    "prefix": "preloadRule",
+    "description": "分包预下载规则",
+    "body": "\"preloadRule\":{},\n  "
+  },
+  "app-requiredBackgroundModes": {
+    "prefix": "requiredBackgroundModes",
+    "description": "需要在后台使用的能力，如“音乐播放”",
+    "body": "\"requiredBackgroundModes\":[\"audio\"],\n  "
+  },
+  "app-resizable": {
+    "prefix": "resizable",
+    "description": "iPad 小程序是否支持屏幕旋转，默认关闭",
+    "body": "\"resizable\":false,\n  "
+  },
+  "app-subPackages": {
+    "prefix": "subPackages",
+    "description": "App 对应的 JSON 文件 subPackages 配置项，分包结构配置",
+    "body": "\"subPackages\":[],\n  "
+  },
+  "app-tabbar": {
+    "prefix": "tabbar",
+    "description": "App 对应的 JSON 文件 tabbar 配置项",
+    "body": "\"tabBar\": {\n\t\"color\": \"${1}\",\n\t\"selectedColor\": \"${2}\",\n\t\"backgroundColor\": \"${3}\",\n\t\"position\": \"bottom\",\n\t\"borderStyle\": \"black\",\n\t\"list\": [\n\t\t{\n\t\t\t\"pagePath\": \"${4}\",\n\t\t\t\"text\": \"${5}\",\n\t\t\t\"iconPath\": \"${6}\",\n\t\t\t\"selectedIconPath\": \"${7}\"\n\t\t}\n\t]\n},\n${8}\n  "
+  },
+  "app-window": {
+    "prefix": "window",
+    "description": "App 对应的 JSON 文件 window 配置项",
+    "body": "\"window\": {\n\t\"navigationBarBackgroundColor\": \"#000000\",\n\t\"navigationBarTextStyle\": \"white\",\n\t\"navigationBarTitleText\": \"\",\n\t\"navigationStyle\": \"default|custom\",\n\t\"backgroundColor\": \"#ffffff\",\n\t\"backgroundTextStyle\": \"dark|light\",\n\t\"backgroundColorTop\": \"#ffffff\",\n\t\"backgroundColorBottom\": \"#ffffff\",\n\t\"enablePullDownRefresh\": true,\n\t\"onReachBottomDistance\": 50\n},\n${1}\n  "
+  },
+  "app-workers": {
+    "prefix": "workers",
+    "description": "Worker 代码放置的目录",
+    "body": "\"workers\":\"\",\n  "
+  },
+  "page-json": {
+    "prefix": "page",
+    "description": "Page 页面对应的 JSON 文件配置项",
+    "body": "{\n\t\"navigationBarBackgroundColor\": \"#000000\",\n\t\"navigationBarTextStyle\": \"white\",\n\t\"navigationBarTitleText\": \"\",\n\t\"backgroundColor\": \"#ffffff\",\n\t\"backgroundTextStyle\": \"dark|light\",\n\t\"enablePullDownRefresh\": false,\n\t\"disableScroll\": false,\n\t\"onReachBottomDistance\": false\n}\n  "
+  }
+}
