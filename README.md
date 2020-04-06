@@ -17,9 +17,12 @@
 
 - 支持小程序 API 的代码补全
 - 支持 `WXML` 中组件的代码补全
-- 支持 `WXML` `WXSS` `WXS` 的语法高亮 
+- 支持 `WXML` `WXSS` `WXS` 的语法高亮
+- 支持快速创建 `Page` 及 `Component`
 
 ### 预览和上传小程序
+
+> 开发中
 
 - 支持设置小程序上传目录
 - 支持扫码预览小程序
@@ -40,6 +43,8 @@
 感谢以下开源项目：
 
 - [vscode-miniapp-helper](https://github.com/overtrue/vscode-miniapp-helper)
+
+- [w-extension](https://github.com/masterZSH/w-extension)
 
 ## License
 
