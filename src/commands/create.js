@@ -20,9 +20,29 @@ function create(type, value, uri) {
   }
 
   if (type === 'page') {
-    const projectFolder = vscode.workspace.filePath;
-    // TODO: 更新 app.json
-    console.log(projectFolder);
+    const projectPath = vscode.workspace.rootPath;
+    let currentPath = uri.path;
+
+    while (
+      !fs.existsSync(currentPath + path.sep + 'app.json') &&
+      currentPath !== projectPath
+      ) {
+      currentPath = currentPath.split(path.sep).slice(0, -1).join(path.sep);
+    }
+
+    const appConfigFile = currentPath + path.sep + 'app.json';
+
+    if (fs.existsSync(appConfigFile)) {
+      const content = fs.readFileSync(appConfigFile);
+      const appConfig = JSON.parse(content);
+      const pagePath = uri.path
+        .replace(currentPath, '')
+        .slice(1);
+
+      appConfig.pages.push(pagePath + '/' + value);
+
+      fs.writeFileSync(appConfigFile, JSON.stringify(appConfig, null, 2));
+    }
   }
 
   vscode.window.showInformationMessage(name + ' ' + value + ' 创建成功');
