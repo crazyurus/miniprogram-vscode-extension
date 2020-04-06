@@ -3,13 +3,14 @@
   "displayName": "微信小程序开发工具",
   "description": "提供代码补全、语法高亮、打包上传等特性",
   "version": "1.0.0",
-  "icon": "assets/logo.png",
+  "icon": "./assets/logo.png",
   "publisher": "Crazy Urus",
   "engines": {
     "vscode": "^1.28.0"
   },
   "categories": [
-    "Snippets"
+    "Snippets",
+    "Programming Languages"
   ],
   "keywords": [
     "小程序",
@@ -32,12 +33,34 @@
     "email": "crazyurus@vip.qq.com"
   },
   "contributes": {
-    "snippets": [{
-      "language": "javascript",
-      "path": "./snippets/snippets.js.json"
-    }, {
-      "language": "typescript",
-      "path": "./snippets/snippets.ts.json"
-    }]
+    "snippets": [
+      {
+        "language": "javascript",
+        "path": "./snippets/snippets.js.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./snippets/snippets.ts.json"
+      }
+    ],
+    "languages": [
+      {
+        "id": "xml",
+        "aliases": [
+          "XML"
+        ],
+        "extensions": [
+          ".wxml"
+        ]
+      }
+    ]
+  },
+  "activationEvents": [
+    "onLanguage:xml",
+    "onLanguage:xsl"
+  ],
+  "main": "./src/extension.js",
+  "dependencies": {
+    "js-beautify": "latest"
   }
 }
