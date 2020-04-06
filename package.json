@@ -7,11 +7,12 @@
   "publisher": "Crazy Urus",
   "license": "GPL-3.0",
   "engines": {
-    "vscode": "*"
+    "vscode": "^1.25.0"
   },
   "categories": [
     "Snippets",
-    "Programming Languages"
+    "Programming Languages",
+    "Other"
   ],
   "keywords": [
     "小程序",
@@ -73,6 +74,17 @@
         "extensions": [
           ".wxss"
         ]
+      }
+    ],
+    "themes": [
+      {
+        "label": "WeChat Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/editor-theme-dark-color-theme.json"
+      }, {
+        "label": "WeChat Light",
+        "uiTheme": "vs",
+        "path": "./themes/editor-theme-color-theme.json"
       }
     ]
   },
