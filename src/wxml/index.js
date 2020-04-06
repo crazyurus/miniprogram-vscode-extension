@@ -3,66 +3,11 @@ const JSBeautify = require('js-beautify')
 
 var vkbeautify;
 
-function createShiftArr(step) {
-
-  var space = '    ';
-
-  if (isNaN(parseInt(step))) {
-    space = step;
-  } else {
-    switch (step) {
-      case 1:
-        space = ' ';
-        break;
-      case 2:
-        space = '  ';
-        break;
-      case 3:
-        space = '   ';
-        break;
-      case 4:
-        space = '    ';
-        break;
-      case 5:
-        space = '     ';
-        break;
-      case 6:
-        space = '      ';
-        break;
-      case 7:
-        space = '       ';
-        break;
-      case 8:
-        space = '        ';
-        break;
-      case 9:
-        space = '         ';
-        break;
-      case 10:
-        space = '          ';
-        break;
-      case 11:
-        space = '           ';
-        break;
-      case 12:
-        space = '            ';
-        break;
-    }
-  }
-
-  var shift = ['\n'];
-  for (ix = 0; ix < 100; ix++) {
-    shift.push(shift[ix] + space);
-  }
-  return shift;
-}
-
 function VKBeautify() {
   var settings = vscode.workspace.getConfiguration();
   this.insertSpaces = settings.editor.insertSpaces
   this.step = settings.editor.insertSpaces ? settings.editor.tabSize : '\t';
   this.tabSize = settings.editor.tabSize
-  // this.shift = createShiftArr(this.step);
 };
 
 VKBeautify.prototype.xml = function(text, step) {

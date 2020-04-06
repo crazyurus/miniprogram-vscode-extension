@@ -2,11 +2,11 @@
   "name": "wechat-dark",
   "type": "dark",
   "colors": {
-    "editor.background": "#2E2E2E", //编辑器背景色
-    "editor.foreground": "#DCDCDC", //编辑器的默认前景色
-    "editorLineNumber.foreground": "#4B4B4B", //编辑器行号的颜色
-    "editorGroup.border": "#444444", //编辑器组彼此分开
-    "editorGroupHeader.tabsBackground": "#383838", //Tabs容器的背景色。
+    "editor.background": "#2E2E2E",
+    "editor.foreground": "#DCDCDC",
+    "editorLineNumber.foreground": "#4B4B4B",
+    "editorGroup.border": "#444444",
+    "editorGroupHeader.tabsBackground": "#383838",
 
     "editor.lineHighlightBorder": "#ffffff00",
     "editor.lineHighlightBackground": "#ffffff20",
@@ -42,9 +42,6 @@
     "statusBar.foreground": "#9b9b9b",
 
     "editor.findMatchHighlightBackground": "#534333"
-
-    // "list.filterMatchBackground": "#ff0000",
-    // "match"
   },
   "tokenColors": [
     {

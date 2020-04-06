@@ -2,7 +2,7 @@
   "name": "miniprogram-vscode-extension",
   "displayName": "微信小程序开发工具",
   "description": "提供代码补全、语法高亮、项目模版、打包上传等功能",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "icon": "assets/logo.png",
   "publisher": "crazyurus",
   "license": "GPL-3.0",
@@ -112,6 +112,39 @@
         "label": "WeChat Light",
         "uiTheme": "vs",
         "path": "./themes/light.json"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "when": "explorerResourceIsFolder == true", 
+          "command": "MiniProgram.commands.config.compileDir",
+          "group": "compile"
+        },
+        {
+          "when": "explorerResourceIsFolder == true", 
+          "command": "MiniProgram.commands.create.page",
+          "group": "file"
+        },
+        {
+          "when": "explorerResourceIsFolder == true", 
+          "command": "MiniProgram.commands.create.component",
+          "group": "file"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "MiniProgram.commands.config.compileDir",
+        "title": "设置为编译上传目录"
+      },
+      {
+        "command": "MiniProgram.commands.create.page",
+        "title": "新建 Page"
+      },
+      {
+        "command": "MiniProgram.commands.create.component",
+        "title": "新建 Component"
       }
     ]
   },

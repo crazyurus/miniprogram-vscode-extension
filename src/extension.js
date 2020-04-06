@@ -1,6 +1,10 @@
 const WxmlExtension = require('./wxml');
+const CommandExtension = require('./commands');
+
 const plugins = [
   WxmlExtension,
+  CommandExtension.create,
+  CommandExtension.compile,
 ];
 
 function activate(context) {
