@@ -2,6 +2,7 @@ const vscode = require('vscode');
 const path = require('path');
 const fs = require('fs');
 const { updateJSON } = require('../utils/json');
+const { getCurrentFolderPath } = require('../utils/path');
 
 const pageTemplate = require('../templates/page');
 const componentTemplate = require('../templates/component');
@@ -22,7 +23,7 @@ function create(type, value, uri) {
   }
 
   if (type === 'page') {
-    const projectPath = vscode.workspace.rootPath;
+    const projectPath = getCurrentFolderPath();
     let currentPath = uri.path;
 
     while (
