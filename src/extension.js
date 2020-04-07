@@ -5,6 +5,7 @@ const plugins = [
   WxmlExtension,
   CommandExtension.create,
   CommandExtension.compile,
+  CommandExtension.project,
 ];
 
 function activate(context) {
