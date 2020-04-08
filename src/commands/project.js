@@ -7,7 +7,7 @@ function setStatusBar() {
   if (projectConfig) {
     const item = vscode.window.createStatusBarItem(1, 24);
 
-    item.text = `${projectConfig.projectname} (${projectConfig.appid})`;
+    item.text = `$(bookmark) ${projectConfig.projectname} (${projectConfig.appid})`;
     item.tooltip = '查看项目的详细配置';
     item.command = 'MiniProgram.commands.config.project';
     item.show();

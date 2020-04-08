@@ -2,7 +2,7 @@
   "name": "miniprogram-vscode-extension",
   "displayName": "微信小程序开发工具",
   "description": "提供代码补全、语法高亮、项目模版、打包上传等功能",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "icon": "assets/logo.png",
   "publisher": "crazyurus",
   "license": "GPL-3.0",
@@ -12,6 +12,10 @@
   "categories": [
     "Snippets",
     "Programming Languages",
+    "Themes",
+    "Formatters",
+    "Debuggers",
+    "Extension Packs",
     "Other"
   ],
   "keywords": [
@@ -140,20 +144,49 @@
         "title": "设置为编译上传目录"
       },
       {
+        "command": "MiniProgram.commands.config.project",
+        "title": "查看项目配置",
+        "category": "MiniProgram"
+      },
+      {
         "command": "MiniProgram.commands.create.page",
         "title": "新建 Page"
       },
       {
         "command": "MiniProgram.commands.create.component",
         "title": "新建 Component"
+      },
+      {
+        "command": "MiniProgram.commands.compile.npm",
+        "title": "构建 NPM",
+        "category": "MiniProgram"
+      },
+      {
+        "command": "MiniProgram.commands.compile.preview",
+        "title": "预览小程序",
+        "category": "MiniProgram"
+      },
+      {
+        "command": "MiniProgram.commands.compile.upload",
+        "title": "打包并上传到微信后台",
+        "category": "MiniProgram"
       }
-    ]
+    ],
+    "views": {
+      "explorer": [
+          {
+              "id": "miniprogram-view", 
+              "name": "微信小程序"
+          }
+      ]
+    }
   },
   "activationEvents": [
     "*"
   ],
-  "main": "./src/extension.js",
+  "main": "./src/index.js",
   "dependencies": {
-    "js-beautify": "latest"
+    "js-beautify": "^1.11.0",
+    "miniprogram-ci": "^1.0.18"
   }
 }

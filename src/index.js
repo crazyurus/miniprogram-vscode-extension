@@ -1,8 +1,10 @@
-const WxmlExtension = require('./wxml');
+const WxmlExtension = require('./extensions/wxml');
+const ViewExtension = require('./extensions/view');
 const CommandExtension = require('./commands');
 
 const plugins = [
   WxmlExtension,
+  ViewExtension,
   CommandExtension.create,
   CommandExtension.compile,
   CommandExtension.project,
