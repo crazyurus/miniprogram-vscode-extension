@@ -107,6 +107,7 @@ function compile(context) {
       vscode.window.showInformationMessage('开始构建小程序');
       
       const tempImagePath = os.tmpdir + path.sep + project.appid + '-qrcode.jpg';
+      const projectConfig = readProjectConfig();
       const { spawn } = require('child_process');
       const childProcess = spawn('node', [
         __dirname + '../../../bin/preview.js',
@@ -124,9 +125,51 @@ function compile(context) {
         const webiewPanel = vscode.window.createWebviewPanel('qrcode', '预览小程序');
         const webview = webiewPanel.webview;
         const base64 = fs.readFileSync(tempImagePath);
+        const html = `
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <style>
+                body {
+                  line-height: 1.6;
+                }
+                .title {
+                  text-align: center;
+                  font-size: 20px;
+                  margin-top: 30px;
+                }
+                .qrcode {
+                  display: block;
+                  width: 280px;
+                  margin: 15px auto;
+                  border: 1px solid #E2E2E2;
+                }
+                .footer {
+                  box-sizing: border-box;
+                  width: 280px;
+                  margin: 0 auto;
+                  background-color: #232323;
+                  border-radius: 100px;
+                  font-size: 13px;
+                  text-align: center;
+                  box-shadow: inset 0 5px 10px -5px #191919, 0 1px 0 0 #444;
+                  padding: 7px 14px;
+                }
+              </style>
+            </head>
+            <body>
+              <div class="title">微信小程序预览</div>
+              <img class="qrcode" src="${base64}">
+              <div class="footer">
+                <div>请使用微信扫描二维码预览</div>
+                <div>“${projectConfig.projectname}”</div>
+              </div>
+            </body>
+          </html>
+        `;
 
         vscode.window.showInformationMessage('构建完成');
-        webview.html = `<img src="${base64}">`;
+        webview.html = html;
       });
     });
   });
