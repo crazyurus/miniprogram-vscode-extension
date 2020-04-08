@@ -12,7 +12,7 @@ function createProject(context) {
   const projectConfig = readProjectConfig();
   const options = {
     appid: projectConfig.appid,
-    type: projectConfig.compileType,
+    type: projectConfig.compileType === 'miniprogram' ? 'miniProgram' : 'miniProgramPlugin',
     projectPath: projectConfig.miniprogramRoot || rootPath,
     ignores: ['node_modules/**/*'],
   };
@@ -80,9 +80,11 @@ function compileDir() {
 }
 
 function compile(context) {
-  vscode.commands.registerCommand('MiniProgram.commands.compile.npm', e => {
-    const rootPath = getCurrentFolderPath();
+  const projectConfig = readProjectConfig();
+  const rootPath = getCurrentFolderPath();
 
+  // 构建 npm
+  vscode.commands.registerCommand('MiniProgram.commands.compile.npm', e => {
     if (fs.existsSync(rootPath + path.sep + 'package.json')) {
       createProject(context).then(project => {
         ci.packNpm(project, {
@@ -98,6 +100,31 @@ function compile(context) {
     } else {
       vscode.window.showWarningMessage('未找到 package.json 文件');
     }
+  });
+
+  // 预览
+  vscode.commands.registerCommand('MiniProgram.commands.compile.preview', e => {
+    createProject(context).then(project => {
+      try {
+        ci.preview({
+          project,
+          desc: '来自 VSCode MiniProgram Extension',
+          setting: projectConfig.setting,
+          qrcodeFormat: 'image',
+          qrcodeOutputDest: '/Users/crazyurus/Projects/个人/miniprogram-vscode-extension/src/commands/qrcode.jpg',
+          onProgressUpdate(info) {
+            // vscode.window.showInformationMessage('编译项目中\n' + info._msg);
+          },
+        });
+      } catch (e) {
+        console.log(e);
+      }
+      
+    }).catch(err => {
+      if (err) {
+        vscode.window.showErrorMessage(err);
+      }
+    });
   });
 }
 
