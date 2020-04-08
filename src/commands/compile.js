@@ -1,7 +1,7 @@
 const vscode = require('vscode');
 const path = require('path');
 const fs = require('fs');
-const ci = require('miniprogram-ci');
+const os = require('os');
 const { updateJSON } = require('../utils/json');
 const { getCurrentFolderPath } = require('../utils/path');
 const { readProjectConfig } = require('../utils/project');
@@ -22,12 +22,10 @@ function createProject(context) {
   }
 
   if (privateKeyPath && fs.existsSync(privateKeyPath)) {
-    return Promise.resolve(
-      new ci.Project({
-        ...options,
-        privateKeyPath,
-      })
-    );
+    return Promise.resolve({
+      ...options,
+      privateKeyPath,
+    });
   }
 
   return new Promise((resolve, reject) => {
@@ -52,12 +50,10 @@ function createProject(context) {
         const keyFile = result[0].path;
         context.workspaceState.update('privateKeyPath', keyFile);
 
-        resolve(
-          new ci.Project({
-            ...options,
-            privateKeyPath: keyFile,
-          })
-        );
+        resolve({
+          ...options,
+          privateKeyPath: keyFile,
+        });
       } else {
         reject();
       }
@@ -84,9 +80,12 @@ function compile(context) {
   const rootPath = getCurrentFolderPath();
 
   // 构建 npm
-  vscode.commands.registerCommand('MiniProgram.commands.compile.npm', e => {
+  vscode.commands.registerCommand('MiniProgram.commands.compile.npm', () => {
     if (fs.existsSync(rootPath + path.sep + 'package.json')) {
-      createProject(context).then(project => {
+      createProject(context).then(options => {
+        const ci = require('miniprogram-ci');
+        const project = ci.Project(options);
+
         ci.packNpm(project, {
           reporter(info) {
             vscode.window.showInformationMessage(`构建完成，共用时 ${info.pack_time} ms，其中包含小程序依赖 ${info.miniprogram_pack_num} 项、其它依赖 ${info.other_pack_num} 项`);
@@ -103,27 +102,32 @@ function compile(context) {
   });
 
   // 预览
-  vscode.commands.registerCommand('MiniProgram.commands.compile.preview', e => {
+  vscode.commands.registerCommand('MiniProgram.commands.compile.preview', () => {
     createProject(context).then(project => {
-      try {
-        ci.preview({
-          project,
-          desc: '来自 VSCode MiniProgram Extension',
-          setting: projectConfig.setting,
-          qrcodeFormat: 'image',
-          qrcodeOutputDest: '/Users/crazyurus/Projects/个人/miniprogram-vscode-extension/src/commands/qrcode.jpg',
-          onProgressUpdate(info) {
-            // vscode.window.showInformationMessage('编译项目中\n' + info._msg);
-          },
-        });
-      } catch (e) {
-        console.log(e);
-      }
+      vscode.window.showInformationMessage('开始构建小程序');
       
-    }).catch(err => {
-      if (err) {
+      const tempImagePath = os.tmpdir + path.sep + project.appid + '-qrcode.jpg';
+      const { spawn } = require('child_process');
+      const childProcess = spawn('node', [
+        __dirname + '../../../bin/preview.js',
+        project.appid,
+        project.type,
+        project.projectPath,
+        project.privateKeyPath,
+        tempImagePath,
+      ]);
+      
+      childProcess.stderr.on('data', err => {
         vscode.window.showErrorMessage(err);
-      }
+      });
+      childProcess.on('close', () => {
+        const webiewPanel = vscode.window.createWebviewPanel('qrcode', '预览小程序');
+        const webview = webiewPanel.webview;
+        const base64 = fs.readFileSync(tempImagePath);
+
+        vscode.window.showInformationMessage('构建完成');
+        webview.html = `<img src="${base64}">`;
+      });
     });
   });
 }

@@ -174,10 +174,10 @@
     ],
     "views": {
       "explorer": [
-          {
-              "id": "miniprogram-view", 
-              "name": "微信小程序"
-          }
+        {
+          "id": "miniprogram-view",
+          "name": "微信小程序"
+        }
       ]
     }
   },
