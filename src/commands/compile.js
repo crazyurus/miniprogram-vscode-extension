@@ -174,15 +174,17 @@ function compile(context) {
                   margin: 15px auto;
                   border: 1px solid #E2E2E2;
                 }
+                body.vscode-dark .footer {
+                  background-color: #232323;
+                  box-shadow: inset 0 5px 10px -5px #191919, 0 1px 0 0 #444;
+                }
                 .footer {
                   box-sizing: border-box;
                   width: 280px;
                   margin: 0 auto;
-                  background-color: #232323;
                   border-radius: 100px;
                   font-size: 13px;
                   text-align: center;
-                  box-shadow: inset 0 5px 10px -5px #191919, 0 1px 0 0 #444;
                   padding: 7px 14px;
                 }
               </style>
