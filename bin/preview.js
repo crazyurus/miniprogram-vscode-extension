@@ -1,13 +1,9 @@
 const ci = require('miniprogram-ci');
+const { createProject } = require('./base');
 const params = process.argv;
+const options = createProject(params);
 
-const project = new ci.Project({
-  appid: params[2],
-  type: params[3],
-  projectPath: params[4],
-  privateKeyPath: params[5],
-  ignores: ['node_modules/**/*'],
-});
+const project = new ci.Project(options);
 
 ci.preview({
   project,
@@ -17,5 +13,4 @@ ci.preview({
   },
   qrcodeFormat: 'base64',
   qrcodeOutputDest: params[6],
-})
-.catch(error => {});
+}).catch(error => {});

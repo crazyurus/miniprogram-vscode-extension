@@ -5,6 +5,7 @@ const os = require('os');
 const { updateJSON } = require('../utils/json');
 const { getCurrentFolderPath } = require('../utils/path');
 const { readProjectConfig } = require('../utils/project');
+const { exec } = require('../utils/exec');
 
 function createProject(context) {
   const privateKeyPath = context.workspaceState.get('privateKeyPath');
@@ -122,31 +123,8 @@ function compile(context) {
         project.privateKeyPath,
         tempImagePath,
       ];
-      const { exec } = require('child_process');
       
-      exec(commands.join(' '), (error, stdout, stderr) => {
-        if (stderr) {
-          let errMsg = stderr;
-
-          if (stderr.includes('{')) {
-            let json = stderr.slice(stderr.indexOf('{'));
-
-            try {
-              json = JSON.parse(json);
-              errMsg = json.errMsg;
-
-              if (errMsg.includes('invalid ip:')) {
-                errMsg = '请前往微信小程序后台“开发”-“开发设置”关闭 IP 白名单\n' + errMsg;
-              }
-            } catch {
-
-            }
-          }
-
-          vscode.window.showErrorMessage(errMsg);
-          return;
-        }
-
+      exec(commands).then(() => {
         if (!fs.existsSync(tempImagePath)) {
           vscode.window.showErrorMessage('构建失败');
           return;
@@ -202,6 +180,8 @@ function compile(context) {
 
         vscode.window.showInformationMessage('构建完成');
         webview.html = html;
+      }).catch(error => {
+        vscode.window.showErrorMessage(error);
       });
     });
   });
