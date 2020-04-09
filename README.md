@@ -10,6 +10,9 @@
 
 **MiniProgram: Upload** - 打包并上传小程序，完成后在微信小程序后台发布
 
+**MiniProgram: Build NPM** - 构建 NPM
+
+**MiniProgram: Config** - 项目配置
 
 ## 功能
 
