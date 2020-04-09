@@ -59,7 +59,7 @@ function activate(context) {
     vscode.window.showInputBox({
       prompt: '页面名称',
       placeHolder: '请输入页面名称，如：index',
-      validateInput: validate
+      validateInput: validate,
     }).then(value => {
       if (value) {
         create('page', value, uri);
@@ -73,7 +73,7 @@ function activate(context) {
     vscode.window.showInputBox({
       prompt: '组件名称',
       placeHolder: '请输入组件名称，如：input',
-      validateInput: validate
+      validateInput: validate,
     }).then(value => {
       if (value) {
         create('component', value, uri);
