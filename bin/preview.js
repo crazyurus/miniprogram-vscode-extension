@@ -17,4 +17,5 @@ ci.preview({
   },
   qrcodeFormat: 'base64',
   qrcodeOutputDest: params[6],
-});
+})
+.catch(error => {});

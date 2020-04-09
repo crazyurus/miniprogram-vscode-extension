@@ -83,6 +83,8 @@ function compile(context) {
   vscode.commands.registerCommand('MiniProgram.commands.compile.npm', () => {
     if (fs.existsSync(rootPath + path.sep + 'package.json')) {
       createProject(context).then(options => {
+        vscode.window.showInformationMessage('开始构建 NPM');
+
         const ci = require('miniprogram-ci');
         const project = ci.Project(options);
 
@@ -106,22 +108,48 @@ function compile(context) {
     createProject(context).then(project => {
       vscode.window.showInformationMessage('开始构建小程序');
       
-      const tempImagePath = os.tmpdir + path.sep + project.appid + '-qrcode.jpg';
+      const timestamp = new Date().valueOf();
+      const tempImagePath = os.tmpdir + path.sep + project.appid + timestamp + '-qrcode.jpg';
       const projectConfig = readProjectConfig();
-      const { spawn } = require('child_process');
-      const childProcess = spawn('node', [
+      const commands = [
+        'node',
         __dirname + '../../../bin/preview.js',
         project.appid,
         project.type,
         project.projectPath,
         project.privateKeyPath,
         tempImagePath,
-      ]);
+      ];
+      const { exec } = require('child_process');
       
-      childProcess.stderr.on('data', err => {
-        vscode.window.showErrorMessage(err);
-      });
-      childProcess.on('close', () => {
+      exec(commands.join(' '), (error, stdout, stderr) => {
+        if (stderr) {
+          let errMsg = stderr;
+
+          if (stderr.includes('{')) {
+            let json = stderr.slice(stderr.indexOf('{'));
+
+            try {
+              json = JSON.parse(json);
+              errMsg = json.errMsg;
+
+              if (errMsg.includes('invalid ip:')) {
+                errMsg = '请前往微信小程序后台“开发”-“开发设置”关闭 IP 白名单\n' + errMsg;
+              }
+            } catch {
+
+            }
+          }
+
+          vscode.window.showErrorMessage(errMsg);
+          return;
+        }
+
+        if (!fs.existsSync(tempImagePath)) {
+          vscode.window.showErrorMessage('构建失败');
+          return;
+        }
+
         const webiewPanel = vscode.window.createWebviewPanel('qrcode', '预览小程序');
         const webview = webiewPanel.webview;
         const base64 = fs.readFileSync(tempImagePath);
