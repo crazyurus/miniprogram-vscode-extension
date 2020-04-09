@@ -85,13 +85,15 @@ function compile(context) {
       createProject(context).then(options => {
         vscode.window.showInformationMessage('开始构建 NPM');
 
-        const ci = require('miniprogram-ci');
-        const project = ci.Project(options);
+        setImmediate(() => {
+          const ci = require('miniprogram-ci');
+          const project = new ci.Project(options);
 
-        ci.packNpm(project, {
-          reporter(info) {
-            vscode.window.showInformationMessage(`构建完成，共用时 ${info.pack_time} ms，其中包含小程序依赖 ${info.miniprogram_pack_num} 项、其它依赖 ${info.other_pack_num} 项`);
-          },
+          ci.packNpm(project, {
+            reporter(info) {
+              vscode.window.showInformationMessage(`构建完成，共用时 ${info.pack_time} ms，其中包含小程序依赖 ${info.miniprogram_pack_num} 项、其它依赖 ${info.other_pack_num} 项`);
+            },
+          });
         });
       }).catch(err => {
         if (err) {
