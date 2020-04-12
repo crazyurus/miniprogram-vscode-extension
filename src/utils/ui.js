@@ -11,7 +11,10 @@ function showInputBox(options) {
     inputBox.prompt = options.prompt;
     inputBox.show();
 
-    inputBox.onDidAccept(() => resolve(inputBox.value));
+    inputBox.onDidAccept(() => {
+      resolve(inputBox.value);
+      inputBox.hide();
+    });
   });
 };
 

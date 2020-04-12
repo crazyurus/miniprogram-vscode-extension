@@ -208,7 +208,7 @@ function compile(context) {
     const description = await showInputBox({
       title: '上传小程序',
       prompt: '项目备注',
-      placeHolder: '请输入项目备注（选填）',
+      placeholder: '请输入项目备注（选填）',
       step: 2,
       totalSteps: 2,
     });
