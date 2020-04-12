@@ -18,4 +18,37 @@ function showInputBox(options) {
   });
 };
 
+function openWebView(url, title) {
+  const webiewPanel = vscode.window.createWebviewPanel(
+    'webview', title,
+    vscode.ViewColumn.One,
+    {
+      enableScripts: true,
+      retainContextWhenHidden: true,
+    },
+  );
+  
+  webiewPanel.webview.html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          html, body, iframe {
+            height: 100%;
+            width: 100%;
+            border: none;
+            padding: 0;
+          }
+        </style>
+      </head>
+      <body>
+        <iframe src="${url}">
+      </body>
+    </html>
+  `;
+
+  return webiewPanel;
+}
+
 exports.showInputBox = showInputBox;
+exports.openWebView = openWebView;

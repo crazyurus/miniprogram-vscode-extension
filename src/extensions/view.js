@@ -19,6 +19,10 @@ class TreeDataProvider {
         {
           command: "MiniProgram.commands.config.project", 
           title: "查看项目配置"
+        },
+        {
+          command: "MiniProgram.commands.document", 
+          title: "查看开发文档"
         }
       ];
     }

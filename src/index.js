@@ -8,6 +8,7 @@ const plugins = [
   CommandExtension.create,
   CommandExtension.compile,
   CommandExtension.project,
+  CommandExtension.document,
 ];
 
 function activate(context) {
