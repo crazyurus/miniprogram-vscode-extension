@@ -1,5 +1,8 @@
 const vscode = require('vscode');
+const fs = require('fs');
+const path = require('path');
 const { readProjectConfig } = require('../utils/project');
+const { getCurrentFolderPath } = require('../utils/path');
 
 function setStatusBar() {
   const projectConfig = readProjectConfig();
@@ -16,7 +19,15 @@ function setStatusBar() {
 
 function setCommands() {
   vscode.commands.registerCommand('MiniProgram.commands.config.project', () => {
-    vscode.window.showInformationMessage('查看项目配置开发中');
+    const rootPath = getCurrentFolderPath();
+    const projectFilePath = rootPath + path.sep + 'project.config.json';
+
+    if (fs.existsSync(projectFilePath)) {
+      vscode.workspace.openTextDocument(projectFilePath)
+        .then(document => vscode.window.showTextDocument(document));
+    } else {
+      vscode.window.showErrorMessage('未找到 project.config.json 文件');
+    }
   });
 }
 
