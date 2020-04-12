@@ -6,6 +6,7 @@ const { updateJSON } = require('../utils/json');
 const { getCurrentFolderPath } = require('../utils/path');
 const { readProjectConfig } = require('../utils/project');
 const { exec } = require('../utils/exec');
+const { showInputBox } = require('../utils/ui');
 
 function createProject(context) {
   const privateKeyPath = context.workspaceState.get('privateKeyPath');
@@ -143,6 +144,7 @@ function compile(context) {
                 line-height: 1.6;
               }
               .title {
+                cursor: default;
                 text-align: center;
                 font-size: 20px;
                 margin-top: 30px;
@@ -158,6 +160,7 @@ function compile(context) {
                 box-shadow: inset 0 5px 10px -5px #191919, 0 1px 0 0 #444;
               }
               .footer {
+                cursor: default;
                 box-sizing: border-box;
                 width: 280px;
                 margin: 0 auto;
@@ -190,22 +193,24 @@ function compile(context) {
   vscode.commands.registerCommand('MiniProgram.commands.compile.upload', async () => {
     const project = await createProject(context);
     const previousVersion = context.workspaceState.get('previousVersion');
-    const version = await vscode.window.showInputBox({
+    const version = await showInputBox({
+      title: '上传小程序',
       prompt: '版本号',
-      placeHolder: '请输入小程序版本号，' + (previousVersion ? '上个版本：' + previousVersion : '如：1.2.3'),
-      validateInput(value) {
-        if (/^\d+\.\d+\.\d+$/.test(value)) return null;
-        else return '格式不正确';
-      }
+      placeholder: '请输入小程序版本号，' + (previousVersion ? '当前版本：' + previousVersion : '如：1.2.3'),
+      step: 1,
+      totalSteps: 2,
     });
 
     if (!version) {
       return;
     }
 
-    const description = await vscode.window.showInputBox({
+    const description = await showInputBox({
+      title: '上传小程序',
       prompt: '项目备注',
       placeHolder: '请输入项目备注（选填）',
+      step: 2,
+      totalSteps: 2,
     });
 
     vscode.window.showInformationMessage('开始上传小程序');
