@@ -7,6 +7,17 @@ const { getCurrentFolderPath } = require('../utils/path');
 const { readProjectConfig } = require('../utils/project');
 const { showInputBox } = require('../utils/ui');
 
+function getCompileOptions(options) {
+  return {
+    es6: options.es6,
+    es7: options.enhance,
+    minify: options.minified,
+    codeProtect: options.uglifyFileName,
+    autoPrefixWXSS: options.postcss,
+    uploadWithSourceMap: true,
+  };
+}
+
 function createProject(context) {
   const privateKeyPath = context.workspaceState.get('privateKeyPath');
   const rootPath = getCurrentFolderPath();
@@ -123,9 +134,7 @@ function compile(context) {
       ci.preview({
         project,
         desc: '来自 VSCode MiniProgram Extension',
-        setting: {
-          es7: true,
-        },
+        setting: getCompileOptions(projectConfig.setting),
         qrcodeFormat: 'base64',
         qrcodeOutputDest: tempImagePath,
       }).then(() => {
@@ -226,9 +235,7 @@ function compile(context) {
         project,
         version,
         desc: description || '通过%20MiniProgram%20VSCode%20Extension%20上传',
-        setting: {
-          es7: true,
-        },
+        setting: getCompileOptions(projectConfig.setting),
       }).then(async () => {
         const result = await vscode.window.showInformationMessage('上传成功，可前往微信小程序后台提交审核并发布', '打开微信小程序后台');
   
