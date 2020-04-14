@@ -2,7 +2,7 @@
   "name": "miniprogram-vscode-extension",
   "displayName": "微信小程序开发工具",
   "description": "提供预览、打包上传、代码补全、语法高亮、项目模版等功能",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "icon": "assets/logo.png",
   "publisher": "crazyurus",
   "license": "GPL-3.0",
@@ -192,6 +192,6 @@
   "main": "./src/index.js",
   "dependencies": {
     "js-beautify": "^1.11.0",
-    "miniprogram-ci": "^1.0.18"
+    "miniprogram-ci": "^1.0.24"
   }
 }
