@@ -9,8 +9,7 @@ const { showInputBox } = require('../utils/ui');
 
 function getCompileOptions(options) {
   return {
-    es6: options.es6,
-    es7: options.enhance,
+    es7: true,
     minify: options.minified,
     codeProtect: options.uglifyFileName,
     autoPrefixWXSS: options.postcss,
