@@ -5,7 +5,7 @@ const os = require('os');
 const { updateJSON } = require('../utils/json');
 const { getCurrentFolderPath } = require('../utils/path');
 const { readProjectConfig } = require('../utils/project');
-const { showInputBox } = require('../utils/ui');
+const { openWebView, showInputBox } = require('../utils/ui');
 
 function getCompileOptions(options) {
   return {
@@ -123,7 +123,7 @@ function compile(context) {
     vscode.window.showInformationMessage('开始构建小程序');
       
     const timestamp = new Date().valueOf();
-    const tempImagePath = os.tmpdir + path.sep + options.appid + timestamp + '-qrcode.jpg';
+    const tempImagePath = os.tmpdir() + path.sep + options.appid + timestamp + '-qrcode.jpg';
     const projectConfig = readProjectConfig();
 
     setImmediate(() => {
@@ -250,6 +250,37 @@ function compile(context) {
       });
     });
   });
+
+  // 模拟器
+  vscode.commands.registerCommand('MiniProgram.commands.simulator', () => {
+    const projectConfig = readProjectConfig();
+    const tempPackagePath = os.tmpdir() + path.sep + projectConfig.appid;
+    const rootPath = getCurrentFolderPath();
+    const commands = [
+      path.resolve(__dirname, '../../node_modules/.bin/weweb'),
+      projectConfig.miniprogramRoot || rootPath,
+      '-d',
+      tempPackagePath,
+    ];
+    const { spawn } = require('child_process');
+    const process = spawn(commands[0], commands.slice(1));
+
+    vscode.window.showInformationMessage('正在编译小程序');
+    process.stdout.on('data', data => {
+      if (data.toString().includes('Opening it on:')) {
+        const webview = openWebView('http://localhost:2000', '模拟器', vscode.ViewColumn.Two, 'background-color: #fff');
+        vscode.window.showInformationMessage('编译完成，启动模拟器');
+
+        webview.onDidDispose(() => {
+          process.kill();
+        });
+      }
+    });
+
+    process.stderr.on('data', data => {
+      vscode.window.showErrorMessage(data);
+    });
+  });
 }
 
 function activate(context) {
@@ -257,7 +288,9 @@ function activate(context) {
   compile(context);
 }
 
-exports.activate = activate;
-
 function deactivate() {}
-exports.deactivate = deactivate;
+
+module.exports = {
+  activate,
+  deactivate,
+};

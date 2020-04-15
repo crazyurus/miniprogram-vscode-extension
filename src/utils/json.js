@@ -17,5 +17,7 @@ function updateJSON(filePath, key, value, method = '') {
   fs.writeFileSync(filePath, JSON.stringify(appConfig, null, 2));
 }
 
-exports.readJSON = readJSON;
-exports.updateJSON = updateJSON;
+module.exports = {
+  readJSON,
+  updateJSON,
+};

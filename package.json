@@ -1,7 +1,7 @@
 {
   "name": "miniprogram-vscode-extension",
   "displayName": "微信小程序开发工具",
-  "description": "提供预览、打包上传、代码补全、语法高亮、项目模版等功能",
+  "description": "提供模拟器、预览、打包上传、代码补全、语法高亮、项目模版等功能",
   "version": "1.2.4",
   "icon": "assets/logo.png",
   "publisher": "crazyurus",
@@ -140,6 +140,10 @@
     },
     "commands": [
       {
+        "command": "MiniProgram.commands.simulator",
+        "title": "启动模拟器"
+      },
+      {
         "command": "MiniProgram.commands.config.compileDir",
         "title": "设置为编译上传目录"
       },
@@ -192,6 +196,7 @@
   "main": "./src/index.js",
   "dependencies": {
     "js-beautify": "^1.11.0",
-    "miniprogram-ci": "^1.0.24"
+    "miniprogram-ci": "^1.0.24",
+    "weweb-cli": "^1.1.2"
   }
 }

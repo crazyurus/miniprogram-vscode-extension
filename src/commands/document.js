@@ -32,7 +32,9 @@ function activate() {
   });
 }
 
-exports.activate = activate;
-
 function deactivate() {}
-exports.deactivate = deactivate;
+
+module.exports = {
+  activate,
+  deactivate,
+};

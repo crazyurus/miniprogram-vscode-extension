@@ -18,10 +18,10 @@ function showInputBox(options) {
   });
 };
 
-function openWebView(url, title) {
+function openWebView(url, title, position = vscode.ViewColumn.One, style = '') {
   const webiewPanel = vscode.window.createWebviewPanel(
     'webview', title,
-    vscode.ViewColumn.One,
+    position,
     {
       enableScripts: true,
       retainContextWhenHidden: true,
@@ -38,6 +38,7 @@ function openWebView(url, title) {
             width: 100%;
             border: none;
             padding: 0;
+            ${style}
           }
         </style>
       </head>

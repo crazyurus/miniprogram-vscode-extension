@@ -5,8 +5,12 @@ class TreeDataProvider {
     if (!element) {
       return [
         {
+          command: "MiniProgram.commands.simulator", 
+          title: "启动模拟器"
+        },
+        {
           command: "MiniProgram.commands.compile.preview", 
-          title: "预览小程序"
+          title: "扫码预览小程序"
         },
         {
           command: "MiniProgram.commands.compile.upload", 
@@ -45,7 +49,10 @@ function activate(context) {
   );
    
 }
-exports.activate = activate;
 
 function deactivate() {}
-exports.deactivate = deactivate;
+
+module.exports = {
+  activate,
+  deactivate,
+};

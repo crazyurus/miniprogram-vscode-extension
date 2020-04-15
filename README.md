@@ -1,8 +1,10 @@
 # 微信小程序开发工具
 
-提供代码补全、语法高亮、项目模版、打包上传等功能，部分功能开发中。
+提供模拟器、预览、打包上传、代码补全、语法高亮、项目模版等功能，部分功能开发中。
 
 ## 命令
+
+**MiniProgram: Simulator** - 启动模拟器
 
 **MiniProgram: Create** - 创建新的小程序
 
@@ -65,6 +67,8 @@
 - [vscode-miniapp-helper](https://github.com/overtrue/vscode-miniapp-helper)
 
 - [w-extension](https://github.com/masterZSH/w-extension)
+
+- [weweb](https://github.com/wdfe/weweb)
 
 ## License
 
