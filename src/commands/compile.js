@@ -254,7 +254,8 @@ function compile(context) {
     const tempPackagePath = os.tmpdir() + path.sep + projectConfig.appid;
     const rootPath = getCurrentFolderPath();
     const commands = [
-      path.resolve(__dirname, '../../node_modules/.bin/weweb'),
+      'node',
+      path.resolve(__dirname, '../../node_modules/weweb-cli'),
       projectConfig.miniprogramRoot || rootPath,
       '-d',
       tempPackagePath,
