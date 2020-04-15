@@ -142,10 +142,10 @@ function compile(context) {
           return;
         }
 
-        const webiewPanel = vscode.window.createWebviewPanel('qrcode', '预览小程序');
-        const webview = webiewPanel.webview;
         const base64 = fs.readFileSync(tempImagePath);
-        const html = `
+
+        vscode.window.showInformationMessage('构建完成');
+        openWebView(`
           <!DOCTYPE html>
           <html>
             <head>
@@ -190,10 +190,7 @@ function compile(context) {
               </div>
             </body>
           </html>
-        `;
-
-        vscode.window.showInformationMessage('构建完成');
-        webview.html = html;
+        `, '预览小程序');
       }).catch(error => {
         vscode.window.showErrorMessage(error.message);
       });

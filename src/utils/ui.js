@@ -20,33 +20,37 @@ function showInputBox(options) {
 
 function openWebView(url, title, position = vscode.ViewColumn.One, style = '') {
   const webiewPanel = vscode.window.createWebviewPanel(
-    'webview', title,
+    title, title,
     position,
     {
       enableScripts: true,
       retainContextWhenHidden: true,
     },
   );
-  
-  webiewPanel.webview.html = `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <style>
-          html, body, iframe {
-            height: 100%;
-            width: 100%;
-            border: none;
-            padding: 0;
-            ${style}
-          }
-        </style>
-      </head>
-      <body>
-        <iframe src="${url}">
-      </body>
-    </html>
-  `;
+
+  if (url.indexOf('http') === 0) {
+    webiewPanel.webview.html = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <style>
+            html, body, iframe {
+              height: 100%;
+              width: 100%;
+              border: none;
+              padding: 0;
+              ${style}
+            }
+          </style>
+        </head>
+        <body>
+          <iframe src="${url}">
+        </body>
+      </html>
+    `;
+  } else {
+    webiewPanel.webview.html = url;
+  }
 
   return webiewPanel;
 }
