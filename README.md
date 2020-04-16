@@ -54,9 +54,9 @@
 
 ## 反馈
 
-[创建 Issue](https://github.com/overtrue/vscode-miniapp-helper/issues)
+[创建 Issue](https://github.com/crazyurus/miniprogram-vscode-extension/issues)
 
-[欢迎 PR](https://github.com/overtrue/vscode-miniapp-helper/pulls)
+[欢迎 PR](https://github.com/crazyurus/miniprogram-vscode-extension/pulls)
 
 ## 致谢
 
