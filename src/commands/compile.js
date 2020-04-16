@@ -265,13 +265,19 @@ function compile(context) {
 
     vscode.window.showInformationMessage('正在编译小程序');
     process.stdout.on('data', data => {
-      if (data.toString().includes('Opening it on:')) {
+      const result = data.toString();
+
+      if (result.includes('Opening it on:')) {
         const webview = openWebView('http://localhost:2000', '模拟器', vscode.ViewColumn.Two, 'background-color: #fff');
         vscode.window.showInformationMessage('编译完成，启动模拟器');
 
         webview.onDidDispose(() => {
           process.kill();
         });
+      }
+
+      if (result.includes('Error:')) {
+        vscode.window.showErrorMessage(result);
       }
     });
 
