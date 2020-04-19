@@ -1,0 +1,21 @@
+name: 构建插件
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+        
+      - name: NPM Install
+        run: |
+          npm i
+
+      - name: Package
+        uses: lannonbr/vsce-action@master
+        with:
+          args: "package"
