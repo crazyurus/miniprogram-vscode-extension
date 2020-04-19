@@ -236,7 +236,7 @@ function compile(context) {
     });
 
     await vscode.window.withProgress({
-      title: '正在编译小程序',
+      title: '正在上传小程序',
       location: vscode.ProgressLocation.Notification,
       cancellable: true,
     }, async progress => {
@@ -279,29 +279,41 @@ function compile(context) {
       '-d',
       tempPackagePath,
     ];
-    const { spawn } = require('child_process');
-    const process = spawn(commands[0], commands.slice(1));
 
-    vscode.window.showInformationMessage('正在编译小程序');
-    process.stdout.on('data', data => {
-      const result = data.toString();
+    vscode.window.withProgress({
+      title: '正在编译小程序',
+      location: vscode.ProgressLocation.Notification,
+      cancellable: true,
+    }, progress => {
+      const { spawn } = require('child_process');
+      const process = spawn(commands[0], commands.slice(1));
 
-      if (result.includes('Opening it on:')) {
-        const webview = openWebView('http://localhost:2000', '模拟器', vscode.ViewColumn.Two, 'background-color: #fff');
-        vscode.window.showInformationMessage('编译完成，启动模拟器');
-
-        webview.onDidDispose(() => {
-          process.kill();
+      return new Promise((resolve, reject) => {
+        process.stdout.on('data', data => {
+          const result = data.toString();
+    
+          if (result.includes('Opening it on:')) {
+            resolve();
+          } else if (result.includes('Error')) {
+            vscode.window.showErrorMessage(result);
+            reject(result);
+          } else {
+            progress.report({ message: result });
+          }
         });
-      }
 
-      if (result.includes('Error:')) {
-        vscode.window.showErrorMessage(result);
-      }
-    });
+        process.stderr.on('data', data => {
+          vscode.window.showErrorMessage(data);
+          reject(data);
+        });
+      });
+    }).then(() => {
+      const webview = openWebView('http://localhost:2000', '模拟器', vscode.ViewColumn.Two, 'background-color: #fff');
+      vscode.window.showInformationMessage('编译完成，启动模拟器');
 
-    process.stderr.on('data', data => {
-      vscode.window.showErrorMessage(data);
+      webview.onDidDispose(() => {
+        process.kill();
+      });
     });
   });
 }
