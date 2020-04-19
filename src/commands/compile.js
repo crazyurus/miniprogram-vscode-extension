@@ -150,65 +150,65 @@ function compile(context) {
         onProgressUpdate(message) {
           progress.report(message);
         }
+      }).then(() => {
+        if (!fs.existsSync(tempImagePath)) {
+          vscode.window.showErrorMessage('构建失败');
+          return;
+        }
+    
+        const base64 = fs.readFileSync(tempImagePath);
+    
+        vscode.window.showInformationMessage('构建完成');
+        openWebView(`
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <style>
+                body {
+                  line-height: 1.6;
+                }
+                .title {
+                  cursor: default;
+                  text-align: center;
+                  font-size: 20px;
+                  margin-top: 30px;
+                }
+                .qrcode {
+                  display: block;
+                  width: 280px;
+                  margin: 15px auto;
+                  border: 1px solid #E2E2E2;
+                }
+                body.vscode-dark .footer {
+                  background-color: #232323;
+                  box-shadow: inset 0 5px 10px -5px #191919, 0 1px 0 0 #444;
+                }
+                .footer {
+                  cursor: default;
+                  box-sizing: border-box;
+                  width: 280px;
+                  margin: 0 auto;
+                  border-radius: 100px;
+                  font-size: 13px;
+                  text-align: center;
+                  padding: 7px 14px;
+                }
+              </style>
+            </head>
+            <body>
+              <div class="title">微信小程序预览</div>
+              <img class="qrcode" src="${base64}">
+              <div class="footer">
+                <div>请使用微信扫描二维码预览</div>
+                <div>“${projectConfig.projectname}”</div>
+              </div>
+            </body>
+          </html>
+        `, '预览小程序');
       }).catch(error => {
         vscode.window.showErrorMessage(error.message);
       });
     });
-
-    if (!fs.existsSync(tempImagePath)) {
-      vscode.window.showErrorMessage('构建失败');
-      return;
-    }
-
-    const base64 = fs.readFileSync(tempImagePath);
-
-    vscode.window.showInformationMessage('构建完成');
-    openWebView(`
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <style>
-            body {
-              line-height: 1.6;
-            }
-            .title {
-              cursor: default;
-              text-align: center;
-              font-size: 20px;
-              margin-top: 30px;
-            }
-            .qrcode {
-              display: block;
-              width: 280px;
-              margin: 15px auto;
-              border: 1px solid #E2E2E2;
-            }
-            body.vscode-dark .footer {
-              background-color: #232323;
-              box-shadow: inset 0 5px 10px -5px #191919, 0 1px 0 0 #444;
-            }
-            .footer {
-              cursor: default;
-              box-sizing: border-box;
-              width: 280px;
-              margin: 0 auto;
-              border-radius: 100px;
-              font-size: 13px;
-              text-align: center;
-              padding: 7px 14px;
-            }
-          </style>
-        </head>
-        <body>
-          <div class="title">微信小程序预览</div>
-          <img class="qrcode" src="${base64}">
-          <div class="footer">
-            <div>请使用微信扫描二维码预览</div>
-            <div>“${projectConfig.projectname}”</div>
-          </div>
-        </body>
-      </html>
-    `, '预览小程序');
   });
 
   // 上传
@@ -251,20 +251,20 @@ function compile(context) {
         onProgressUpdate(message) {
           progress.report(message);
         }
+      }).then(async () => {
+        const result = await vscode.window.showInformationMessage('上传成功，可前往微信小程序后台提交审核并发布', '打开微信小程序后台');
+  
+        context.workspaceState.update('previousVersion', version);
+    
+        switch (result) {
+          case '打开微信小程序后台':
+            vscode.env.openExternal('https://mp.weixin.qq.com/');
+            break;
+        }
       }).catch(error => {
         vscode.window.showErrorMessage(error.message);
       });
     });
-
-    const result = await vscode.window.showInformationMessage('上传成功，可前往微信小程序后台提交审核并发布', '打开微信小程序后台');
-  
-    context.workspaceState.update('previousVersion', version);
-
-    switch (result) {
-      case '打开微信小程序后台':
-        vscode.env.openExternal('https://mp.weixin.qq.com/');
-        break;
-    }
   });
 
   // 模拟器
