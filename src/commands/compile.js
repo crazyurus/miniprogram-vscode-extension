@@ -72,6 +72,16 @@ function createProject(context) {
   });
 }
 
+function loadMiniprogramCI() {
+  return new Promise(resolve => {
+    setImmediate(() => {
+      const ci = require('miniprogram-ci');
+      
+      resolve(ci);
+    });
+  });
+}
+
 function compileDir() {
   vscode.commands.registerCommand('MiniProgram.commands.config.compileDir', e => {
     const rootPath = getCurrentFolderPath();
@@ -118,83 +128,87 @@ function compile(context) {
 
   // 预览
   vscode.commands.registerCommand('MiniProgram.commands.compile.preview', async () => {
-    const options = await createProject(context);
-      
-    vscode.window.showInformationMessage('开始构建小程序');
-      
+    const options = await createProject(context);  
     const timestamp = new Date().valueOf();
     const tempImagePath = os.tmpdir() + path.sep + options.appid + timestamp + '-qrcode.jpg';
     const projectConfig = readProjectConfig();
 
-    setImmediate(() => {
-      const ci = require('miniprogram-ci');
+    await vscode.window.withProgress({
+      title: '正在编译小程序',
+      location: vscode.ProgressLocation.Notification,
+      cancellable: true,
+    }, async progress => {
+      const ci = await loadMiniprogramCI();
       const project = new ci.Project(options);
 
-      ci.preview({
+      await ci.preview({
         project,
         desc: '来自 VSCode MiniProgram Extension',
         setting: getCompileOptions(projectConfig.setting),
         qrcodeFormat: 'base64',
         qrcodeOutputDest: tempImagePath,
-      }).then(() => {
-        if (!fs.existsSync(tempImagePath)) {
-          vscode.window.showErrorMessage('构建失败');
-          return;
+        onProgressUpdate(message) {
+          progress.report(message);
         }
-
-        const base64 = fs.readFileSync(tempImagePath);
-
-        vscode.window.showInformationMessage('构建完成');
-        openWebView(`
-          <!DOCTYPE html>
-          <html>
-            <head>
-              <style>
-                body {
-                  line-height: 1.6;
-                }
-                .title {
-                  cursor: default;
-                  text-align: center;
-                  font-size: 20px;
-                  margin-top: 30px;
-                }
-                .qrcode {
-                  display: block;
-                  width: 280px;
-                  margin: 15px auto;
-                  border: 1px solid #E2E2E2;
-                }
-                body.vscode-dark .footer {
-                  background-color: #232323;
-                  box-shadow: inset 0 5px 10px -5px #191919, 0 1px 0 0 #444;
-                }
-                .footer {
-                  cursor: default;
-                  box-sizing: border-box;
-                  width: 280px;
-                  margin: 0 auto;
-                  border-radius: 100px;
-                  font-size: 13px;
-                  text-align: center;
-                  padding: 7px 14px;
-                }
-              </style>
-            </head>
-            <body>
-              <div class="title">微信小程序预览</div>
-              <img class="qrcode" src="${base64}">
-              <div class="footer">
-                <div>请使用微信扫描二维码预览</div>
-                <div>“${projectConfig.projectname}”</div>
-              </div>
-            </body>
-          </html>
-        `, '预览小程序');
       }).catch(error => {
         vscode.window.showErrorMessage(error.message);
       });
     });
+
+    if (!fs.existsSync(tempImagePath)) {
+      vscode.window.showErrorMessage('构建失败');
+      return;
+    }
+
+    const base64 = fs.readFileSync(tempImagePath);
+
+    vscode.window.showInformationMessage('构建完成');
+    openWebView(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <style>
+            body {
+              line-height: 1.6;
+            }
+            .title {
+              cursor: default;
+              text-align: center;
+              font-size: 20px;
+              margin-top: 30px;
+            }
+            .qrcode {
+              display: block;
+              width: 280px;
+              margin: 15px auto;
+              border: 1px solid #E2E2E2;
+            }
+            body.vscode-dark .footer {
+              background-color: #232323;
+              box-shadow: inset 0 5px 10px -5px #191919, 0 1px 0 0 #444;
+            }
+            .footer {
+              cursor: default;
+              box-sizing: border-box;
+              width: 280px;
+              margin: 0 auto;
+              border-radius: 100px;
+              font-size: 13px;
+              text-align: center;
+              padding: 7px 14px;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="title">微信小程序预览</div>
+          <img class="qrcode" src="${base64}">
+          <div class="footer">
+            <div>请使用微信扫描二维码预览</div>
+            <div>“${projectConfig.projectname}”</div>
+          </div>
+        </body>
+      </html>
+    `, '预览小程序');
   });
 
   // 上传
@@ -221,31 +235,36 @@ function compile(context) {
       totalSteps: 2,
     });
 
-    vscode.window.showInformationMessage('开始上传小程序');
-
-    setImmediate(() => {
-      const ci = require('miniprogram-ci');
+    await vscode.window.withProgress({
+      title: '正在编译小程序',
+      location: vscode.ProgressLocation.Notification,
+      cancellable: true,
+    }, async progress => {
+      const ci = await loadMiniprogramCI();
       const project = new ci.Project(options);
 
-      ci.upload({
+      await ci.upload({
         project,
         version,
         desc: description || '通过%20MiniProgram%20VSCode%20Extension%20上传',
         setting: getCompileOptions(projectConfig.setting),
-      }).then(async () => {
-        const result = await vscode.window.showInformationMessage('上传成功，可前往微信小程序后台提交审核并发布', '打开微信小程序后台');
-  
-        context.workspaceState.update('previousVersion', version);
-  
-        switch (result) {
-          case '打开微信小程序后台':
-            vscode.env.openExternal('https://mp.weixin.qq.com/');
-            break;
+        onProgressUpdate(message) {
+          progress.report(message);
         }
       }).catch(error => {
         vscode.window.showErrorMessage(error.message);
       });
     });
+
+    const result = await vscode.window.showInformationMessage('上传成功，可前往微信小程序后台提交审核并发布', '打开微信小程序后台');
+  
+    context.workspaceState.update('previousVersion', version);
+
+    switch (result) {
+      case '打开微信小程序后台':
+        vscode.env.openExternal('https://mp.weixin.qq.com/');
+        break;
+    }
   });
 
   // 模拟器
