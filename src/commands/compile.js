@@ -101,25 +101,25 @@ function compile(context) {
   const rootPath = getCurrentFolderPath();
 
   // 构建 npm
-  vscode.commands.registerCommand('MiniProgram.commands.compile.npm', () => {
+  vscode.commands.registerCommand('MiniProgram.commands.compile.npm', async () => {
     if (fs.existsSync(rootPath + path.sep + 'package.json')) {
-      createProject(context).then(options => {
-        vscode.window.showInformationMessage('开始构建 NPM');
+      const options = await createProject(context);
 
-        setImmediate(() => {
-          const ci = require('miniprogram-ci');
-          const project = new ci.Project(options);
+      await vscode.window.withProgress({
+        title: '正在构建 NPM',
+        location: vscode.ProgressLocation.Notification,
+        cancellable: true,
+      }, async () => {
+        const ci = await loadMiniprogramCI();
+        const project = new ci.Project(options);
 
-          ci.packNpm(project, {
-            reporter(info) {
-              vscode.window.showInformationMessage(`构建完成，共用时 ${info.pack_time} ms，其中包含小程序依赖 ${info.miniprogram_pack_num} 项、其它依赖 ${info.other_pack_num} 项`);
-            },
-          });
+        await ci.packNpm(project, {
+          reporter(info) {
+            vscode.window.showInformationMessage(`构建完成，共用时 ${info.pack_time} ms，其中包含小程序依赖 ${info.miniprogram_pack_num} 项、其它依赖 ${info.other_pack_num} 项`);
+          },
+        }).catch(error => {
+          vscode.window.showErrorMessage(error.message);
         });
-      }).catch(err => {
-        if (err) {
-          vscode.window.showErrorMessage(err);
-        }
       });
     } else {
       vscode.window.showWarningMessage('未找到 package.json 文件');
