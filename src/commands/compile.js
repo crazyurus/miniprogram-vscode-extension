@@ -17,6 +17,14 @@ function getCompileOptions(options) {
   };
 }
 
+function getMiniProgramRootPath(rootPath, relativePath) {
+  if (relativePath) {
+    return path.resolve(rootPath, relativePath);
+  }
+
+  return rootPath;
+}
+
 function createProject(context) {
   const privateKeyPath = context.workspaceState.get('privateKeyPath');
   const rootPath = getCurrentFolderPath();
@@ -24,7 +32,7 @@ function createProject(context) {
   const options = {
     appid: projectConfig.appid,
     type: projectConfig.compileType === 'miniprogram' ? 'miniProgram' : 'miniProgramPlugin',
-    projectPath: projectConfig.miniprogramRoot || rootPath,
+    projectPath: getMiniProgramRootPath(rootPath, projectConfig.miniprogramRoot),
     ignores: ['node_modules/**/*'],
   };
 
@@ -275,7 +283,7 @@ function compile(context) {
     const commands = [
       'node',
       path.resolve(__dirname, '../../node_modules/weweb-cli'),
-      projectConfig.miniprogramRoot || rootPath,
+      getMiniProgramRootPath(rootPath, projectConfig.miniprogramRoot),
       '-d',
       tempPackagePath,
     ];
