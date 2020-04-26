@@ -122,17 +122,17 @@
     "menus": {
       "explorer/context": [
         {
-          "when": "extensionActivated && explorerResourceIsFolder == true",
+          "when": "extensionActivated && explorerResourceIsFolder",
           "command": "MiniProgram.commands.config.compileDir",
           "group": "compile"
         },
         {
-          "when": "extensionActivated && explorerResourceIsFolder == true",
+          "when": "extensionActivated && explorerResourceIsFolder",
           "command": "MiniProgram.commands.create.page",
           "group": "file"
         },
         {
-          "when": "extensionActivated && explorerResourceIsFolder == true",
+          "when": "extensionActivated && explorerResourceIsFolder",
           "command": "MiniProgram.commands.create.component",
           "group": "file"
         }
