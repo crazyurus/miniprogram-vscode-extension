@@ -259,16 +259,16 @@ function compile(context) {
         onProgressUpdate(message) {
           progress.report(message);
         }
-      }).then(async () => {
-        const result = await vscode.window.showInformationMessage('上传成功，可前往微信小程序后台提交审核并发布', '打开微信小程序后台');
+      }).then(() => {
+        vscode.window.showInformationMessage('上传成功，可前往微信小程序后台提交审核并发布', '打开微信小程序后台').then(result => {
+          switch (result) {
+            case '打开微信小程序后台':
+              vscode.env.openExternal('https://mp.weixin.qq.com/');
+              break;
+          }
+        });
   
         context.workspaceState.update('previousVersion', version);
-    
-        switch (result) {
-          case '打开微信小程序后台':
-            vscode.env.openExternal('https://mp.weixin.qq.com/');
-            break;
-        }
       }).catch(error => {
         vscode.window.showErrorMessage(error.message);
       });
