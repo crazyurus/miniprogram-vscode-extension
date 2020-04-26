@@ -66,7 +66,7 @@ function createProject(context) {
       openLabel: '选择',
     }).then(result => {
       if (Array.isArray(result)) {
-        const keyFile = result[0].path;
+        const keyFile = result[0].fsPath;
         context.workspaceState.update('privateKeyPath', keyFile);
 
         resolve({
@@ -164,7 +164,7 @@ function compile(context) {
           return;
         }
     
-        const base64 = fs.readFileSync(tempImagePath);
+        const base64 = fs.readFileSync(tempImagePath, 'utf8');
     
         vscode.window.showInformationMessage('构建完成');
         openWebView(`

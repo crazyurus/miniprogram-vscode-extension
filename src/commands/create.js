@@ -12,7 +12,7 @@ function create(type, value, uri) {
   const name = type === 'page' ? '页面' : '组件';
 
   for (let ext in template) {
-    const filePath = `${uri.path}${path.sep}${value}.${ext}`;
+    const filePath = `${uri.fsPath}${path.sep}${value}.${ext}`;
 
     if (fs.existsSync(filePath)) {
       vscode.window.showErrorMessage(name + ' ' + value + ' 已存在');
@@ -24,7 +24,7 @@ function create(type, value, uri) {
 
   if (type === 'page') {
     const projectPath = getCurrentFolderPath();
-    let currentPath = uri.path;
+    let currentPath = uri.fsPath;
 
     while (
       !fs.existsSync(currentPath + path.sep + 'app.json') &&
@@ -36,7 +36,7 @@ function create(type, value, uri) {
     const appConfigFile = currentPath + path.sep + 'app.json';
 
     if (fs.existsSync(appConfigFile)) {
-      const pagePath = uri.path
+      const pagePath = uri.fsPath
         .replace(currentPath, '')
         .slice(1);
 

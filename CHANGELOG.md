@@ -1,5 +1,9 @@
 # 更新日志
 
+## [1.3.6] - 2020-4-26
+### 修复
+- `privateKeyPath` Windows 下路径错误，感谢 @veecam 的反馈
+
 ## [1.3.5] - 2020-4-23
 ### 修复
 - `miniprogramRoot` 不支持相对路径，感谢 @chatterzhao 的反馈
