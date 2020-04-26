@@ -191,7 +191,7 @@
     }
   },
   "activationEvents": [
-    "*"
+    "workspaceContains:project.config.json"
   ],
   "main": "./src/index.js",
   "dependencies": {
