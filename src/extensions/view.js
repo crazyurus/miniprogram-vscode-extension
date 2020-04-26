@@ -27,6 +27,10 @@ class TreeDataProvider {
         {
           command: "MiniProgram.commands.document", 
           title: "查看开发文档"
+        },
+        {
+          command: "MiniProgram.commands.storage.clear", 
+          title: "清除缓存"
         }
       ];
     }
@@ -43,6 +47,7 @@ class TreeDataProvider {
 }
 
 function activate(context) {
+  vscode.commands.executeCommand('setContext', 'extensionActivated', true);
   vscode.window.registerTreeDataProvider(
     'miniprogram-view',
     new TreeDataProvider(),
@@ -50,7 +55,9 @@ function activate(context) {
    
 }
 
-function deactivate() {}
+function deactivate() {
+  vscode.commands.executeCommand('setContext', 'extensionActivated', false);
+}
 
 module.exports = {
   activate,

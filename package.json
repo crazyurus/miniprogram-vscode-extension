@@ -122,17 +122,17 @@
     "menus": {
       "explorer/context": [
         {
-          "when": "explorerResourceIsFolder == true",
+          "when": "extensionActivated && explorerResourceIsFolder == true",
           "command": "MiniProgram.commands.config.compileDir",
           "group": "compile"
         },
         {
-          "when": "explorerResourceIsFolder == true",
+          "when": "extensionActivated && explorerResourceIsFolder == true",
           "command": "MiniProgram.commands.create.page",
           "group": "file"
         },
         {
-          "when": "explorerResourceIsFolder == true",
+          "when": "extensionActivated && explorerResourceIsFolder == true",
           "command": "MiniProgram.commands.create.component",
           "group": "file"
         }
@@ -179,11 +179,17 @@
         "command": "MiniProgram.commands.document",
         "title": "查看开发文档",
         "category": "MiniProgram"
+      },
+      {
+        "command": "MiniProgram.commands.stroage.clear",
+        "title": "清除缓存",
+        "category": "MiniProgram"
       }
     ],
     "views": {
       "explorer": [
         {
+          "when": "extensionActivated",
           "id": "miniprogram-view",
           "name": "微信小程序"
         }
