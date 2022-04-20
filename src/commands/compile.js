@@ -6,6 +6,11 @@ const { updateJSON } = require('../utils/json');
 const { getCurrentFolderPath } = require('../utils/path');
 const { readProjectConfig } = require('../utils/project');
 const { openWebView, showInputBox } = require('../utils/ui');
+const { random } = require('../utils/math');
+
+function getCIBot() {
+  return random(1, 30);
+}
 
 function getCompileOptions(options) {
   return {
@@ -157,7 +162,8 @@ function compile(context) {
         qrcodeOutputDest: tempImagePath,
         onProgressUpdate(message) {
           progress.report(message);
-        }
+        },
+        robot: getCIBot(),
       }).then(() => {
         if (!fs.existsSync(tempImagePath)) {
           vscode.window.showErrorMessage('构建失败');
@@ -258,7 +264,8 @@ function compile(context) {
         setting: getCompileOptions(projectConfig.setting),
         onProgressUpdate(message) {
           progress.report(message);
-        }
+        },
+        robot: getCIBot(),
       }).then(() => {
         vscode.window.showInformationMessage('上传成功，可前往微信小程序后台提交审核并发布', '打开微信小程序后台').then(result => {
           switch (result) {
