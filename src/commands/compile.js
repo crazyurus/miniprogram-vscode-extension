@@ -84,7 +84,7 @@ function loadMiniprogramCI() {
   return new Promise(resolve => {
     setImmediate(() => {
       const ci = require('miniprogram-ci');
-      
+
       resolve(ci);
     });
   });
@@ -136,7 +136,7 @@ function compile(context) {
 
   // 预览
   vscode.commands.registerCommand('MiniProgram.commands.compile.preview', async () => {
-    const options = await createProject(context);  
+    const options = await createProject(context);
     const timestamp = new Date().valueOf();
     const tempImagePath = os.tmpdir() + path.sep + options.appid + timestamp + '-qrcode.jpg';
     const projectConfig = readProjectConfig();
@@ -163,9 +163,9 @@ function compile(context) {
           vscode.window.showErrorMessage('构建失败');
           return;
         }
-    
+
         const base64 = fs.readFileSync(tempImagePath, 'utf8');
-    
+
         vscode.window.showInformationMessage('构建完成');
         openWebView(`
           <!DOCTYPE html>
@@ -267,60 +267,10 @@ function compile(context) {
               break;
           }
         });
-  
+
         context.workspaceState.update('previousVersion', version);
       }).catch(error => {
         vscode.window.showErrorMessage(error.message);
-      });
-    });
-  });
-
-  // 模拟器
-  vscode.commands.registerCommand('MiniProgram.commands.simulator', () => {
-    const projectConfig = readProjectConfig();
-    const tempPackagePath = os.tmpdir() + path.sep + projectConfig.appid;
-    const rootPath = getCurrentFolderPath();
-    const commands = [
-      'node',
-      path.resolve(__dirname, '../../node_modules/weweb-cli'),
-      getMiniProgramRootPath(rootPath, projectConfig.miniprogramRoot),
-      '-d',
-      tempPackagePath,
-    ];
-
-    vscode.window.withProgress({
-      title: '正在编译小程序',
-      location: vscode.ProgressLocation.Notification,
-      cancellable: true,
-    }, progress => {
-      const { spawn } = require('child_process');
-      const process = spawn(commands[0], commands.slice(1));
-
-      return new Promise((resolve, reject) => {
-        process.stdout.on('data', data => {
-          const result = data.toString();
-    
-          if (result.includes('Opening it on:')) {
-            resolve();
-          } else if (result.includes('Error')) {
-            vscode.window.showErrorMessage(result);
-            reject(result);
-          } else {
-            progress.report({ message: result });
-          }
-        });
-
-        process.stderr.on('data', data => {
-          vscode.window.showErrorMessage(data);
-          reject(data);
-        });
-      });
-    }).then(() => {
-      const webview = openWebView('http://localhost:2000', '模拟器', vscode.ViewColumn.Two, 'background-color: #fff');
-      vscode.window.showInformationMessage('编译完成，启动模拟器');
-
-      webview.onDidDispose(() => {
-        process.kill();
       });
     });
   });
@@ -331,7 +281,7 @@ function activate(context) {
   compile(context);
 }
 
-function deactivate() {}
+function deactivate() { }
 
 module.exports = {
   activate,
