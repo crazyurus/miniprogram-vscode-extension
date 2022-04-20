@@ -198,6 +198,6 @@
   "main": "./src/index.js",
   "dependencies": {
     "js-beautify": "^1.11.0",
-    "miniprogram-ci": "^1.0.26"
+    "miniprogram-ci": "^1.8.12"
   }
 }
