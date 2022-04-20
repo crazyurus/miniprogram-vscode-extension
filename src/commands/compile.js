@@ -93,7 +93,7 @@ function loadMiniprogramCI() {
 function compileDir() {
   vscode.commands.registerCommand('MiniProgram.commands.config.compileDir', e => {
     const rootPath = getCurrentFolderPath();
-    const projectFilePath = rootPath + path.sep + 'project.config.json';
+    const projectFilePath = path.join(rootPath, 'project.config.json');
 
     if (fs.existsSync(projectFilePath)) {
       updateJSON(projectFilePath, 'miniprogramRoot', e.fsPath);
@@ -138,7 +138,7 @@ function compile(context) {
   vscode.commands.registerCommand('MiniProgram.commands.compile.preview', async () => {
     const options = await createProject(context);
     const timestamp = new Date().valueOf();
-    const tempImagePath = os.tmpdir() + path.sep + options.appid + timestamp + '-qrcode.jpg';
+    const tempImagePath = path.join(os.tmpdir(), options.appid + timestamp + '-qrcode.jpg');
     const projectConfig = readProjectConfig();
 
     await vscode.window.withProgress({

@@ -5,10 +5,14 @@ const { getCurrentFolderPath } = require('./path');
 
 function readProjectConfig() {
   const rootPath = getCurrentFolderPath();
-  const projectFilePath = rootPath + path.sep + 'project.config.json';
+  const projectFilePath = path.join(rootPath, 'project.config.json');
 
   if (fs.existsSync(projectFilePath)) {
-    return readJSON(projectFilePath);
+    const config = readJSON(projectFilePath);
+
+    config.projectname = decodeURIComponent(config.projectname);
+
+    return config;
   }
 
   return null;

@@ -34,17 +34,9 @@ function openWebView(url, title, position = vscode.ViewColumn.One, style = '') {
       <html>
         <head>
           <style>
-            html, body {
+            html, body, iframe {
               height: 100%;
               width: 100%;
-              border: none;
-              padding: 0;
-              ${style}
-            }
-
-            iframe {
-              height: 667px;
-              width: 375px;
               border: none;
               padding: 0;
               ${style}
@@ -52,7 +44,7 @@ function openWebView(url, title, position = vscode.ViewColumn.One, style = '') {
           </style>
         </head>
         <body>
-          <iframe src="${url}" onload="this.style.height=this.contentDocument.body.scrollHeight +'px';">
+          <iframe src="${url}">
         </body>
       </html>
     `;
