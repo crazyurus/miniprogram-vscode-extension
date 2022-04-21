@@ -62,16 +62,56 @@
     ],
     "jsonValidation": [
       {
-        "url": "./validations/app.json",
-        "fileMatch": "*/app.json"
+        "fileMatch": "package.json",
+        "url": "https://json.schemastore.org/package"
       },
       {
-        "url": "./validations/page.json",
-        "fileMatch": "*/pages/*.json"
+        "fileMatch": "bower.json",
+        "url": "https://json.schemastore.org/bower"
       },
       {
-        "url": "./validations/project.json",
-        "fileMatch": "*/project.json"
+        "fileMatch": "app.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/app.schema.json"
+      },
+      {
+        "fileMatch": "ext.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/ext.schema.json"
+      },
+      {
+        "fileMatch": "game.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/game.schema.json"
+      },
+      {
+        "fileMatch": "plugin.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/plugin.schema.json"
+      },
+      {
+        "fileMatch": "project.config.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/project.config.schema.json"
+      },
+      {
+        "fileMatch": "sitemap.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/sitemap.schema.json"
+      },
+      {
+        "fileMatch": "container.config.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/container.config.schema.json"
+      },
+      {
+        "fileMatch": [
+          "*.json",
+          "!/settings.json",
+          "!/config.json",
+          "!/app.json",
+          "!/ext.json",
+          "!/game.json",
+          "!/plugin.json",
+          "!/project.config.json",
+          "!/sitemap.json",
+          "!/container.config.json",
+          "!/.eslintrc.*"
+        ],
+        "url": "https://dldir1.qq.com/WechatWebDev/plugins/editor/wechat-miniprogram_wx-json/1.0.0/page_component.schema.json"
       }
     ],
     "languages": [
@@ -117,6 +157,13 @@
         "label": "WeChat Light",
         "uiTheme": "vs",
         "path": "./themes/light.json"
+      }
+    ],
+    "iconThemes": [
+      {
+        "id": "wechat-icon",
+        "label": "%minimalIconThemeLabel%",
+        "path": "./icons/vs_minimal-icon-theme.json"
       }
     ],
     "menus": {
