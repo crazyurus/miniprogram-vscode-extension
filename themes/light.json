@@ -3,30 +3,22 @@
   "type": "light",
   "colors": {
     "foreground": "#222222",
-
     "editor.background": "#ffffff",
-
     "sideBarSectionHeader.background": "#F2F2F2",
     "sideBarSectionHeader.border": "#E8E8E8",
     "sideBarSectionHeader.foreground": "#7f7f7f",
-
     "sideBar.background": "#ffffff",
     "sideBar.foreground": "#222222",
     "sideBar.border": "#E8E8E8",
     "panel.background": "#f3f3f3",
-
     "activityBar.background": "#F2F2F2",
     "activityBar.foreground": "#000000",
-
     "list.activeSelectionBackground": "#F5F5F5",
     "list.activeSelectionForeground": "#000000",
     "statusBar.background": "#f2f2f2",
     "statusBar.foreground": "#787878",
-
     "terminal.border": "#E8E8E8",
-
     "focusBorder": "#55BD6A",
-
     "input.background": "#F7F7F7",
     "input.border": "#EAEAEA"
   },
