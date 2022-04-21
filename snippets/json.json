@@ -1,67 +1,158 @@
 {
-  "app-debug": {
-    "prefix": "debug",
-    "description": "App 对应的 JSON 文件 debug 配置项，是否是调试模式",
-    "body": "\"debug\":true,\n  "
+  "window-navigationBarBackgroundColor": {
+    "prefix": "navigationBarBackgroundColor",
+    "body": [
+      "\"navigationBarBackgroundColor\": \"${1:#000000}\""
+    ],
+    "description": "导航栏背景颜色，如 #000000"
   },
-  "app-functionalPages": {
-    "prefix": "functionalPages",
-    "description": "是否启用插件功能页",
-    "body": "\"functionalPages\":false,\n  "
+  "window-navigationBarTextStyle": {
+    "prefix": "navigationBarTextStyle",
+    "body": [
+      "\"navigationBarTextStyle\": \"${1:white}\""
+    ],
+    "description": "导航栏标题颜色，仅支持 black/white。"
   },
-  "app-network": {
-    "prefix": "networktimeout",
-    "description": "App 对应的 JSON 文件 networktimeout 配置项，超时设置",
-    "body": "\"networkTimeout\": {\n\t\"request\": ${1:10000},\n\t\"connectSocket\": ${2:10000},\n\t\"uploadFile\": ${3:10000},\n\t\"downloadFile\": ${4:10000}\n},\n${5}\n  "
+  "window-navigationBarTitleText": {
+    "prefix": "navigationBarTitleText",
+    "body": [
+      "\"navigationBarTitleText\": \"${1:String}\""
+    ],
+    "description": "导航栏标题文字内容。"
   },
-  "app-pages": {
+  "window-backgroundColor": {
+    "prefix": "backgroundColor",
+    "body": [
+      "\"backgroundColor\": \"${1:#ffffff}\""
+    ],
+    "description": "窗口的背景色。"
+  },
+  "window-backgroundTextStyle": {
+    "prefix": "backgroundTextStyle",
+    "body": [
+      "\"backgroundTextStyle\": \"${1:dark}\""
+    ],
+    "description": "下拉背景字体、loading 图的样式，仅支持 dark/light。"
+  },
+  "window-enablePullDownRefresh": {
+    "prefix": "enablePullDownRefresh",
+    "body": [
+      "\"enablePullDownRefresh\": \"${1:false}\""
+    ],
+    "description": "是否开启下拉刷新。"
+  },
+  "pages": {
     "prefix": "pages",
-    "description": "App 对应的 JSON 文件 pages 配置项",
-    "body": "\"pages\": [\n\t\"pages/index/index\"\n],\n${1}\n  "
+    "body": [
+      "\"pages\": [\n\t\"${1:Entrance}\"\n],"
+    ],
+    "description": "设置页面路径。"
   },
-  "app-plugins": {
-    "prefix": "plugins",
-    "description": "使用到的插件",
-    "body": "\"plugins\":{},\n  "
-  },
-  "app-preloadRule": {
-    "prefix": "preloadRule",
-    "description": "分包预下载规则",
-    "body": "\"preloadRule\":{},\n  "
-  },
-  "app-requiredBackgroundModes": {
-    "prefix": "requiredBackgroundModes",
-    "description": "需要在后台使用的能力，如“音乐播放”",
-    "body": "\"requiredBackgroundModes\":[\"audio\"],\n  "
-  },
-  "app-resizable": {
-    "prefix": "resizable",
-    "description": "iPad 小程序是否支持屏幕旋转，默认关闭",
-    "body": "\"resizable\":false,\n  "
-  },
-  "app-subPackages": {
-    "prefix": "subPackages",
-    "description": "App 对应的 JSON 文件 subPackages 配置项，分包结构配置",
-    "body": "\"subPackages\":[],\n  "
-  },
-  "app-tabbar": {
-    "prefix": "tabbar",
-    "description": "App 对应的 JSON 文件 tabbar 配置项",
-    "body": "\"tabBar\": {\n\t\"color\": \"${1}\",\n\t\"selectedColor\": \"${2}\",\n\t\"backgroundColor\": \"${3}\",\n\t\"position\": \"bottom\",\n\t\"borderStyle\": \"black\",\n\t\"list\": [\n\t\t{\n\t\t\t\"pagePath\": \"${4}\",\n\t\t\t\"text\": \"${5}\",\n\t\t\t\"iconPath\": \"${6}\",\n\t\t\t\"selectedIconPath\": \"${7}\"\n\t\t}\n\t]\n},\n${8}\n  "
-  },
-  "app-window": {
+  "window": {
     "prefix": "window",
-    "description": "App 对应的 JSON 文件 window 配置项",
-    "body": "\"window\": {\n\t\"navigationBarBackgroundColor\": \"#000000\",\n\t\"navigationBarTextStyle\": \"white\",\n\t\"navigationBarTitleText\": \"\",\n\t\"navigationStyle\": \"default|custom\",\n\t\"backgroundColor\": \"#ffffff\",\n\t\"backgroundTextStyle\": \"dark|light\",\n\t\"backgroundColorTop\": \"#ffffff\",\n\t\"backgroundColorBottom\": \"#ffffff\",\n\t\"enablePullDownRefresh\": true,\n\t\"onReachBottomDistance\": 50\n},\n${1}\n  "
+    "body": [
+      "\"window\": {",
+      "\t\"navigationBarBackgroundColor\": \"${1:#ffffff}\",",
+      "\t\"navigationBarTextStyle\": \"${2:black}\",",
+      "\t\"navigationBarTitleText\": \"${3:title}\",",
+      "\t\"backgroundColor\": \"${4:#eeeeee}\",",
+      "\t\"backgroundTextStyle\": \"${5:light}\",",
+      "\t\"enablePullDownRefresh\": \"${6:false}\"",
+      "}"
+    ],
+    "description": "设置默认页面的窗口表现。"
   },
-  "app-workers": {
-    "prefix": "workers",
-    "description": "Worker 代码放置的目录",
-    "body": "\"workers\":\"\",\n  "
+  "networkTimeout": {
+    "prefix": "networkTimeout",
+    "body": [
+      "\"networkTimeout\": {",
+      "\t\"request\": ${1:20000},",
+      "\t\"connectSocket\": ${2:20000},",
+      "\t\"uploadFile\": ${3:20000},",
+      "\t\"downloadFile\": ${4:20000}",
+      "}"
+    ],
+    "description": "设置各种网络请求的超时时间。"
   },
-  "page-json": {
-    "prefix": "page",
-    "description": "Page 页面对应的 JSON 文件配置项",
-    "body": "{\n\t\"navigationBarBackgroundColor\": \"#000000\",\n\t\"navigationBarTextStyle\": \"white\",\n\t\"navigationBarTitleText\": \"\",\n\t\"backgroundColor\": \"#ffffff\",\n\t\"backgroundTextStyle\": \"dark|light\",\n\t\"enablePullDownRefresh\": false,\n\t\"disableScroll\": false,\n\t\"onReachBottomDistance\": false\n}\n  "
+  "ext-extEnable": {
+    "prefix": "extEnable",
+    "body": [
+      "\"extEnable\": \"${1:true}\""
+    ],
+    "description": "开发平台小程序。"
+  },
+  "ext-extAppid": {
+    "prefix": "extAppid",
+    "body": [
+      "\"extAppid\": \"${1:appid}\""
+    ],
+    "description": "已授权小程序的 appid。"
+  },
+  "ext-extPages": {
+    "prefix": "extPages",
+    "body": [
+      "\"extPages\": {",
+      "\t\"${1:path}\": {}",
+      "}"
+    ],
+    "description": "页面设置。"
+  },
+  "ext-ext": {
+    "prefix": "ext",
+    "body": [
+      "\"ext\": {",
+      "\t${1:data}",
+      "}"
+    ],
+    "description": "页面设置。"
+  },
+  "tabbar-color": {
+    "prefix": "color",
+    "body": [
+      "\"color\": \"${1:#000000}\""
+    ],
+    "description": "tab 上的文字默认颜色。"
+  },
+  "tabbar-selectedColor": {
+    "prefix": "selectedColor",
+    "body": [
+      "\"selectedColor\": \"${1:#000000}\""
+    ],
+    "description": "tab 上的文字选中时的颜色。"
+  },
+  "tabbar-backgroundColor": {
+    "prefix": "backgroundColor",
+    "body": [
+      "\"backgroundColor\": \"${1:#ffffff}\""
+    ],
+    "description": "tab 的背景色。"
+  },
+  "tabbar-borderStyle": {
+    "prefix": "borderStyle",
+    "body": [
+      "\"borderStyle\": \"${1:black}\""
+    ],
+    "description": "tabbar上边框的颜色，仅支持black/white。"
+  },
+  "tabbar-backgroundTextStyle": {
+    "prefix": "backgroundTextStyle",
+    "body": [
+      "\"backgroundTextStyle\": \"${1:dark}\""
+    ],
+    "description": "背景字体、loading 图的样式，仅支持 dark/light。"
+  },
+  "tabbar": {
+    "prefix": "tabBar",
+    "body": [
+      "\"tabBar\": {",
+      "\t\"list\": [{",
+      "\t\t\"pagePath\": \"${1:pagePath}\",",
+      "\t\t\"text\": \"${2:text}\",",
+      "\t\t\"iconPath\": \"${3:iconPath}\",",
+      "\t\t\"selectedIconPath\": \"${4:selectedIconPath}\"",
+      "\t}]",
+      "}"
+    ],
+    "description": "tab 的列表。"
   }
 }
