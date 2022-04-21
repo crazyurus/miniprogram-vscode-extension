@@ -14,16 +14,6 @@ function getCIBot() {
   return random(1, 30);
 }
 
-function getCompileOptions(options) {
-  return {
-    es7: true,
-    minify: options.minified,
-    codeProtect: options.uglifyFileName,
-    autoPrefixWXSS: options.postcss,
-    uploadWithSourceMap: true,
-  };
-}
-
 function compileDir() {
   vscode.commands.registerCommand('MiniProgram.commands.config.compileDir', e => {
     const rootPath = getCurrentFolderPath();
@@ -87,7 +77,7 @@ function compile(context) {
       await ci.preview({
         project,
         desc: '来自 VSCode MiniProgram Extension',
-        setting: getCompileOptions(projectConfig.setting),
+        setting: projectConfig.setting,
         qrcodeFormat: 'base64',
         qrcodeOutputDest: tempImagePath,
         onProgressUpdate(message) {
@@ -149,7 +139,7 @@ function compile(context) {
         project,
         version,
         desc: description || '通过%20MiniProgram%20VSCode%20Extension%20上传',
-        setting: getCompileOptions(projectConfig.setting),
+        setting: projectConfig.setting,
         onProgressUpdate(message) {
           progress.report(message);
         },
