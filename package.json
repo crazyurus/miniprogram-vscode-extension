@@ -116,14 +116,16 @@
     ],
     "languages": [
       {
-        "id": "xml",
-        "aliases": [
-          "XML"
-        ],
+        "id": "wxml",
         "extensions": [
           ".wxml",
           ".ttml"
-        ]
+        ],
+        "aliases": [
+          "WXML",
+          "wxml"
+        ],
+        "configuration": "./languages/wxml/language-configuration.json"
       },
       {
         "id": "javascript",
@@ -133,7 +135,8 @@
           "js"
         ],
         "extensions": [
-          ".wxs"
+          ".wxs",
+          ".sjs"
         ]
       },
       {
@@ -145,6 +148,31 @@
           ".wxss",
           ".ttss"
         ]
+      }
+    ],
+    "grammars": [
+      {
+        "scopeName": "text.html.basic",
+        "path": "./languages/wxml/syntaxes/tmLanguage.json",
+        "embeddedLanguages": {
+          "text.html": "html",
+          "source.js": "javascript"
+        },
+        "tokenTypes": {
+          "meta.tag string.quoted": "other"
+        }
+      },
+      {
+        "language": "wxml",
+        "scopeName": "text.html.derivative",
+        "path": "./languages/wxml/syntaxes/derivative.tmLanguage.json",
+        "embeddedLanguages": {
+          "text.html": "html",
+          "source.js": "javascript"
+        },
+        "tokenTypes": {
+          "meta.tag string.quoted": "other"
+        }
       }
     ],
     "themes": [
@@ -161,9 +189,9 @@
     ],
     "iconThemes": [
       {
-        "id": "wechat-icon",
-        "label": "%minimalIconThemeLabel%",
-        "path": "./icons/vs_minimal-icon-theme.json"
+        "id": "material-icon-theme-wechat",
+        "label": "Wechat Icon Theme",
+        "path": "./icons/material-icons.json"
       }
     ],
     "menus": {
@@ -244,7 +272,6 @@
   ],
   "main": "./src/index.js",
   "dependencies": {
-    "js-beautify": "^1.11.0",
     "miniprogram-ci": "^1.8.12"
   }
 }
