@@ -272,6 +272,7 @@
   ],
   "main": "./src/index.js",
   "dependencies": {
-    "miniprogram-ci": "^1.8.12"
+    "miniprogram-ci": "^1.8.12",
+    "open": "^8.4.0"
   }
 }

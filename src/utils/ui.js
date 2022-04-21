@@ -1,4 +1,5 @@
 const vscode = require('vscode');
+const commonHTML = require('../html/common');
 
 function showInputBox(options) {
   return new Promise(resolve => {
@@ -29,25 +30,10 @@ function openWebView(url, title, position = vscode.ViewColumn.One, style = '') {
   );
 
   if (url.indexOf('http') === 0) {
-    webiewPanel.webview.html = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <style>
-            html, body, iframe {
-              height: 100%;
-              width: 100%;
-              border: none;
-              padding: 0;
-              ${style}
-            }
-          </style>
-        </head>
-        <body>
-          <iframe src="${url}">
-        </body>
-      </html>
-    `;
+    webiewPanel.webview.html = commonHTML({
+      style,
+      url,
+    });
   } else {
     webiewPanel.webview.html = url;
   }

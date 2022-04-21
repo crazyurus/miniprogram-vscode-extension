@@ -1,13 +1,15 @@
-const ViewExtension = require('./extensions/view');
-const CommandExtension = require('./commands');
+const ViewPlugin = require('./plugins/view');
+const PreloadPlugin = require('./plugins/preload');
+const CommandPlugin = require('./commands');
 
 const plugins = [
-  ViewExtension,
-  CommandExtension.create,
-  CommandExtension.compile,
-  CommandExtension.project,
-  CommandExtension.document,
-  CommandExtension.storage,
+  ViewPlugin,
+  CommandPlugin.create,
+  CommandPlugin.compile,
+  CommandPlugin.project,
+  CommandPlugin.document,
+  CommandPlugin.storage,
+  PreloadPlugin,
 ];
 
 function activate(context) {
