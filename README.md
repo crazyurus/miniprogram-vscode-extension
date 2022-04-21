@@ -1,6 +1,8 @@
 # 微信小程序开发工具
 
-提供预览、打包上传、代码补全、语法高亮、项目模版等功能，部分功能仍在开发中。
+提供预览、打包上传、代码补全、语法高亮、依赖分析、项目模版等功能，部分功能仍在开发中。
+
+![微信小程序开发工具](https://sf3-cn.feishucdn.com/obj/eden-cn/eseh7nupevhps/miniprogram-vscode-extension/analyse-viewer.png)
 
 ## 命令
 
@@ -12,9 +14,15 @@
 
 **MiniProgram: Build NPM** - 构建 NPM
 
+**MiniProgram: Code Analyse** - 代码静态依赖分析
+
 **MiniProgram: Config** - 项目配置
 
 ## 功能
+
+### 代码分析
+
+- 支持代码静态依赖分析
 
 ### 代码补全与语法高亮
 
@@ -65,6 +73,8 @@
 - [vscode-miniapp-helper](https://github.com/overtrue/vscode-miniapp-helper)
 
 - [w-extension](https://github.com/masterZSH/w-extension)
+
+部分功能的实现参考微信开发者工具 IDE
 
 ## License
 

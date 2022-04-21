@@ -13,9 +13,11 @@ jobs:
         
       - name: NPM Install
         run: |
-          npm i
+          npm ci
 
-      - name: Package
-        uses: lannonbr/vsce-action@master
+      - name: Deploy
+        uses: lannonbr/vsce-action@3.0.0
         with:
-          args: "package"
+          args: "publish -p $VSCE_TOKEN"
+        env:
+          VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
