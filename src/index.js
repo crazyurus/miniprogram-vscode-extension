@@ -1,4 +1,5 @@
 const ViewPlugin = require('./plugins/view');
+const ExtensionPlugin = require('./plugins/extension');
 const CommandPlugin = require('./commands');
 
 const plugins = [
@@ -8,6 +9,7 @@ const plugins = [
   CommandPlugin.project,
   CommandPlugin.document,
   CommandPlugin.storage,
+  ExtensionPlugin,
 ];
 
 function activate(context) {

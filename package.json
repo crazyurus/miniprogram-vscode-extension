@@ -41,140 +41,10 @@
     "url": "https://github.com/crazyurus/miniprogram-vscode-extension/issues",
     "email": "crazyurus@vip.qq.com"
   },
+  "scripts": {
+    "build:extension": "node ./build/extension.js"
+  },
   "contributes": {
-    "snippets": [
-      {
-        "language": "javascript",
-        "path": "./snippets/js.json"
-      },
-      {
-        "language": "typescript",
-        "path": "./snippets/ts.json"
-      },
-      {
-        "language": "wxml",
-        "path": "./snippets/wxml.json"
-      },
-      {
-        "language": "json",
-        "path": "./snippets/json.json"
-      }
-    ],
-    "jsonValidation": [
-      {
-        "fileMatch": "package.json",
-        "url": "https://json.schemastore.org/package"
-      },
-      {
-        "fileMatch": "bower.json",
-        "url": "https://json.schemastore.org/bower"
-      },
-      {
-        "fileMatch": "app.json",
-        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/app.schema.json"
-      },
-      {
-        "fileMatch": "ext.json",
-        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/ext.schema.json"
-      },
-      {
-        "fileMatch": "game.json",
-        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/game.schema.json"
-      },
-      {
-        "fileMatch": "plugin.json",
-        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/plugin.schema.json"
-      },
-      {
-        "fileMatch": "project.config.json",
-        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/project.config.schema.json"
-      },
-      {
-        "fileMatch": "sitemap.json",
-        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/sitemap.schema.json"
-      },
-      {
-        "fileMatch": "container.config.json",
-        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/container.config.schema.json"
-      },
-      {
-        "fileMatch": [
-          "*.json",
-          "!/settings.json",
-          "!/config.json",
-          "!/app.json",
-          "!/ext.json",
-          "!/game.json",
-          "!/plugin.json",
-          "!/project.config.json",
-          "!/sitemap.json",
-          "!/container.config.json",
-          "!/.eslintrc.*"
-        ],
-        "url": "https://dldir1.qq.com/WechatWebDev/plugins/editor/wechat-miniprogram_wx-json/1.0.0/page_component.schema.json"
-      }
-    ],
-    "languages": [
-      {
-        "id": "wxml",
-        "extensions": [
-          ".wxml",
-          ".ttml"
-        ],
-        "aliases": [
-          "WXML",
-          "wxml"
-        ],
-        "configuration": "./languages/wxml/language-configuration.json"
-      },
-      {
-        "id": "javascript",
-        "aliases": [
-          "JavaScript",
-          "javascript",
-          "js"
-        ],
-        "extensions": [
-          ".wxs",
-          ".sjs"
-        ]
-      },
-      {
-        "id": "css",
-        "aliases": [
-          "CSS"
-        ],
-        "extensions": [
-          ".wxss",
-          ".ttss"
-        ]
-      }
-    ],
-    "grammars": [
-      {
-        "scopeName": "text.html.basic",
-        "path": "./languages/wxml/syntaxes/tmLanguage.json",
-        "embeddedLanguages": {
-          "text.html": "html",
-          "source.js": "javascript"
-        },
-        "tokenTypes": {
-          "meta.tag string.quoted": "other"
-        }
-      },
-      {
-        "language": "wxml",
-        "scopeName": "text.html.derivative",
-        "path": "./languages/wxml/syntaxes/derivative.tmLanguage.json",
-        "embeddedLanguages": {
-          "text.html": "html",
-          "source.js": "javascript"
-        },
-        "tokenTypes": {
-          "meta.tag string.quoted": "other"
-        }
-      }
-    ],
     "themes": [
       {
         "label": "WeChat Dark",
@@ -270,6 +140,363 @@
           "name": "微信小程序"
         }
       ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "wxml",
+      "properties": {
+        "universal-path-intellisense.extensionOnImport": {
+          "type": "boolean",
+          "default": true,
+          "description": "Adds the file extension to a import statements"
+        },
+        "universal-path-intellisense.mappings": {
+          "type": "object",
+          "default": {},
+          "description": "Mappings for paths"
+        },
+        "universal-path-intellisense.showHiddenFiles": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show hidden files"
+        },
+        "universal-path-intellisense.autoSlashAfterDirectory": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically adds slash after directory"
+        },
+        "universal-path-intellisense.absolutePathToWorkspace": {
+          "type": "boolean",
+          "default": true,
+          "description": "Sets an absolute path to the current workspace"
+        },
+        "universal-path-intellisense.noExtensionFileWhiteList": {
+          "type": "array",
+          "default": [
+            "js",
+            "ts",
+            "wxml",
+            "json"
+          ],
+          "description": "the files which will no be imported with file extension"
+        },
+        "wxml.customData": {
+          "type": "array",
+          "markdownDescription": "%wxml.customData.desc%",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "scope": "resource"
+        },
+        "wxml.format.enable": {
+          "type": "boolean",
+          "scope": "window",
+          "default": true,
+          "description": "%wxml.format.enable.desc%"
+        },
+        "wxml.format.wrapLineLength": {
+          "type": "integer",
+          "scope": "resource",
+          "default": 120,
+          "description": "%wxml.format.wrapLineLength.desc%"
+        },
+        "wxml.format.unformatted": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "scope": "resource",
+          "default": "wbr",
+          "markdownDescription": "%wxml.format.unformatted.desc%"
+        },
+        "wxml.format.contentUnformatted": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "scope": "resource",
+          "default": "pre,code,textarea",
+          "markdownDescription": "%wxml.format.contentUnformatted.desc%"
+        },
+        "wxml.format.indentInnerWxml": {
+          "type": "boolean",
+          "scope": "resource",
+          "default": false,
+          "markdownDescription": "%wxml.format.indentInnerWxml.desc%"
+        },
+        "wxml.format.preserveNewLines": {
+          "type": "boolean",
+          "scope": "resource",
+          "default": true,
+          "description": "%wxml.format.preserveNewLines.desc%"
+        },
+        "wxml.format.maxPreserveNewLines": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "scope": "resource",
+          "default": null,
+          "markdownDescription": "%wxml.format.maxPreserveNewLines.desc%"
+        },
+        "wxml.format.indentHandlebars": {
+          "type": "boolean",
+          "scope": "resource",
+          "default": false,
+          "markdownDescription": "%wxml.format.indentHandlebars.desc%"
+        },
+        "wxml.format.endWithNewline": {
+          "type": "boolean",
+          "scope": "resource",
+          "default": false,
+          "description": "%wxml.format.endWithNewline.desc%"
+        },
+        "wxml.format.extraLiners": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "scope": "resource",
+          "default": "head, body, /wxml",
+          "markdownDescription": "%wxml.format.extraLiners.desc%"
+        },
+        "wxml.format.wrapAttributes": {
+          "type": "string",
+          "scope": "resource",
+          "default": "auto",
+          "enum": [
+            "auto",
+            "force",
+            "force-aligned",
+            "force-expand-multiline",
+            "aligned-multiple",
+            "preserve",
+            "preserve-aligned"
+          ],
+          "enumDescriptions": [
+            "%wxml.format.wrapAttributes.auto%",
+            "%wxml.format.wrapAttributes.force%",
+            "%wxml.format.wrapAttributes.forcealign%",
+            "%wxml.format.wrapAttributes.forcemultiline%",
+            "%wxml.format.wrapAttributes.alignedmultiple%",
+            "%wxml.format.wrapAttributes.preserve%",
+            "%wxml.format.wrapAttributes.preservealigned%"
+          ],
+          "description": "%wxml.format.wrapAttributes.desc%"
+        },
+        "wxml.format.wrapAttributesIndentSize": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "scope": "resource",
+          "default": "null",
+          "description": "%wxml.format.wrapAttributesIndentSize.desc%"
+        },
+        "wxml.format.templating": {
+          "type": [
+            "boolean"
+          ],
+          "scope": "resource",
+          "default": false,
+          "description": "%wxml.format.templating.desc%"
+        },
+        "wxml.format.unformattedContentDelimiter": {
+          "type": [
+            "string"
+          ],
+          "scope": "resource",
+          "default": "",
+          "markdownDescription": "%wxml.format.unformattedContentDelimiter.desc%"
+        },
+        "wxml.suggest.wxml5": {
+          "type": "boolean",
+          "scope": "resource",
+          "default": true,
+          "description": "%wxml.suggest.wxml5.desc%"
+        },
+        "wxml.validate.scripts": {
+          "type": "boolean",
+          "scope": "resource",
+          "default": true,
+          "description": "%wxml.validate.scripts%"
+        },
+        "wxml.validate.styles": {
+          "type": "boolean",
+          "scope": "resource",
+          "default": true,
+          "description": "%wxml.validate.styles%"
+        },
+        "wxml.autoClosingTags": {
+          "type": "boolean",
+          "scope": "resource",
+          "default": true,
+          "description": "%wxml.autoClosingTags%"
+        },
+        "wxml.mirrorCursorOnMatchingTag": {
+          "type": "boolean",
+          "scope": "resource",
+          "default": false,
+          "description": "%wxml.mirrorCursorOnMatchingTag%",
+          "deprecationMessage": "%wxml.mirrorCursorOnMatchingTagDeprecationMessage%"
+        },
+        "wxml.trace.server": {
+          "type": "string",
+          "scope": "window",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "%wxml.trace.server.desc%"
+        }
+      },
+      "id": "wxml",
+      "order": 20
+    },
+    "jsonValidation": [
+      {
+        "fileMatch": "package.json",
+        "url": "https://json.schemastore.org/package"
+      },
+      {
+        "fileMatch": "bower.json",
+        "url": "https://json.schemastore.org/bower"
+      },
+      {
+        "fileMatch": "app.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/app.schema.json"
+      },
+      {
+        "fileMatch": "ext.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/ext.schema.json"
+      },
+      {
+        "fileMatch": "game.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/game.schema.json"
+      },
+      {
+        "fileMatch": "plugin.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/plugin.schema.json"
+      },
+      {
+        "fileMatch": "project.config.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/project.config.schema.json"
+      },
+      {
+        "fileMatch": "sitemap.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/sitemap.schema.json"
+      },
+      {
+        "fileMatch": "container.config.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/container.config.schema.json"
+      },
+      {
+        "fileMatch": [
+          "*.json",
+          "!/settings.json",
+          "!/config.json",
+          "!/app.json",
+          "!/ext.json",
+          "!/game.json",
+          "!/plugin.json",
+          "!/project.config.json",
+          "!/sitemap.json",
+          "!/container.config.json",
+          "!/.eslintrc.*"
+        ],
+        "url": "https://dldir1.qq.com/WechatWebDev/plugins/editor/wechat-miniprogram_wx-json/1.0.0/page_component.schema.json"
+      },
+      {
+        "fileMatch": "*.wxml-data.json",
+        "url": "https://raw.githubusercontent.com/microsoft/vscode-html-languageservice/master/docs/customData.schema.json"
+      },
+      {
+        "fileMatch": "package.json",
+        "url": "./extensions/wxml-language-features/schemas/package.schema.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "javascript",
+        "path": "./extensions/wx-snippets/snippets/snippets.js.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./extensions/wx-snippets/snippets/snippets.ts.json"
+      },
+      {
+        "language": "json",
+        "path": "./extensions/wx-snippets/snippets/snippets.json.json"
+      }
+    ],
+    "languages": [
+      {
+        "id": "wxml",
+        "extensions": [
+          ".wxml"
+        ],
+        "aliases": [
+          "WXML",
+          "wxml"
+        ],
+        "configuration": "./extensions/wxml-basics/wxml.language-configuration.json"
+      },
+      {
+        "id": "javascript",
+        "aliases": [
+          "JavaScript",
+          "javascript",
+          "js"
+        ],
+        "extensions": [
+          ".wxs"
+        ]
+      },
+      {
+        "id": "css",
+        "aliases": [
+          "CSS"
+        ],
+        "extensions": [
+          ".wxss"
+        ]
+      }
+    ],
+    "grammars": [
+      {
+        "scopeName": "text.html.basic",
+        "path": "./extensions/wxml-basics/syntaxes/wxml.tmLanguage.json",
+        "embeddedLanguages": {
+          "text.html": "html",
+          "source.js": "javascript"
+        },
+        "tokenTypes": {
+          "meta.tag string.quoted": "other"
+        }
+      },
+      {
+        "language": "wxml",
+        "scopeName": "text.html.derivative",
+        "path": "./extensions/wxml-basics/syntaxes/wxml-derivative.tmLanguage.json",
+        "embeddedLanguages": {
+          "text.html": "html",
+          "source.js": "javascript"
+        },
+        "tokenTypes": {
+          "meta.tag string.quoted": "other"
+        }
+      }
+    ],
+    "configurationDefaults": {
+      "[wxml]": {
+        "editor.suggest.insertMode": "replace"
+      },
+      "[handlebars]": {
+        "editor.suggest.insertMode": "replace"
+      }
     }
   },
   "activationEvents": [
@@ -279,5 +506,10 @@
   "dependencies": {
     "miniprogram-ci": "^1.8.12",
     "open": "^8.4.0"
+  },
+  "devDependencies": {
+    "glob": "^8.0.1",
+    "lodash": "^4.17.21",
+    "typescript": "^4.6.3"
   }
 }

@@ -1,0 +1,12 @@
+{
+	"displayName": "XML Language Basics",
+	"description": "Provides syntax highlighting and bracket matching in XML files.",
+	"a":[			{
+		"language": "wxml",
+		"scopeName": "text.wxml",
+		"path": "./syntaxes/wxml.tmLanguage.json",
+		"embeddedLanguages": {
+			"source.js": "javascript"
+		  }
+	}]
+}

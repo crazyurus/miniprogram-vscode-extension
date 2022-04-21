@@ -1,0 +1,67 @@
+{
+  "name": "wx-json",
+  "displayName": "wx-json",
+  "description": "Wechat MiniProgram & MiniGame Related JSON Language",
+  "version": "1.0.0",
+  "publisher": "wechat.miniprogram",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.40.0"
+  },
+  "contributes": {
+    "jsonValidation": [
+      {
+        "fileMatch": "package.json",
+        "url": "https://json.schemastore.org/package"
+      },
+      {
+        "fileMatch": "bower.json",
+        "url": "https://json.schemastore.org/bower"
+      },
+      {
+        "fileMatch": "app.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/app.schema.json"
+      },
+      {
+        "fileMatch": "ext.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/ext.schema.json"
+      },
+      {
+        "fileMatch": "game.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/game.schema.json"
+      },
+      {
+        "fileMatch": "plugin.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/plugin.schema.json"
+      },
+      {
+        "fileMatch": "project.config.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/project.config.schema.json"
+      },
+      {
+        "fileMatch": "sitemap.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/sitemap.schema.json"
+      },
+      {
+        "fileMatch": "container.config.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/container.config.schema.json"
+      },
+      {
+        "fileMatch": [
+          "*.json",
+          "!/settings.json",
+          "!/config.json",
+          "!/app.json",
+          "!/ext.json",
+          "!/game.json",
+          "!/plugin.json",
+          "!/project.config.json",
+          "!/sitemap.json",
+          "!/container.config.json",
+          "!/.eslintrc.*"
+        ],
+        "url": "https://dldir1.qq.com/WechatWebDev/plugins/editor/wechat-miniprogram_wx-json/1.0.0/page_component.schema.json"
+      }
+    ]
+  }
+}

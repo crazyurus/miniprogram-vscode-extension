@@ -1,0 +1,25 @@
+{
+  "name": "wxss",
+  "displayName": "WXSS",
+  "description": "WXSS Language Basics",
+  "version": "1.0.0",
+  "publisher": "wechat.miniprogram",
+  "engines": {
+    "vscode": "*"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "license": "MIT",
+  "contributes": {
+    "languages": [{
+      "id": "css",
+      "aliases": [
+        "CSS"
+      ],
+      "extensions": [
+        ".wxss"
+      ]
+    }]
+  }
+}

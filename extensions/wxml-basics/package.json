@@ -1,0 +1,54 @@
+{
+	"name": "wxml",
+	"displayName": "%displayName%",
+	"description": "%description%",
+	"version": "1.0.0",
+	"publisher": "wechat.miniprogram",
+	"license": "MIT",
+	"engines": {
+		"vscode": "*"
+	},
+	"contributes": {
+		"languages": [
+			{
+				"id": "wxml",
+				"extensions": [
+					".wxml"
+				],
+				"aliases": [
+					"WXML",
+					"wxml"
+				],
+				"configuration": "./extensions/wxml-basics/wxml.language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"scopeName": "text.html.basic",
+				"path": "./extensions/wxml-basics/syntaxes/wxml.tmLanguage.json",
+				"embeddedLanguages": {
+					"text.html": "html",
+					"source.js": "javascript"
+				},
+				"tokenTypes": {
+					"meta.tag string.quoted": "other"
+				}
+			},
+			{
+				"language": "wxml",
+				"scopeName": "text.html.derivative",
+				"path": "./extensions/wxml-basics/syntaxes/wxml-derivative.tmLanguage.json",
+				"embeddedLanguages": {
+					"text.html": "html",
+					"source.js": "javascript"
+				},
+				"tokenTypes": {
+					"meta.tag string.quoted": "other"
+				}
+			}
+		]
+	},
+	"scripts": {
+		"update-grammar": "node ../../build/npm/update-grammar.js atom/language-xml grammars/xml.cson ./syntaxes/xml.tmLanguage.json grammars/xsl.cson ./syntaxes/xsl.tmLanguage.json"
+	}
+}

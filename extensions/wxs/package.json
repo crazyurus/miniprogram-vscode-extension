@@ -1,0 +1,27 @@
+{
+  "name": "wxs",
+  "displayName": "WXS",
+  "description": "WXS Language Basics",
+  "version": "1.0.0",
+  "publisher": "wechat.miniprogram",
+  "engines": {
+    "vscode": "*"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "license": "MIT",
+  "contributes": {
+    "languages": [{
+      "id": "javascript",
+      "aliases": [
+        "JavaScript",
+        "javascript",
+        "js"
+      ],
+      "extensions": [
+        ".wxs"
+      ]
+    }]
+  }
+}

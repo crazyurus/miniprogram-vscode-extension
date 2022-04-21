@@ -1,0 +1,98 @@
+{
+  "themes": [
+    {
+      "label": "WeChat Dark",
+      "uiTheme": "vs-dark",
+      "path": "./themes/dark.json"
+    },
+    {
+      "label": "WeChat Light",
+      "uiTheme": "vs",
+      "path": "./themes/light.json"
+    }
+  ],
+  "iconThemes": [
+    {
+      "id": "material-icon-theme-wechat",
+      "label": "Wechat Icon Theme",
+      "path": "./icons/material-icons.json"
+    }
+  ],
+  "menus": {
+    "explorer/context": [
+      {
+        "when": "extensionActivated && explorerResourceIsFolder",
+        "command": "MiniProgram.commands.config.compileDir",
+        "group": "compile"
+      },
+      {
+        "when": "extensionActivated && explorerResourceIsFolder",
+        "command": "MiniProgram.commands.create.page",
+        "group": "file"
+      },
+      {
+        "when": "extensionActivated && explorerResourceIsFolder",
+        "command": "MiniProgram.commands.create.component",
+        "group": "file"
+      }
+    ]
+  },
+  "commands": [
+    {
+      "command": "MiniProgram.commands.config.compileDir",
+      "title": "设置为编译上传目录"
+    },
+    {
+      "command": "MiniProgram.commands.config.project",
+      "title": "查看项目配置",
+      "category": "MiniProgram"
+    },
+    {
+      "command": "MiniProgram.commands.create.page",
+      "title": "新建 Page"
+    },
+    {
+      "command": "MiniProgram.commands.create.component",
+      "title": "新建 Component"
+    },
+    {
+      "command": "MiniProgram.commands.compile.npm",
+      "title": "构建 NPM",
+      "category": "MiniProgram"
+    },
+    {
+      "command": "MiniProgram.commands.compile.analyse",
+      "title": "分析代码静态依赖",
+      "category": "MiniProgram"
+    },
+    {
+      "command": "MiniProgram.commands.compile.preview",
+      "title": "预览小程序",
+      "category": "MiniProgram"
+    },
+    {
+      "command": "MiniProgram.commands.compile.upload",
+      "title": "打包并上传到微信后台",
+      "category": "MiniProgram"
+    },
+    {
+      "command": "MiniProgram.commands.document",
+      "title": "查看开发文档",
+      "category": "MiniProgram"
+    },
+    {
+      "command": "MiniProgram.commands.stroage.clear",
+      "title": "清除缓存",
+      "category": "MiniProgram"
+    }
+  ],
+  "views": {
+    "explorer": [
+      {
+        "when": "extensionActivated",
+        "id": "miniprogram-view",
+        "name": "微信小程序"
+      }
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "wx-snippets",
+  "displayName": "WX Snippets",
+  "description": "Snippets for WeChat MiniProgram",
+  "version": "2.11.0",
+  "publisher": "wechat.miniprogram",
+  "engines": {
+    "vscode": "^1.28.0"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "javascript",
+        "path": "./extensions/wx-snippets/snippets/snippets.js.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./extensions/wx-snippets/snippets/snippets.ts.json"
+      },
+      {
+        "language": "json",
+        "path": "./extensions/wx-snippets/snippets/snippets.json.json"
+      }
+    ]
+  },
+  "activationEvents": [
+    "onLanguage:javascript"
+  ],
+  "main": "main.js"
+}

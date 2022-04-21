@@ -1,0 +1,221 @@
+{
+  "enableProposedApi": true,
+  "name": "wxml-language-features",
+  "displayName": "%displayName%",
+  "description": "%description%",
+  "version": "1.0.0",
+  "publisher": "wechat.miniprogram",
+  "license": "MIT",
+  "aiKey": "AIF-d9b70cd4-b9f9-4d70-929b-a071c400b217",
+  "engines": {
+    "vscode": "0.10.x"
+  },
+  "activationEvents": [
+    "onLanguage:wxml"
+  ],
+  "main": "./client/dist/node/htmlClientMain",
+  "browser": "./client/dist/browser/htmlClientMain",
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "configuration": {
+      "id": "wxml",
+      "order": 20,
+      "type": "object",
+      "title": "wxml",
+      "properties": {
+        "wxml.customData": {
+          "type": "array",
+          "markdownDescription": "%wxml.customData.desc%",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "scope": "resource"
+        },
+        "wxml.format.enable": {
+          "type": "boolean",
+          "scope": "window",
+          "default": true,
+          "description": "%wxml.format.enable.desc%"
+        },
+        "wxml.format.wrapLineLength": {
+          "type": "integer",
+          "scope": "resource",
+          "default": 120,
+          "description": "%wxml.format.wrapLineLength.desc%"
+        },
+        "wxml.format.unformatted": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "scope": "resource",
+          "default": "wbr",
+          "markdownDescription": "%wxml.format.unformatted.desc%"
+        },
+        "wxml.format.contentUnformatted": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "scope": "resource",
+          "default": "pre,code,textarea",
+          "markdownDescription": "%wxml.format.contentUnformatted.desc%"
+        },
+        "wxml.format.indentInnerWxml": {
+          "type": "boolean",
+          "scope": "resource",
+          "default": false,
+          "markdownDescription": "%wxml.format.indentInnerWxml.desc%"
+        },
+        "wxml.format.preserveNewLines": {
+          "type": "boolean",
+          "scope": "resource",
+          "default": true,
+          "description": "%wxml.format.preserveNewLines.desc%"
+        },
+        "wxml.format.maxPreserveNewLines": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "scope": "resource",
+          "default": null,
+          "markdownDescription": "%wxml.format.maxPreserveNewLines.desc%"
+        },
+        "wxml.format.indentHandlebars": {
+          "type": "boolean",
+          "scope": "resource",
+          "default": false,
+          "markdownDescription": "%wxml.format.indentHandlebars.desc%"
+        },
+        "wxml.format.endWithNewline": {
+          "type": "boolean",
+          "scope": "resource",
+          "default": false,
+          "description": "%wxml.format.endWithNewline.desc%"
+        },
+        "wxml.format.extraLiners": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "scope": "resource",
+          "default": "head, body, /wxml",
+          "markdownDescription": "%wxml.format.extraLiners.desc%"
+        },
+        "wxml.format.wrapAttributes": {
+          "type": "string",
+          "scope": "resource",
+          "default": "auto",
+          "enum": [
+            "auto",
+            "force",
+            "force-aligned",
+            "force-expand-multiline",
+            "aligned-multiple",
+            "preserve",
+            "preserve-aligned"
+          ],
+          "enumDescriptions": [
+            "%wxml.format.wrapAttributes.auto%",
+            "%wxml.format.wrapAttributes.force%",
+            "%wxml.format.wrapAttributes.forcealign%",
+            "%wxml.format.wrapAttributes.forcemultiline%",
+            "%wxml.format.wrapAttributes.alignedmultiple%",
+            "%wxml.format.wrapAttributes.preserve%",
+            "%wxml.format.wrapAttributes.preservealigned%"
+          ],
+          "description": "%wxml.format.wrapAttributes.desc%"
+        },
+        "wxml.format.wrapAttributesIndentSize": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "scope": "resource",
+          "default": "null",
+          "description": "%wxml.format.wrapAttributesIndentSize.desc%"
+        },
+        "wxml.format.templating": {
+          "type": [
+            "boolean"
+          ],
+          "scope": "resource",
+          "default": false,
+          "description": "%wxml.format.templating.desc%"
+        },
+        "wxml.format.unformattedContentDelimiter": {
+          "type": [
+            "string"
+          ],
+          "scope": "resource",
+          "default": "",
+          "markdownDescription": "%wxml.format.unformattedContentDelimiter.desc%"
+        },
+        "wxml.suggest.wxml5": {
+          "type": "boolean",
+          "scope": "resource",
+          "default": true,
+          "description": "%wxml.suggest.wxml5.desc%"
+        },
+        "wxml.validate.scripts": {
+          "type": "boolean",
+          "scope": "resource",
+          "default": true,
+          "description": "%wxml.validate.scripts%"
+        },
+        "wxml.validate.styles": {
+          "type": "boolean",
+          "scope": "resource",
+          "default": true,
+          "description": "%wxml.validate.styles%"
+        },
+        "wxml.autoClosingTags": {
+          "type": "boolean",
+          "scope": "resource",
+          "default": true,
+          "description": "%wxml.autoClosingTags%"
+        },
+        "wxml.mirrorCursorOnMatchingTag": {
+          "type": "boolean",
+          "scope": "resource",
+          "default": false,
+          "description": "%wxml.mirrorCursorOnMatchingTag%",
+          "deprecationMessage": "%wxml.mirrorCursorOnMatchingTagDeprecationMessage%"
+        },
+        "wxml.trace.server": {
+          "type": "string",
+          "scope": "window",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "%wxml.trace.server.desc%"
+        }
+      }
+    },
+    "configurationDefaults": {
+      "[wxml]": {
+        "editor.suggest.insertMode": "replace"
+      },
+      "[handlebars]": {
+        "editor.suggest.insertMode": "replace"
+      }
+    },
+    "jsonValidation": [
+      {
+        "fileMatch": "*.wxml-data.json",
+        "url": "https://raw.githubusercontent.com/microsoft/vscode-html-languageservice/master/docs/customData.schema.json"
+      },
+      {
+        "fileMatch": "package.json",
+        "url": "./extensions/wxml-language-features/schemas/package.schema.json"
+      }
+    ]
+  }
+}
