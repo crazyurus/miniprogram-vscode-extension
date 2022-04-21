@@ -20,7 +20,7 @@ function showInputBox(options) {
 };
 
 function openWebView(url, title, position = vscode.ViewColumn.One, style = '') {
-  const webiewPanel = vscode.window.createWebviewPanel(
+  const webviewPanel = vscode.window.createWebviewPanel(
     title, title,
     position,
     {
@@ -30,16 +30,23 @@ function openWebView(url, title, position = vscode.ViewColumn.One, style = '') {
   );
 
   if (url.indexOf('http') === 0) {
-    webiewPanel.webview.html = commonHTML({
+    webviewPanel.webview.html = commonHTML({
       style,
       url,
     });
   } else {
-    webiewPanel.webview.html = url;
+    webviewPanel.webview.html = url;
   }
 
-  return webiewPanel;
+  return webviewPanel;
 }
 
-exports.showInputBox = showInputBox;
-exports.openWebView = openWebView;
+function openDocument(path) {
+  return vscode.workspace.openTextDocument(path).then(document => vscode.window.showTextDocument(document, vscode.ViewColumn.One));
+}
+
+module.exports = {
+  showInputBox,
+  openWebView,
+  openDocument,
+};

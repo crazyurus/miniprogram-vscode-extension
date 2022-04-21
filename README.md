@@ -66,8 +66,6 @@
 
 - [w-extension](https://github.com/masterZSH/w-extension)
 
-- [weweb](https://github.com/wdfe/weweb)
-
 ## License
 
 [GPL-3.0](https://github.com/crazyurus/miniprogram-vscode-extension/blob/master/LICENSE)

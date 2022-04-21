@@ -3,7 +3,7 @@ const path = require('path');
 const open = require('open');
 const { readProjectConfig, createProject } = require('../utils/project');
 const { loadMiniprogramCI } = require('../utils/ci');
-const { openWebView } = require('../utils/ui');
+const { openWebView, openDocument } = require('../utils/ui');
 const projectHTML = require('../html/project');
 
 function setStatusBar() {
@@ -83,7 +83,7 @@ function setCommands(context) {
             break;
           case 'openConfig':
             const projectFilePath = path.join(options.projectPath, 'project.config.json')
-            vscode.workspace.openTextDocument(projectFilePath).then(document => vscode.window.showTextDocument(document, vscode.ViewColumn.One));
+            openDocument(projectFilePath);
             break;
         }
       }, undefined, context.subscriptions);

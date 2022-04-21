@@ -52,7 +52,7 @@
         "path": "./snippets/ts.json"
       },
       {
-        "language": "xml",
+        "language": "wxml",
         "path": "./snippets/wxml.json"
       },
       {
@@ -234,6 +234,11 @@
       {
         "command": "MiniProgram.commands.compile.npm",
         "title": "构建 NPM",
+        "category": "MiniProgram"
+      },
+      {
+        "command": "MiniProgram.commands.compile.analyse",
+        "title": "分析代码静态依赖",
         "category": "MiniProgram"
       },
       {

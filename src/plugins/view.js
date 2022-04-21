@@ -17,6 +17,10 @@ class TreeDataProvider {
           title: "构建 NPM"
         },
         {
+          command: "MiniProgram.commands.compile.analyse",
+          title: "分析代码静态依赖"
+        },
+        {
           command: "MiniProgram.commands.config.project",
           title: "查看项目配置"
         },
