@@ -1,9 +1,7 @@
-const WxmlExtension = require('./extensions/wxml');
 const ViewExtension = require('./extensions/view');
 const CommandExtension = require('./commands');
 
 const plugins = [
-  WxmlExtension,
   ViewExtension,
   CommandExtension.create,
   CommandExtension.compile,
@@ -20,5 +18,7 @@ function deactivate() {
   plugins.forEach(plugin => plugin.deactivate());
 }
 
-exports.activate = activate;
-exports.deactivate = deactivate;
+module.exports = {
+  activate,
+  deactivate,
+};
