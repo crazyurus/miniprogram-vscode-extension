@@ -5,19 +5,26 @@ function template(params) {
       <html>
         <head>
           <style>
+            html {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 100%;
+            }
             body {
               line-height: 1.5;
+              cursor: default;
+              user-select: none;
             }
             .title {
               cursor: default;
               text-align: center;
               font-size: 20px;
-              margin-top: 30px;
             }
             .qrcode {
               display: block;
               width: 280px;
-              margin: 15px auto;
+              margin: 16px auto;
               border: 1px solid #E2E2E2;
             }
             body.vscode-dark .footer {
@@ -28,11 +35,11 @@ function template(params) {
               cursor: default;
               box-sizing: border-box;
               width: 280px;
-              margin: 0 auto;
+              margin: 16px auto 0;
               border-radius: 100px;
               font-size: 13px;
               text-align: center;
-              padding: 7px 14px;
+              padding: 8px 16px;
             }
           </style>
         </head>

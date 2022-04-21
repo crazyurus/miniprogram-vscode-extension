@@ -1,5 +1,4 @@
 const ViewPlugin = require('./plugins/view');
-const PreloadPlugin = require('./plugins/preload');
 const CommandPlugin = require('./commands');
 
 const plugins = [
@@ -9,7 +8,6 @@ const plugins = [
   CommandPlugin.project,
   CommandPlugin.document,
   CommandPlugin.storage,
-  PreloadPlugin,
 ];
 
 function activate(context) {

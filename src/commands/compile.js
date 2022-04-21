@@ -8,7 +8,6 @@ const { readProjectConfig, createProject } = require('../utils/project');
 const { openWebView, showInputBox, openDocument } = require('../utils/ui');
 const { random } = require('../utils/math');
 const previewHTML = require('../html/preview');
-const { loadMiniprogramCI } = require('../utils/ci');
 
 function getCIBot() {
   return random(1, 30);
@@ -42,7 +41,7 @@ function compile(context) {
         location: vscode.ProgressLocation.Notification,
         cancellable: true,
       }, async () => {
-        const ci = await loadMiniprogramCI();
+        const ci = require('miniprogram-ci');
         const project = new ci.Project(options);
 
         await ci.packNpm(project, {
@@ -70,7 +69,7 @@ function compile(context) {
       location: vscode.ProgressLocation.Notification,
       cancellable: true,
     }, async progress => {
-      const ci = await loadMiniprogramCI();
+      const ci = require('miniprogram-ci');
       const project = new ci.Project(options);
       const { appName } = await project.attr();
 
@@ -132,7 +131,7 @@ function compile(context) {
       location: vscode.ProgressLocation.Notification,
       cancellable: true,
     }, async progress => {
-      const ci = await loadMiniprogramCI();
+      const ci = require('miniprogram-ci');
       const project = new ci.Project(options);
 
       await ci.upload({
@@ -185,7 +184,7 @@ function compile(context) {
           break;
         case 'analyse':
           const options = await createProject(context);
-          const ci = await loadMiniprogramCI();
+          const ci = require('miniprogram-ci');
           const project = new ci.Project(options);
           const result = await ci.analyseCode(project);
 

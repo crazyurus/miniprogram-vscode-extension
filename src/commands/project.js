@@ -2,7 +2,6 @@ const vscode = require('vscode');
 const path = require('path');
 const open = require('open');
 const { readProjectConfig, createProject } = require('../utils/project');
-const { loadMiniprogramCI } = require('../utils/ci');
 const { openWebView, openDocument } = require('../utils/ui');
 const projectHTML = require('../html/project');
 
@@ -24,7 +23,7 @@ function setCommands(context) {
     const projectConfig = readProjectConfig();
 
     if (projectConfig) {
-      const ci = await loadMiniprogramCI();
+      const ci = require('miniprogram-ci');
       const options = await createProject(context);
       const project = new ci.Project(options);
       const projectSetting = await project.attr();
@@ -55,11 +54,11 @@ function setCommands(context) {
           },
           {
             label: '代码包总大小（使用分包）',
-            value: projectSetting.setting.MaxSubpackageFullCodeSize + 'MB',
+            value: projectSetting.setting.MaxSubpackageFullCodeSize + ' MB',
           },
           {
             label: '代码包总大小（未使用分包）',
-            value: projectSetting.setting.MaxSubpackageSubCodeSize + 'MB',
+            value: projectSetting.setting.MaxSubpackageSubCodeSize + ' MB',
           },
           {
             label: 'Tabbar 最小个数',
@@ -71,7 +70,7 @@ function setCommands(context) {
           },
           {
             label: 'Tabbar 的 Icon 大小限制',
-            value: projectSetting.setting.MaxTabbarIconSize + 'KB',
+            value: projectSetting.setting.MaxTabbarIconSize + ' KB',
           },
         ]
       }), '项目配置', vscode.ViewColumn.Beside);

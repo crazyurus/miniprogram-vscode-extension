@@ -10,6 +10,8 @@ function template(params) {
             body {
               line-height: 1.5;
               margin: 36px 24px;
+              cursor: default;
+              user-select: none;
             }
             .app {
               display: flex;
@@ -34,6 +36,10 @@ function template(params) {
             }
             .form .label {
               color: var(--vscode-gitDecoration-ignoredResourceForeground);
+            }
+            .form .value {
+              cursor: text;
+              user-select: text;
             }
             .footer {
               margin-top: 16px;
