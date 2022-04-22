@@ -28,6 +28,5 @@
   },
   "activationEvents": [
     "onLanguage:javascript"
-  ],
-  "main": "main.js"
+  ]
 }

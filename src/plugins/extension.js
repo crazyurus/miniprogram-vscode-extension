@@ -1,9 +1,12 @@
-const path = require('path');
-const extensions = require('../../extensions');
+const extensions = [
+  require('../../extensions/engine-tutorial-plugin'),
+  require('../../extensions/universal-path-intellisense'),
+  require('../../extensions/wxml-language-features'),
+];
 
 function activate(context) {
   extensions.forEach(extension => {
-    const { activate } = require(path.join('..', extension));
+    const { activate } = extension;
 
     activate && activate(context);
   });
@@ -11,7 +14,7 @@ function activate(context) {
 
 function deactivate() {
   extensions.forEach(extension => {
-    const { deactivate } = require(path.join('..', extension));
+    const { deactivate } = extension;
 
     deactivate && deactivate();
   });

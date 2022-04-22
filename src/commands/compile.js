@@ -200,7 +200,7 @@ function compile(context) {
           const rootPath = getCurrentFolderPath();
           const filePath = message.data.ext.replace('topLevel/MainPackage', rootPath);
 
-          if (fs.existsSync(filePath)) {
+          if (message.data.action === 'clickTreemap' && fs.existsSync(filePath)) {
             openDocument(filePath);
           }
 

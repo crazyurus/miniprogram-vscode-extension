@@ -1,1 +1,0 @@
-module.exports = ["../extensions/engine-tutorial-plugin/extension.js","../extensions/universal-path-intellisense/out/extension.js","../extensions/wx-snippets/main.js","../extensions/wxml-language-features/client/dist/node/htmlClientMain"];
