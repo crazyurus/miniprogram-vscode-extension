@@ -87,7 +87,7 @@ function setCommands(context) {
         }
       }, undefined, context.subscriptions);
     } else {
-      vscode.window.showErrorMessage('未找到 project.config.json 文件');
+      vscode.window.showWarningMessage('未找到 project.config.json 文件');
     }
   });
 }

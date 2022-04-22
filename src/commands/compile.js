@@ -28,41 +28,54 @@ function compileDir() {
 }
 
 function compile(context) {
-  const projectConfig = readProjectConfig();
   const rootPath = getCurrentFolderPath();
 
   // 构建 npm
   vscode.commands.registerCommand('MiniProgram.commands.compile.npm', async () => {
-    if (fs.existsSync(rootPath + path.sep + 'package.json')) {
-      const options = await createProject(context);
+    const projectConfig = readProjectConfig();
 
-      await vscode.window.withProgress({
-        title: '正在构建 NPM',
-        location: vscode.ProgressLocation.Notification,
-        cancellable: true,
-      }, async () => {
-        const ci = require('miniprogram-ci');
-        const project = new ci.Project(options);
-
-        await ci.packNpm(project, {
-          reporter(info) {
-            vscode.window.showInformationMessage(`构建完成，共用时 ${info.pack_time} ms，其中包含小程序依赖 ${info.miniprogram_pack_num} 项、其它依赖 ${info.other_pack_num} 项`);
-          },
-        }).catch(error => {
-          vscode.window.showErrorMessage(error.message);
-        });
-      });
-    } else {
-      vscode.window.showWarningMessage('未找到 package.json 文件');
+    if (!projectConfig) {
+      vscode.window.showWarningMessage('未找到 project.config.json 文件');
+      return;
     }
+
+    if (!fs.existsSync(path.join(rootPath, 'package.json'))) {
+      vscode.window.showWarningMessage('未找到 package.json 文件');
+      return;
+    }
+
+    const options = await createProject(context);
+
+    await vscode.window.withProgress({
+      title: '正在构建 NPM',
+      location: vscode.ProgressLocation.Notification,
+      cancellable: true,
+    }, async () => {
+      const ci = require('miniprogram-ci');
+      const project = new ci.Project(options);
+
+      await ci.packNpm(project, {
+        reporter(info) {
+          vscode.window.showInformationMessage(`构建完成，共用时 ${info.pack_time} ms，其中包含小程序依赖 ${info.miniprogram_pack_num} 项、其它依赖 ${info.other_pack_num} 项`);
+        },
+      }).catch(error => {
+        vscode.window.showErrorMessage(error.message);
+      });
+    });
   });
 
   // 预览
   vscode.commands.registerCommand('MiniProgram.commands.compile.preview', async () => {
+    const projectConfig = readProjectConfig();
+
+    if (!projectConfig) {
+      vscode.window.showWarningMessage('未找到 project.config.json 文件');
+      return;
+    }
+
     const options = await createProject(context);
     const timestamp = new Date().valueOf();
     const tempImagePath = path.join(os.tmpdir(), options.appid + timestamp + '-qrcode.jpg');
-    const projectConfig = readProjectConfig();
 
     await vscode.window.withProgress({
       title: '正在编译小程序',
@@ -104,6 +117,13 @@ function compile(context) {
 
   // 上传
   vscode.commands.registerCommand('MiniProgram.commands.compile.upload', async () => {
+    const projectConfig = readProjectConfig();
+
+    if (!projectConfig) {
+      vscode.window.showWarningMessage('未找到 project.config.json 文件');
+      return;
+    }
+
     const options = await createProject(context);
     const previousVersion = context.workspaceState.get('previousVersion');
     const version = await showInputBox({
@@ -161,6 +181,13 @@ function compile(context) {
 
   // 代码分析
   vscode.commands.registerCommand('MiniProgram.commands.compile.analyse', async () => {
+    const projectConfig = readProjectConfig();
+
+    if (!projectConfig) {
+      vscode.window.showWarningMessage('未找到 project.config.json 文件');
+      return;
+    }
+
     const viewerPath = path.join(__dirname, '..', '..', 'analyse-viewer');
     let html = await fs.promises.readFile(path.join(viewerPath, 'index.html'), { encoding: 'utf-8' });
     const panel = openWebView('', '代码依赖分析', vscode.ViewColumn.One);
