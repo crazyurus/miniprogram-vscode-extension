@@ -119,7 +119,6 @@
         const vscode = __webpack_require__(1);
         const decoration_1 = __webpack_require__(2);
         function activate(context) {
-            console.log('[TutorialEngine]extension activate');
             let disposable = vscode.commands.registerCommand('workbench.enginetutorial', ({ data = {} }) => {
                 onRemoteMessage(data);
             });
