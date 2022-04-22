@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const os = require('os');
 const { updateJSON } = require('../utils/json');
-const { getCurrentFolderPath } = require('../utils/path');
+const { getCurrentFolderPath, getProjectConfigPath } = require('../utils/path');
 const { readProjectConfig, createProject } = require('../utils/project');
 const { openWebView, showInputBox, openDocument } = require('../utils/ui');
 const { random } = require('../utils/math');
@@ -30,7 +30,7 @@ function getCompileOptions(options) {
 function compileDir() {
   vscode.commands.registerCommand('MiniProgram.commands.config.compileDir', e => {
     const rootPath = getCurrentFolderPath();
-    const projectFilePath = path.join(rootPath, 'project.config.json');
+    const projectFilePath = getProjectConfigPath(rootPath);
 
     if (fs.existsSync(projectFilePath)) {
       updateJSON(projectFilePath, 'miniprogramRoot', e.fsPath);

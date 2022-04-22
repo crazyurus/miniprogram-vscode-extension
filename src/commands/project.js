@@ -1,7 +1,6 @@
 const vscode = require('vscode');
-const path = require('path');
 const open = require('open');
-const { getCurrentFolderPath, getIDEPath } = require('../utils/path');
+const { getCurrentFolderPath, getIDEPath, getProjectConfigPath } = require('../utils/path');
 const { readProjectConfig, createProject } = require('../utils/project');
 const { openWebView, openDocument } = require('../utils/ui');
 const projectHTML = require('../html/project');
@@ -102,7 +101,7 @@ function setCommands(context) {
             open(options.projectPath);
             break;
           case 'openConfig':
-            const projectFilePath = path.join(options.projectPath, 'project.config.json')
+            const projectFilePath = getProjectConfigPath(options.projectPath);
             openDocument(projectFilePath);
             break;
         }

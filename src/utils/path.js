@@ -1,11 +1,16 @@
 const os = require('os');
 const fs = require('fs');
+const path = require('path');
 const vscode = require('vscode');
 
 function getCurrentFolderPath() {
   return Array.isArray(vscode.workspace.workspaceFolders)
     ? vscode.workspace.workspaceFolders[0].uri.fsPath
     : '';
+}
+
+function getProjectConfigPath(rootPath) {
+  return path.join(rootPath, 'project.config.json')
 }
 
 function getIDEPath() {
@@ -30,5 +35,6 @@ function getIDEPath() {
 
 module.exports = {
   getCurrentFolderPath,
+  getProjectConfigPath,
   getIDEPath,
 };

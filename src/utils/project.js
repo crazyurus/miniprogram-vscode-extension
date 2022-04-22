@@ -2,11 +2,11 @@ const fs = require('fs');
 const path = require('path');
 const vscode = require('vscode');
 const { readJSON } = require('./json');
-const { getCurrentFolderPath } = require('./path');
+const { getCurrentFolderPath, getProjectConfigPath } = require('./path');
 
 function readProjectConfig() {
   const rootPath = getCurrentFolderPath();
-  const projectFilePath = path.join(rootPath, 'project.config.json');
+  const projectFilePath = getProjectConfigPath(rootPath);
 
   if (fs.existsSync(projectFilePath)) {
     const config = readJSON(projectFilePath);
