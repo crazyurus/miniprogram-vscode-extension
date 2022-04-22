@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const vscode = require('vscode');
 const { readJSON } = require('./json');
 const { getCurrentFolderPath } = require('./path');
 
@@ -27,7 +28,8 @@ function getMiniProgramRootPath(rootPath, relativePath) {
 }
 
 function createProject(context) {
-  const privateKeyPath = context.workspaceState.get('privateKeyPath');
+  const privateKey = context.workspaceState.get('privateKey');
+  const privateKeyPath = context.workspaceState.get('privateKeyPath'); // 废弃
   const rootPath = getCurrentFolderPath();
   const projectConfig = readProjectConfig();
   const options = {
@@ -41,6 +43,14 @@ function createProject(context) {
     return Promise.reject('未找到 project.config.json 文件');
   }
 
+  if (privateKey) {
+    return Promise.resolve({
+      ...options,
+      privateKey,
+    });
+  }
+
+  // TODO: 废弃
   if (privateKeyPath && fs.existsSync(privateKeyPath)) {
     return Promise.resolve({
       ...options,
@@ -68,11 +78,12 @@ function createProject(context) {
     }).then(result => {
       if (Array.isArray(result)) {
         const keyFile = result[0].fsPath;
-        context.workspaceState.update('privateKeyPath', keyFile);
+        const key = fs.readFileSync(keyFile, 'utf-8');
+        context.workspaceState.update('privateKey', key);
 
         resolve({
           ...options,
-          privateKeyPath: keyFile,
+          privateKey: key,
         });
       } else {
         reject();
