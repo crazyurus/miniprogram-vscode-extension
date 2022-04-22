@@ -1,6 +1,7 @@
 const ViewPlugin = require('./plugins/view');
 const ExtensionPlugin = require('./plugins/extension');
 const CommandPlugin = require('./commands');
+const TypeScriptPlugin = require('./plugins/typescript');
 
 const plugins = [
   ViewPlugin,
@@ -10,6 +11,7 @@ const plugins = [
   CommandPlugin.document,
   CommandPlugin.storage,
   ExtensionPlugin,
+  TypeScriptPlugin,
 ];
 
 function activate(context) {
