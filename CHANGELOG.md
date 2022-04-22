@@ -4,6 +4,7 @@
 
 ### 修复
 - WXML Language Server 启动报错
+- Windows 下找不到 IDE
 
 ## [1.4.2] - 2022-4-22
 

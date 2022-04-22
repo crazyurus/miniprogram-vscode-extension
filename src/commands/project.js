@@ -1,6 +1,8 @@
 const vscode = require('vscode');
+const fs = require('fs');
+const os = require('os');
 const open = require('open');
-const { getCurrentFolderPath, getIDEPath, getProjectConfigPath } = require('../utils/path');
+const { getProjectConfigPath } = require('../utils/path');
 const { readProjectConfig, createProject } = require('../utils/project');
 const { openWebView, openDocument } = require('../utils/ui');
 const projectHTML = require('../html/project');
@@ -21,18 +23,20 @@ function setStatusBar() {
 function setCommands(context) {
   // 打开 IDE
   vscode.commands.registerCommand('MiniProgram.commands.config.openIDE', () => {
-    const idePath = getIDEPath();
+    const platform = os.platform();
+    const installPath = {
+      win32: 'C:\\Program Files (x86)\\Tencent\\微信web开发者工具\\微信开发者工具.exe',
+      darwin: '/Applications/wechatwebdevtools.app',
+    };
 
-    if (idePath) {
-      // 先启动 IDE 加快速度
-      open.openApp(idePath.exe);
+    if (installPath.hasOwnProperty(platform) && fs.existsSync(installPath[platform])) {
+      const idePath = installPath[platform];
 
-      // 再调用 CLI
-      const rootPath = getCurrentFolderPath();
-      const terminal = vscode.window.createTerminal('打开微信开发者工具');
-
-      terminal.sendText(idePath.cli + ' open --project ' + rootPath);
-      terminal.show();
+      if (platform === 'win32') {
+        open(idePath);
+      } else {
+        open.openApp(idePath);
+      }
     } else {
       vscode.window.showWarningMessage('未找到微信开发者工具 IDE');
     }
