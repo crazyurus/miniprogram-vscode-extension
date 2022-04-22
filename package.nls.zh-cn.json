@@ -6,7 +6,8 @@
   "commands.compile.npm": "构建 NPM",
   "commands.compile.analyse": "分析代码静态依赖",
   "commands.compile.preview": "预览小程序",
-  "commands.compile.upload": "打包并上传到微信平台",
+  "commands.compile.upload": "打包并上传小程序",
   "commands.document": "查看开发文档",
-  "commands.stroage.clear": "清除缓存"
+  "commands.stroage.clear": "清除缓存",
+  "commands.management": "打开微信小程序管理后台"
 }

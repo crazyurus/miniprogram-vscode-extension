@@ -31,6 +31,10 @@ function activate() {
       }
     });
   });
+
+  vscode.commands.registerCommand('MiniProgram.commands.management', () => {
+    vscode.env.openExternal('https://mp.weixin.qq.com/');
+  });
 }
 
 function deactivate() { }

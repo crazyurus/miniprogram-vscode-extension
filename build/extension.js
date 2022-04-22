@@ -52,9 +52,10 @@ glob('../extensions/*/package.nls.json', {
     'commands.compile.npm': 'Build NPM',
     'commands.compile.analyse': 'Analyze code static dependencies',
     'commands.compile.preview': 'Preview mini program',
-    'commands.compile.upload': 'Package and upload to WeChat platform',
+    'commands.compile.upload': 'Package and upload mini program',
     'commands.document': 'View development documentation',
-    'commands.stroage.clear': 'Clear cache'
+    'commands.stroage.clear': 'Clear cache',
+    "commands.management": "Open WeChat management platform"
   };
 
   files.forEach(file => {

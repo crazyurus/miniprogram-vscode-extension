@@ -14,7 +14,7 @@ class TreeDataProvider {
         },
         {
           command: "MiniProgram.commands.compile.upload",
-          title: "打包并上传到微信后台"
+          title: "打包并上传小程序"
         },
         {
           command: "MiniProgram.commands.compile.npm",
@@ -27,6 +27,10 @@ class TreeDataProvider {
         {
           command: "MiniProgram.commands.config.project",
           title: "查看项目配置"
+        },
+        {
+          command: "MiniProgram.commands.management",
+          title: "打开微信小程序管理后台"
         },
         {
           command: "MiniProgram.commands.document",
