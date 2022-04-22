@@ -20,10 +20,9 @@
   ],
   "contributes": {
     "configuration": {
-      "id": "wxml",
-      "order": 20,
+      "id": "miniprogram",
       "type": "object",
-      "title": "wxml",
+      "title": "%displayName%",
       "properties": {
         "wxml.customData": {
           "type": "array",

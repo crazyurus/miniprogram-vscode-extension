@@ -4,9 +4,20 @@ const path = require('path');
 const vscode = require('vscode');
 
 function getCurrentFolderPath() {
-  return Array.isArray(vscode.workspace.workspaceFolders)
+  const rootPath = Array.isArray(vscode.workspace.workspaceFolders)
     ? vscode.workspace.workspaceFolders[0].uri.fsPath
     : '';
+  const config = vscode.workspace.getConfiguration('miniprogram').get('miniprogramPath');
+
+  if (config) {
+    const miniprogramPath = path.resolve(rootPath, config);
+
+    if (fs.existsSync(miniprogramPath)) {
+      return miniprogramPath;
+    }
+  }
+
+  return rootPath;
 }
 
 function getProjectConfigPath(rootPath) {

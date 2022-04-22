@@ -4,20 +4,6 @@
 
 ![微信小程序开发工具](https://sf3-cn.feishucdn.com/obj/eden-cn/eseh7nupevhps/miniprogram-vscode-extension/analyse-viewer.png)
 
-## 命令
-
-**MiniProgram: Create** - 创建新的小程序
-
-**MiniProgram: Preview** - 预览小程序
-
-**MiniProgram: Upload** - 打包并上传小程序，完成后在微信小程序后台发布
-
-**MiniProgram: Build NPM** - 构建 NPM
-
-**MiniProgram: Code Analyse** - 代码静态依赖分析
-
-**MiniProgram: Config** - 项目配置
-
 ## 功能
 
 ### 代码补全与语法高亮
@@ -66,6 +52,8 @@
 [创建 Issue](https://github.com/crazyurus/miniprogram-vscode-extension/issues)
 
 [欢迎 PR](https://github.com/crazyurus/miniprogram-vscode-extension/pulls)
+
+[Email: crazyurus@vip.qq.com](mailto:crazyurus@vip.qq.com)
 
 ## 致谢
 
