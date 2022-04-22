@@ -21,7 +21,10 @@ function activate() {
     return;
   }
 
-  vscode.window.createTerminal('下载小程序 API 类型文件').sendText('npm install -D ' + library);
+  vscode.window.createTerminal({
+    name: '下载小程序 API 类型文件',
+    hideFromUser: true,
+  }).sendText('npm install -D ' + library);
 }
 
 function deactivate() { }

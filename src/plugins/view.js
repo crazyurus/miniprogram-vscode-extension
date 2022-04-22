@@ -5,6 +5,10 @@ class TreeDataProvider {
     if (!element) {
       return [
         {
+          command: "MiniProgram.commands.config.openIDE",
+          title: "打开微信开发者工具"
+        },
+        {
           command: "MiniProgram.commands.compile.preview",
           title: "扫码预览小程序"
         },

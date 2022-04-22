@@ -1,6 +1,7 @@
 const vscode = require('vscode');
 const path = require('path');
 const open = require('open');
+const { getCurrentFolderPath, getIDEPath } = require('../utils/path');
 const { readProjectConfig, createProject } = require('../utils/project');
 const { openWebView, openDocument } = require('../utils/ui');
 const projectHTML = require('../html/project');
@@ -19,6 +20,26 @@ function setStatusBar() {
 }
 
 function setCommands(context) {
+  // 打开 IDE
+  vscode.commands.registerCommand('MiniProgram.commands.config.openIDE', async () => {
+    const idePath = await getIDEPath();
+
+    if (idePath) {
+      // 先启动 IDE 加快速度
+      open.openApp(idePath.exe);
+
+      // 再调用 CLI
+      const rootPath = getCurrentFolderPath();
+      const terminal = vscode.window.createTerminal('打开微信开发者工具');
+
+      terminal.sendText(idePath.cli + ' open --project ' + rootPath);
+      terminal.show();
+    } else {
+      vscode.window.showWarningMessage('未找到微信开发者工具 IDE');
+    }
+  });
+
+  // 项目详情
   vscode.commands.registerCommand('MiniProgram.commands.config.project', async () => {
     const projectConfig = readProjectConfig();
 

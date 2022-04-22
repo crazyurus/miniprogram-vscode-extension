@@ -14,7 +14,7 @@
   "iconThemes": [
     {
       "id": "material-icon-theme-wechat",
-      "label": "Wechat Icon Theme",
+      "label": "WeChat Icon Theme",
       "path": "./icons/material-icons.json"
     }
   ],
@@ -38,6 +38,11 @@
     ]
   },
   "commands": [
+    {
+      "command": "MiniProgram.commands.config.openIDE",
+      "title": "打开微信开发者工具",
+      "category": "MiniProgram"
+    },
     {
       "command": "MiniProgram.commands.config.compileDir",
       "title": "设置为编译上传目录"

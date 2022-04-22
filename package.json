@@ -2,7 +2,7 @@
   "name": "miniprogram-vscode-extension",
   "displayName": "微信小程序开发工具",
   "description": "提供小程序预览、打包上传、代码补全、语法高亮、项目模版等功能",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "icon": "assets/logo.png",
   "publisher": "crazyurus",
   "license": "GPL-3.0",
@@ -60,7 +60,7 @@
     "iconThemes": [
       {
         "id": "material-icon-theme-wechat",
-        "label": "Wechat Icon Theme",
+        "label": "WeChat Icon Theme",
         "path": "./icons/material-icons.json"
       }
     ],
@@ -84,6 +84,11 @@
       ]
     },
     "commands": [
+      {
+        "command": "MiniProgram.commands.config.openIDE",
+        "title": "打开微信开发者工具",
+        "category": "MiniProgram"
+      },
       {
         "command": "MiniProgram.commands.config.compileDir",
         "title": "设置为编译上传目录"
@@ -500,12 +505,14 @@
     }
   },
   "activationEvents": [
-    "workspaceContains:project.config.json"
+    "workspaceContains:project.config.json",
+    "onLanguage:wxml"
   ],
   "main": "./src/index.js",
   "dependencies": {
     "miniprogram-ci": "^1.8.12",
-    "open": "^8.4.0"
+    "open": "^8.4.0",
+    "winreg": "^1.2.4"
   },
   "devDependencies": {
     "glob": "^8.0.1",
