@@ -1,0 +1,12 @@
+{
+  "displayName": "微信小程序开发工具",
+  "description": "提供小程序预览、打包上传、代码补全、语法高亮、项目模版等功能",
+  "commands.config.openIDE": "打开微信开发者工具",
+  "commands.config.project": "查看项目配置",
+  "commands.compile.npm": "构建 NPM",
+  "commands.compile.analyse": "分析代码静态依赖",
+  "commands.compile.preview": "预览小程序",
+  "commands.compile.upload": "打包并上传到微信平台",
+  "commands.document": "查看开发文档",
+  "commands.stroage.clear": "清除缓存"
+}

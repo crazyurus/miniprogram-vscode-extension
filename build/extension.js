@@ -46,8 +46,16 @@ glob('../extensions/*/package.nls.json', {
     return;
   }
 
-  const config = require('../package.json');
-  const nls = {};
+  const nls = {
+    'commands.config.openIDE': 'Open WeChat developer tools',
+    'commands.config.project': 'View project configuration',
+    'commands.compile.npm': 'Build NPM',
+    'commands.compile.analyse': 'Analyze code static dependencies',
+    'commands.compile.preview': 'Preview mini program',
+    'commands.compile.upload': 'Package and upload to WeChat platform',
+    'commands.document': 'View development documentation',
+    'commands.stroage.clear': 'Clear cache'
+  };
 
   files.forEach(file => {
     const content = require(file);
@@ -57,7 +65,7 @@ glob('../extensions/*/package.nls.json', {
 
   fs.writeFileSync('./package.nls.json', JSON.stringify({
     ...nls,
-    displayName: config.displayName,
-    description: config.description,
+    displayName: 'MiniProgram Extension',
+    description: 'Provide preview, package upload, code completion, syntax highlighting, project templates and other functions for mini program',
   }, null, 2));
 });
