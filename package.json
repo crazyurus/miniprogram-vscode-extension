@@ -511,8 +511,7 @@
   "main": "./src/index.js",
   "dependencies": {
     "miniprogram-ci": "^1.8.12",
-    "open": "^8.4.0",
-    "winreg": "^1.2.4"
+    "open": "^8.4.0"
   },
   "devDependencies": {
     "glob": "^8.0.1",

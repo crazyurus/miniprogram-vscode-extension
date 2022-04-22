@@ -21,8 +21,8 @@ function setStatusBar() {
 
 function setCommands(context) {
   // 打开 IDE
-  vscode.commands.registerCommand('MiniProgram.commands.config.openIDE', async () => {
-    const idePath = await getIDEPath();
+  vscode.commands.registerCommand('MiniProgram.commands.config.openIDE', () => {
+    const idePath = getIDEPath();
 
     if (idePath) {
       // 先启动 IDE 加快速度
