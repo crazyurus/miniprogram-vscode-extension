@@ -2,6 +2,7 @@ const ViewPlugin = require('./plugins/view');
 const ExtensionPlugin = require('./plugins/extension');
 const CommandPlugin = require('./commands');
 const TypeScriptPlugin = require('./plugins/typescript');
+const ProxyPlugin = require('./plugins/proxy');
 
 const plugins = [
   ViewPlugin,
@@ -12,6 +13,7 @@ const plugins = [
   CommandPlugin.storage,
   ExtensionPlugin,
   TypeScriptPlugin,
+  ProxyPlugin,
 ];
 
 function activate(context) {
