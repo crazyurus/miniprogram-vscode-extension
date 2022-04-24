@@ -4,21 +4,25 @@ const vscode = require('vscode');
 const { readJSON } = require('./json');
 const { getCurrentFolderPath, getProjectConfigPath, getMiniProgramRootPath } = require('./path');
 
-function readAppConfig(miniprogramPath) {
+function getAppConfigPath(miniprogramPath) {
   if (!miniprogramPath) {
     const rootPath = getCurrentFolderPath();
     const projectConfig = readProjectConfig();
 
     if (!projectConfig) {
-      return null;
+      return '';
     }
 
     miniprogramPath = getMiniProgramRootPath(rootPath, projectConfig.miniprogramRoot);
   }
- 
-  const appFilePath = path.join(miniprogramPath, 'app.json');
 
-  return readJSON(appFilePath);
+  return path.join(miniprogramPath, 'app.json');
+}
+
+function readAppConfig(miniprogramPath) {
+  const appFilePath = getAppConfigPath(miniprogramPath);
+
+  return appFilePath ? readJSON(appFilePath) : null;
 }
 
 function readProjectConfig() {
@@ -103,6 +107,7 @@ function createProject(context) {
 }
 
 module.exports = {
+  getAppConfigPath,
   readAppConfig,
   readProjectConfig,
   createProject,

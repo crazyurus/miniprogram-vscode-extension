@@ -2,7 +2,7 @@ const vscode = require('vscode');
 const path = require('path');
 const fs = require('fs');
 const { updateJSON } = require('../utils/json');
-const { getCurrentFolderPath } = require('../utils/path');
+const { getAppConfigPath } = require('../utils/project');
 
 const pageTemplate = require('../templates/page');
 const componentTemplate = require('../templates/component');
@@ -12,7 +12,7 @@ function create(type, value, uri) {
   const name = type === 'page' ? '页面' : '组件';
 
   for (let ext in template) {
-    const filePath = `${uri.fsPath}${path.sep}${value}.${ext}`;
+    const filePath = path.join(uri.fsPath, `${value}.${ext}`);
 
     if (fs.existsSync(filePath)) {
       vscode.window.showErrorMessage(name + ' ' + value + ' 已存在');
@@ -23,22 +23,16 @@ function create(type, value, uri) {
   }
 
   if (type === 'page') {
-    const projectPath = getCurrentFolderPath();
-    let currentPath = uri.fsPath;
-
-    while (
-      !fs.existsSync(currentPath + path.sep + 'app.json') &&
-      currentPath !== projectPath
-      ) {
-      currentPath = currentPath.split(path.sep).slice(0, -1).join(path.sep);
-    }
-
-    const appConfigFile = currentPath + path.sep + 'app.json';
+    const appConfigFile = getAppConfigPath();
+    const projectPath = path.join(appConfigFile, '..');
 
     if (fs.existsSync(appConfigFile)) {
-      const pagePath = uri.fsPath
-        .replace(currentPath, '')
-        .slice(1);
+      const pagePath = path.relative(projectPath, uri.fsPath).replace(path.sep, '/');
+
+      if (pagePath.includes('..')) {
+        vscode.window.showErrorMessage('页面路径不能超过小程序根目录');
+        return;
+      }
 
       updateJSON(appConfigFile, 'pages', pagePath + '/' + value, 'push');
     }
@@ -52,7 +46,7 @@ function validate(name) {
   return '名称只能包含数字、字母、中划线';
 }
 
-function activate(context) {
+function activate() {
   vscode.commands.registerCommand('MiniProgram.commands.create.page', e => {
     const uri = vscode.Uri.parse(e.fsPath);	
     	
