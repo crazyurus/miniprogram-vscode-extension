@@ -5,7 +5,7 @@ const open = require('open');
 const { getProjectConfigPath } = require('../utils/path');
 const { readProjectConfig, createProject } = require('../utils/project');
 const { openWebView, openDocument } = require('../utils/ui');
-const projectHTML = require('../html/project');
+const renderHTML = require('../html/render');
 const { registerCommand } = require('./compile/utils');
 
 function setStatusBar() {
@@ -57,7 +57,7 @@ function setCommands(context) {
     const options = await createProject(context);
     const project = new ci.Project(options);
     const projectSetting = await project.attr();
-    const panel = openWebView(projectHTML({
+    const panel = openWebView(await renderHTML('project', {
       name: projectSetting.appName,
       avatar: projectSetting.appImageUrl + '/0',
       form: [

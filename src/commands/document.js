@@ -1,7 +1,7 @@
 const vscode = require('vscode');
 const http = require('http');
 const https = require('https');
-const { openWebView } = require('../utils/ui');
+const { openURL } = require('../utils/ui');
 
 function activate() {
   vscode.commands.registerCommand('MiniProgram.commands.document', () => {
@@ -19,11 +19,11 @@ function activate() {
     });
     server.listen();
 
-    server.on('listening', () => {
+    server.on('listening', async () => {
       const address = server.address();
 
       if (address) {
-        const webview = openWebView(`http://localhost:${address.port}/miniprogram/dev/framework/`, '微信官方文档');
+        const webview = await openURL(`http://localhost:${address.port}/miniprogram/dev/framework/`, '微信官方文档');
 
         webview.onDidDispose(() => {
           server.close();

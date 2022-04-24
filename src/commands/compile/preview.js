@@ -4,7 +4,7 @@ const fs = require('fs');
 const os = require('os');
 const { readProjectConfig, readAppConfig, createProject } = require('../../utils/project');
 const { openWebView } = require('../../utils/ui');
-const previewHTML = require('../../html/preview');
+const renderHTML = require('../../html/render');
 const { getCIBot, getCompileOptions, getTemporaryFileName, registerCommand } = require('./utils');
 
 function preview(context) {
@@ -57,7 +57,7 @@ function preview(context) {
       const base64 = await fs.promises.readFile(tempImagePath, 'utf-8');
 
       vscode.window.showInformationMessage('构建完成');
-      openWebView(previewHTML({
+      openWebView(await renderHTML('preview', {
         base64,
         appName,
       }), '预览小程序');

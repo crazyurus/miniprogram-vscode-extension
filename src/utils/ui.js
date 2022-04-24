@@ -1,5 +1,5 @@
 const vscode = require('vscode');
-const commonHTML = require('../html/common');
+const renderHTML = require('../html/render');
 
 function showInputBox(options) {
   return new Promise(resolve => {
@@ -19,7 +19,7 @@ function showInputBox(options) {
   });
 };
 
-function openWebView(url, title, position = vscode.ViewColumn.One, style = '') {
+function openWebView(html, title, position = vscode.ViewColumn.One) {
   const webviewPanel = vscode.window.createWebviewPanel(
     title, title,
     position,
@@ -29,16 +29,17 @@ function openWebView(url, title, position = vscode.ViewColumn.One, style = '') {
     },
   );
 
-  if (url.indexOf('http') === 0) {
-    webviewPanel.webview.html = commonHTML({
-      style,
-      url,
-    });
-  } else {
-    webviewPanel.webview.html = url;
-  }
+  webviewPanel.webview.html = html;
 
   return webviewPanel;
+}
+
+async function openURL(url, title) {
+  const html = await renderHTML('common', {
+    url,
+  });
+
+  return openWebView(html, title);
 }
 
 function openDocument(path) {
@@ -52,6 +53,7 @@ function showSaveDialog(options) {
 module.exports = {
   showInputBox,
   showSaveDialog,
+  openURL,
   openWebView,
   openDocument,
 };
