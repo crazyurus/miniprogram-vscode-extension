@@ -2,6 +2,10 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
 
+function getAnalyseViewerPath(): string {
+  return path.join(__dirname, '..', '..', 'extensions', 'analyse-viewer');
+}
+
 function getMiniProgramRootPath(rootPath: string, relativePath?: string): string {
   if (relativePath) {
     return path.resolve(rootPath, relativePath);
@@ -32,6 +36,7 @@ function getProjectConfigPath(rootPath: string): string {
 }
 
 export {
+  getAnalyseViewerPath,
   getCurrentFolderPath,
   getProjectConfigPath,
   getMiniProgramRootPath,

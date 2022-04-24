@@ -1,10 +1,10 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import * as fs from 'fs/promises';
+import * as fs from 'fs';
 import * as os from 'os';
 import { readProjectConfig, readAppConfig, createProject } from '../../utils/project';
 import { openWebView } from '../../utils/ui';
-import renderHTML from '../../html/render';
+import renderHTML from '../../utils/render';
 import { getCIBot, getCompileOptions, getTemporaryFileName, registerCommand } from './utils';
 
 function preview(context: vscode.ExtensionContext): void {
@@ -54,7 +54,7 @@ function preview(context: vscode.ExtensionContext): void {
         robot: getCIBot(),
       });
 
-      const base64 = await fs.readFile(tempImagePath, 'utf-8');
+      const base64 = await fs.promises.readFile(tempImagePath, 'utf-8');
 
       vscode.window.showInformationMessage('构建完成');
       openWebView(await renderHTML('preview', {

@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
-import { getCurrentFolderPath } from '../../utils/path';
+import { getCurrentFolderPath, getAnalyseViewerPath } from '../../utils/path';
 import { readProjectConfig, createProject } from '../../utils/project';
 import { openWebView, openDocument } from '../../utils/ui';
 import { registerCommand } from './utils';
@@ -15,7 +15,7 @@ function analyseCode(context: vscode.ExtensionContext): void {
       throw new Error('未找到 project.config.json 文件');
     }
 
-    const viewerPath = path.join(__dirname, '..', '..', '..', 'analyse-viewer');
+    const viewerPath = getAnalyseViewerPath();
     let html = await fs.promises.readFile(path.join(viewerPath, 'index.html'), { encoding: 'utf-8' });
     const panel = openWebView('', '代码依赖分析', vscode.ViewColumn.One);
     html = html.replace(/vscode:\/\//g, panel.webview.asWebviewUri(vscode.Uri.file(viewerPath)).toString() + '/');

@@ -42,6 +42,7 @@
     "email": "crazyurus@vip.qq.com"
   },
   "scripts": {
+    "build": "rollup -c ./build/rollup.js",
     "build:extension": "node ./build/extension.js"
   },
   "enableApiProposals": true,
@@ -50,19 +51,19 @@
       {
         "label": "WeChat Dark",
         "uiTheme": "vs-dark",
-        "path": "./themes/dark.json"
+        "path": "./assets/themes/dark.json"
       },
       {
         "label": "WeChat Light",
         "uiTheme": "vs",
-        "path": "./themes/light.json"
+        "path": "./assets/themes/light.json"
       }
     ],
     "iconThemes": [
       {
         "id": "material-icon-theme-wechat",
         "label": "WeChat Icon Theme",
-        "path": "./icons/material-icons.json"
+        "path": "./assets/icons/material-icons.json"
       }
     ],
     "menus": {
@@ -529,18 +530,24 @@
     "workspaceContains:project.config.json",
     "onLanguage:wxml"
   ],
-  "main": "./src/index.js",
+  "main": "./src/dev.js",
   "dependencies": {
     "ejs": "^3.1.7",
     "miniprogram-ci": "^1.8.12",
-    "open": "^8.4.0",
-    "ts-node": "^10.7.0"
+    "open": "^8.4.0"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.2.1",
+    "@rollup/plugin-typescript": "^8.3.2",
     "@types/ejs": "^3.1.0",
     "@types/vscode": "^1.25.0",
     "glob": "^8.0.1",
     "lodash": "^4.17.21",
+    "rollup": "^2.70.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
   }
 }

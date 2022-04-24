@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "commonjs",
+    "target": "esnext",
+    "module": "esnext",
     "declaration": false,
-    "removeComments": true,
+    "removeComments": false,
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -12,13 +12,17 @@
       "node_modules/@types"
     ],
     "allowJs": true,
+    "sourceMap": false,
+    "moduleResolution": "node",
     "noImplicitAny": true
   },
   "include": [
     "src/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "extensions",
+    "dist"
   ],
   "ts-node": {
     "transpileOnly": true

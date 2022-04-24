@@ -5,7 +5,7 @@ import open from 'open';
 import { getProjectConfigPath } from '../utils/path';
 import { readProjectConfig, createProject } from '../utils/project';
 import { openWebView, openDocument } from '../utils/ui';
-import renderHTML from '../html/render';
+import renderHTML from '../utils/render';
 import { registerCommand } from './compile/utils';
 import type { WebviewMessage } from '../types';
 

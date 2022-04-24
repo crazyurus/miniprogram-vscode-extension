@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import renderHTML from '../html/render';
+import renderHTML from '../utils/render';
 
 function showInputBox(options: Partial<vscode.InputBox>): Promise<string> {
   return new Promise(resolve => {

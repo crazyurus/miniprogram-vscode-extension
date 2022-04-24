@@ -3,19 +3,19 @@
     {
       "label": "WeChat Dark",
       "uiTheme": "vs-dark",
-      "path": "./themes/dark.json"
+      "path": "./assets/themes/dark.json"
     },
     {
       "label": "WeChat Light",
       "uiTheme": "vs",
-      "path": "./themes/light.json"
+      "path": "./assets/themes/light.json"
     }
   ],
   "iconThemes": [
     {
       "id": "material-icon-theme-wechat",
       "label": "WeChat Icon Theme",
-      "path": "./icons/material-icons.json"
+      "path": "./assets/icons/material-icons.json"
     }
   ],
   "menus": {
