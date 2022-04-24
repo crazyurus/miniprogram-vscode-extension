@@ -53,7 +53,6 @@
     }
   },
   "main": "./out/extension.js",
-  "icon": "icon/path-intellisense.png",
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",

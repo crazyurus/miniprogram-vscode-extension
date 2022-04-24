@@ -22,10 +22,11 @@ function activate() {
     return;
   }
 
-  vscode.window.createTerminal({
-    name: '下载小程序 API 类型文件',
-    hideFromUser: true,
-  }).sendText('npm install -D ' + library);
+  vscode.tasks.executeTask(new vscode.Task({
+    type: 'miniprogram.tasks.install-types',
+  }, vscode.ConfigurationTarget.WorkspaceFolder, '下载小程序 API 描述文件', 'npm', new vscode.ShellExecution('npm', ['install', '-D', library, '--registry=https://registry.npmmirror.com'], {
+    cwd: rootPath,
+  })));
 }
 
 function deactivate() { }
