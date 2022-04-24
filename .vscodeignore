@@ -2,5 +2,4 @@
 .github
 build
 src
-contributes.json
 tsconfig.json

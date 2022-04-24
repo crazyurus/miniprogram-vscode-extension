@@ -18,15 +18,15 @@ const plugins = [
   ProxyPlugin,
 ];
 
-function activate(context: vscode.ExtensionContext) {
+function activate(context: vscode.ExtensionContext): void {
   plugins.forEach(plugin => plugin.activate(context));
 }
 
-function deactivate() {
+function deactivate(): void {
   plugins.forEach(plugin => plugin.deactivate());
 }
 
-module.exports = {
+export {
   activate,
   deactivate,
 };
