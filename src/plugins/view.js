@@ -25,12 +25,16 @@ class TreeDataProvider {
           title: "分析代码静态依赖"
         },
         {
+          command: "MiniProgram.commands.config.project",
+          title: "查看项目配置"
+        },
+        {
           command: "MiniProgram.commands.compile.artifact",
           title: "查看编译产物"
         },
         {
-          command: "MiniProgram.commands.config.project",
-          title: "查看项目配置"
+          command: "MiniProgram.commands.compile.sourceMap",
+          title: "下载最近上传版本的 SourceMap"
         },
         {
           command: "MiniProgram.commands.management",

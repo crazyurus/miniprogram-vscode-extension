@@ -1,7 +1,5 @@
-const { random } = require('../../utils/math');
-
 function getCIBot() {
-  return random(1, 30);
+  return 28;
 }
 
 function getCompileOptions(options) {

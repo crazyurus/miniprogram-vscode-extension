@@ -76,6 +76,11 @@
       "category": "MiniProgram"
     },
     {
+      "command": "MiniProgram.commands.compile.sourceMap",
+      "title": "%commands.compile.sourceMap%",
+      "category": "MiniProgram"
+    },
+    {
       "command": "MiniProgram.commands.compile.preview",
       "title": "%commands.compile.preview%",
       "category": "MiniProgram"

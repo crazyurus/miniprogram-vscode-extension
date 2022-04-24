@@ -45,8 +45,8 @@ function openDocument(path) {
   return vscode.workspace.openTextDocument(path).then(document => vscode.window.showTextDocument(document, vscode.ViewColumn.One));
 }
 
-function showSaveDialog() {
-  return vscode.window.showSaveDialog().then(result => result.fsPath);
+function showSaveDialog(options) {
+  return vscode.window.showSaveDialog(options).then(result => result ? result.fsPath : '');
 }
 
 module.exports = {

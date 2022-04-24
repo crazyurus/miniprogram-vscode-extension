@@ -5,6 +5,7 @@
   "commands.config.project": "查看项目配置",
   "commands.compile.npm": "构建 NPM",
   "commands.compile.artifact": "查看小程序编译产物",
+  "commands.compile.sourceMap": "下载最近上传版本的 SourceMap",
   "commands.compile.analyse": "分析代码静态依赖",
   "commands.compile.preview": "预览小程序",
   "commands.compile.upload": "打包并上传小程序",

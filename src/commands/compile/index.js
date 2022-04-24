@@ -5,6 +5,7 @@ const comipleCommands = [
   require('./preview'),
   require('./upload'),
   require('./artifact'),
+  require('./sourcemap'),
 ];
 
 function activate(context) {
