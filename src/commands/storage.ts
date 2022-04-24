@@ -1,7 +1,7 @@
-const vscode = require('vscode');
+import * as vscode from 'vscode';
 
-function activate(context) {
-  vscode.commands.registerCommand('MiniProgram.commands.storage.clear', e => {
+function activate(context: vscode.ExtensionContext): void {
+  vscode.commands.registerCommand('MiniProgram.commands.storage.clear', () => {
     context.workspaceState.update('privateKey', '');
     context.workspaceState.update('privateKeyPath', '');
     context.workspaceState.update('previousVersion', '');
@@ -9,9 +9,9 @@ function activate(context) {
   });
 }
 
-function deactivate() { }
+function deactivate(): void { }
 
-module.exports = {
+export {
   activate,
   deactivate,
 };

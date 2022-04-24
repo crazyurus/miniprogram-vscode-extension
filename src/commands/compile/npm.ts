@@ -1,10 +1,10 @@
-const vscode = require('vscode');
-const path = require('path');
-const fs = require('fs');
-const { readProjectConfig, createProject } = require('../../utils/project');
-const { registerCommand } = require('./utils');
+import * as vscode from 'vscode';
+import * as path from 'path';
+import * as fs from 'fs';
+import { readProjectConfig, createProject } from '../../utils/project';
+import { registerCommand } from './utils';
 
-function packNPM(context) {
+function packNPM(context: vscode.ExtensionContext): void {
   registerCommand('MiniProgram.commands.compile.npm', async () => {
     const projectConfig = readProjectConfig();
 
@@ -27,10 +27,17 @@ function packNPM(context) {
       const project = new ci.Project(options);
 
       const warning = await ci.packNpm(project, {
-        reporter(info) {
+        reporter(info: {
+          miniprogram_pack_num: number;
+          pack_time: number;
+          other_pack_num: number;
+        }) {
           vscode.window.showInformationMessage(`构建完成，共用时 ${info.pack_time} ms，其中包含小程序依赖 ${info.miniprogram_pack_num} 项、其它依赖 ${info.other_pack_num} 项`);
         },
-      });
+      }) as Array<{
+        jsPath: string;
+        msg: string;
+      }>;
 
       if (warning.length > 0) {
         vscode.window.showWarningMessage(warning.map((item, index) => {
@@ -41,4 +48,4 @@ function packNPM(context) {
   });
 }
 
-module.exports = packNPM;
+export default packNPM;

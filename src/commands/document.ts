@@ -1,9 +1,9 @@
-const vscode = require('vscode');
-const http = require('http');
-const https = require('https');
-const { openURL } = require('../utils/ui');
+import * as vscode from 'vscode';
+import * as http from 'http';
+import * as https from 'https';
+import { openURL } from '../utils/ui';
 
-function activate() {
+function activate(): void {
   vscode.commands.registerCommand('MiniProgram.commands.document', () => {
     const server = http.createServer((request, response) => {
       https.get('https://developers.weixin.qq.com' + request.url, result => {
@@ -11,7 +11,7 @@ function activate() {
 
         result.on('data', chunk => body += chunk);
         result.on('end', () => {
-          response.writeHead(result.statusCode, {});
+          response.writeHead(result.statusCode || 200, {});
           body = body.replace('<body>', '<body style="background-color: #fff">')
           response.end(body);
         });
@@ -20,7 +20,7 @@ function activate() {
     server.listen();
 
     server.on('listening', async () => {
-      const address = server.address();
+      const address = server.address() as { port: number };
 
       if (address) {
         const webview = await openURL(`http://localhost:${address.port}/miniprogram/dev/framework/`, '微信官方文档');
@@ -33,13 +33,13 @@ function activate() {
   });
 
   vscode.commands.registerCommand('MiniProgram.commands.management', () => {
-    vscode.env.openExternal('https://mp.weixin.qq.com/');
+    vscode.env.openExternal(vscode.Uri.parse('https://mp.weixin.qq.com/'));
   });
 }
 
-function deactivate() { }
+function deactivate(): void { }
 
-module.exports = {
+export {
   activate,
   deactivate,
 };

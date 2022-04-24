@@ -1,14 +1,15 @@
-const vscode = require('vscode');
-const fs = require('fs');
-const os = require('os');
-const open = require('open');
-const { getProjectConfigPath } = require('../utils/path');
-const { readProjectConfig, createProject } = require('../utils/project');
-const { openWebView, openDocument } = require('../utils/ui');
-const renderHTML = require('../html/render');
-const { registerCommand } = require('./compile/utils');
+import * as vscode from 'vscode';
+import * as fs from 'fs';
+import * as os from 'os';
+import open from 'open';
+import { getProjectConfigPath } from '../utils/path';
+import { readProjectConfig, createProject } from '../utils/project';
+import { openWebView, openDocument } from '../utils/ui';
+import renderHTML from '../html/render';
+import { registerCommand } from './compile/utils';
+import type { WebviewMessage } from '../types';
 
-function setStatusBar() {
+function setStatusBar(): void {
   const projectConfig = readProjectConfig();
 
   if (projectConfig) {
@@ -21,14 +22,14 @@ function setStatusBar() {
   }
 }
 
-function setCommands(context) {
+function setCommands(context: vscode.ExtensionContext): void {
   // 打开 IDE
   registerCommand('MiniProgram.commands.config.openIDE', () => {
-    const platform = os.platform();
     const installPath = {
       win32: 'C:\\Program Files (x86)\\Tencent\\微信web开发者工具\\微信开发者工具.exe',
       darwin: '/Applications/wechatwebdevtools.app',
     };
+    const platform = os.platform() as keyof typeof installPath;
 
     if (installPath.hasOwnProperty(platform) && fs.existsSync(installPath[platform])) {
       const idePath = installPath[platform];
@@ -105,7 +106,7 @@ function setCommands(context) {
       ]
     }), '项目配置', vscode.ViewColumn.Beside);
 
-    panel.webview.onDidReceiveMessage(message => {
+    panel.webview.onDidReceiveMessage((message: WebviewMessage) => {
       switch (message.command) {
         case 'openProject':
           open(options.projectPath);
@@ -119,14 +120,14 @@ function setCommands(context) {
   });
 }
 
-function activate(context) {
+function activate(context: vscode.ExtensionContext): void {
   setStatusBar();
   setCommands(context);
 }
 
-function deactivate() { }
+function deactivate(): void { }
 
-module.exports = {
+export {
   activate,
   deactivate,
 };

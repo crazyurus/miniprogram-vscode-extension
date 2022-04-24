@@ -1,4 +1,4 @@
-exports.js = `
+export const js = `
 Page({
   data: {
 
@@ -26,18 +26,18 @@ Page({
 });
 `
 
-exports.json = `
+export const json = `
 {
   "navigationBarTitleText": "",
   "usingComponents": {}
 }
 `;
 
-exports.wxml = `
+export const wxml = `
 <view>New Page</view>
 `;
 
-exports.wxss = `
+export const wxss = `
 page {
   
 }

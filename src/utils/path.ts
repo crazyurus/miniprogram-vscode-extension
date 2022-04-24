@@ -1,8 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-const vscode = require('vscode');
+import * as fs from 'fs';
+import * as path from 'path';
+import * as vscode from 'vscode';
 
-function getMiniProgramRootPath(rootPath, relativePath) {
+function getMiniProgramRootPath(rootPath: string, relativePath?: string): string {
   if (relativePath) {
     return path.resolve(rootPath, relativePath);
   }
@@ -10,11 +10,11 @@ function getMiniProgramRootPath(rootPath, relativePath) {
   return rootPath;
 }
 
-function getCurrentFolderPath() {
+function getCurrentFolderPath(): string {
   const rootPath = Array.isArray(vscode.workspace.workspaceFolders)
     ? vscode.workspace.workspaceFolders[0].uri.fsPath
     : '';
-  const config = vscode.workspace.getConfiguration('miniprogram').get('miniprogramPath');
+  const config = vscode.workspace.getConfiguration('miniprogram').get('miniprogramPath') as string;
 
   if (config) {
     const miniprogramPath = path.resolve(rootPath, config);
@@ -27,11 +27,11 @@ function getCurrentFolderPath() {
   return rootPath;
 }
 
-function getProjectConfigPath(rootPath) {
+function getProjectConfigPath(rootPath: string): string {
   return path.join(rootPath, 'project.config.json')
 }
 
-module.exports = {
+export {
   getCurrentFolderPath,
   getProjectConfigPath,
   getMiniProgramRootPath,

@@ -2,3 +2,4 @@
 .github
 build
 contributes.json
+tsconfig.json

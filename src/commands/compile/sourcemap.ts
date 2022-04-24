@@ -1,10 +1,10 @@
-const vscode = require('vscode');
-const open = require('open');
-const { readProjectConfig, createProject } = require('../../utils/project');
-const { showSaveDialog } = require('../../utils/ui');
-const { getCIBot, getTemporaryFileName, registerCommand } = require('./utils');
+import * as vscode from 'vscode';
+import open from 'open';
+import { readProjectConfig, createProject } from '../../utils/project';
+import { showSaveDialog } from '../../utils/ui';
+import { getCIBot, getTemporaryFileName, registerCommand } from './utils';
 
-function sourceMap(context) {
+function sourceMap(context: vscode.ExtensionContext): void {
   registerCommand('MiniProgram.commands.compile.sourceMap', async () => {
     const projectConfig = readProjectConfig();
 
@@ -44,4 +44,4 @@ function sourceMap(context) {
   });
 }
 
-module.exports = sourceMap;
+export default sourceMap;

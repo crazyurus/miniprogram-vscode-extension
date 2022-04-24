@@ -1,12 +1,13 @@
-const vscode = require('vscode');
-const path = require('path');
-const fs = require('fs');
-const { getCurrentFolderPath } = require('../../utils/path');
-const { readProjectConfig, createProject } = require('../../utils/project');
-const { openWebView, openDocument } = require('../../utils/ui');
-const { registerCommand } = require('./utils');
+import * as vscode from 'vscode';
+import * as path from 'path';
+import * as fs from 'fs';
+import { getCurrentFolderPath } from '../../utils/path';
+import { readProjectConfig, createProject } from '../../utils/project';
+import { openWebView, openDocument } from '../../utils/ui';
+import { registerCommand } from './utils';
+import { WebviewMessage } from '../../types';
 
-function analyseCode(context) {
+function analyseCode(context: vscode.ExtensionContext): void {
   registerCommand('MiniProgram.commands.compile.analyse', async () => {
     const projectConfig = readProjectConfig();
 
@@ -19,7 +20,7 @@ function analyseCode(context) {
     const panel = openWebView('', '代码依赖分析', vscode.ViewColumn.One);
     html = html.replace(/vscode:\/\//g, panel.webview.asWebviewUri(vscode.Uri.file(viewerPath)).toString() + '/');
     panel.webview.html = html;
-    panel.webview.onDidReceiveMessage(async message => {
+    panel.webview.onDidReceiveMessage(async (message: WebviewMessage) => {
       switch (message.command) {
         case 'syncState':
           panel.webview.postMessage({
@@ -63,4 +64,4 @@ function analyseCode(context) {
   });
 }
 
-module.exports = analyseCode;
+export default analyseCode;

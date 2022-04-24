@@ -1,9 +1,9 @@
-const vscode = require('vscode');
-const { readProjectConfig, createProject } = require('../../utils/project');
-const { showInputBox } = require('../../utils/ui');
-const { getCIBot, getCompileOptions, registerCommand } = require('./utils');
+import * as vscode from 'vscode';
+import { readProjectConfig, createProject } from '../../utils/project';
+import { showInputBox } from '../../utils/ui';
+import { getCIBot, getCompileOptions, registerCommand } from './utils';
 
-function upload(context) {
+function upload(context: vscode.ExtensionContext): void {
   registerCommand('MiniProgram.commands.compile.upload', async () => {
     const projectConfig = readProjectConfig();
 
@@ -46,15 +46,15 @@ function upload(context) {
         version,
         desc: description || '通过%20MiniProgram%20VSCode%20Extension%20上传',
         setting: getCompileOptions(projectConfig.setting),
-        onProgressUpdate(message) {
-          progress.report(message);
+        onProgressUpdate(message: string): void {
+          progress.report(message as any);
         },
         robot: getCIBot(),
       });
 
       vscode.window.showInformationMessage('上传成功，可前往微信小程序后台提交审核并发布', '打开微信小程序后台').then(result => {
         if (result === '打开微信小程序后台') {
-          vscode.env.openExternal('https://mp.weixin.qq.com/');
+          vscode.env.openExternal(vscode.Uri.parse('https://mp.weixin.qq.com/'));
         }
       });
 
@@ -63,4 +63,4 @@ function upload(context) {
   });
 }
 
-module.exports = upload;
+export default upload;

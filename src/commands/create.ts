@@ -1,15 +1,15 @@
-const vscode = require('vscode');
-const path = require('path');
-const fs = require('fs');
-const { updateJSON } = require('../utils/json');
-const { getAppConfigPath } = require('../utils/project');
-const { registerCommand } = require('./compile/utils');
+import * as vscode from 'vscode';
+import * as path from 'path';
+import * as fs from 'fs';
+import { updateJSON } from '../utils/json';
+import { getAppConfigPath } from '../utils/project';
+import { registerCommand } from './compile/utils';
 
-const pageTemplate = require('../templates/page');
-const componentTemplate = require('../templates/component');
+import * as pageTemplate from '../templates/page';
+import * as componentTemplate from '../templates/component';
 
-async function create(type, value, uri) {
-  const template = type === 'page' ? pageTemplate : componentTemplate;
+async function create(type: 'page' | 'component', value: string, uri: vscode.Uri): Promise<void> {
+  const template: Record<string, string> = type === 'page' ? pageTemplate : componentTemplate;
   const name = type === 'page' ? '页面' : '组件';
 
   for (let ext in template) {
@@ -33,20 +33,20 @@ async function create(type, value, uri) {
         throw new Error('页面路径不能超过小程序根目录');
       }
 
-      updateJSON(appConfigFile, 'pages', pagePath + '/' + value, 'push');
+      await updateJSON(appConfigFile, 'pages', pagePath + '/' + value, 'push');
     }
   }
 
   vscode.window.showInformationMessage(name + ' ' + value + ' 创建成功');
 }
 
-function validate(name) {
+function validate(name: string): string | null {
   if (/^[a-zA-Z0-9-]+$/.test(name)) return null;
   return '名称只能包含数字、字母、中划线';
 }
 
-function activate() {
-  registerCommand('MiniProgram.commands.create.page', async e => {
+function activate(): void {
+  registerCommand('MiniProgram.commands.create.page', async (e: vscode.Uri) => {
     const uri = vscode.Uri.parse(e.fsPath);
     const value = await vscode.window.showInputBox({
       prompt: '页面名称',
@@ -59,7 +59,7 @@ function activate() {
     }
   });
 
-  registerCommand('MiniProgram.commands.create.component', async e => {
+  registerCommand('MiniProgram.commands.create.component', async (e: vscode.Uri) => {
     const uri = vscode.Uri.parse(e.fsPath);
     const value = await vscode.window.showInputBox({
       prompt: '组件名称',
@@ -73,9 +73,9 @@ function activate() {
   });
 }
 
-function deactivate() { }
+function deactivate(): void { }
 
-module.exports = {
+export {
   activate,
   deactivate,
 };

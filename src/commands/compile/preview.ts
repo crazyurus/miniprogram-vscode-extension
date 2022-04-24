@@ -1,13 +1,13 @@
-const vscode = require('vscode');
-const path = require('path');
-const fs = require('fs');
-const os = require('os');
-const { readProjectConfig, readAppConfig, createProject } = require('../../utils/project');
-const { openWebView } = require('../../utils/ui');
-const renderHTML = require('../../html/render');
-const { getCIBot, getCompileOptions, getTemporaryFileName, registerCommand } = require('./utils');
+import * as vscode from 'vscode';
+import * as path from 'path';
+import * as fs from 'fs/promises';
+import * as os from 'os';
+import { readProjectConfig, readAppConfig, createProject } from '../../utils/project';
+import { openWebView } from '../../utils/ui';
+import renderHTML from '../../html/render';
+import { getCIBot, getCompileOptions, getTemporaryFileName, registerCommand } from './utils';
 
-function preview(context) {
+function preview(context: vscode.ExtensionContext): void {
   registerCommand('MiniProgram.commands.compile.preview', async () => {
     const projectConfig = readProjectConfig();
 
@@ -48,13 +48,13 @@ function preview(context) {
         qrcodeFormat: 'base64',
         qrcodeOutputDest: tempImagePath,
         pagePath,
-        onProgressUpdate(message) {
-          progress.report(message);
+        onProgressUpdate(message: string): void {
+          progress.report(message as any);
         },
         robot: getCIBot(),
       });
 
-      const base64 = await fs.promises.readFile(tempImagePath, 'utf-8');
+      const base64 = await fs.readFile(tempImagePath, 'utf-8');
 
       vscode.window.showInformationMessage('构建完成');
       openWebView(await renderHTML('preview', {
@@ -65,4 +65,4 @@ function preview(context) {
   });
 }
 
-module.exports = preview;
+export default preview;

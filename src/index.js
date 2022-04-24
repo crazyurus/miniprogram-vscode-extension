@@ -1,8 +1,10 @@
-const ViewPlugin = require('./plugins/view');
-const ExtensionPlugin = require('./plugins/extension');
+require('ts-node').register();
+
 const CommandPlugin = require('./commands');
-const TypeScriptPlugin = require('./plugins/typescript');
-const ProxyPlugin = require('./plugins/proxy');
+const { default: ViewPlugin } = require('./plugins/view');
+const { default: ExtensionPlugin } = require('./plugins/extension');
+const { default: TypeScriptPlugin } = require('./plugins/typescript');
+const { default: ProxyPlugin } = require('./plugins/proxy');
 
 const plugins = [
   ViewPlugin,

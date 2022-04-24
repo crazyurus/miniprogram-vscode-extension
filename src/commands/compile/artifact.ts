@@ -1,11 +1,11 @@
-const vscode = require('vscode');
-const os = require('os');
-const path = require('path');
-const open = require('open');
-const { readProjectConfig, createProject } = require('../../utils/project');
-const { getCompileOptions, getTemporaryFileName, registerCommand } = require('./utils');
+import * as vscode from 'vscode';
+import * as os from 'os';
+import * as path from 'path';
+import open from 'open';
+import { readProjectConfig, createProject } from '../../utils/project';
+import { getCompileOptions, getTemporaryFileName, registerCommand } from './utils';
 
-function artifact(context) {
+function artifact(context: vscode.ExtensionContext): void {
   registerCommand('MiniProgram.commands.compile.artifact', async () => {
     const projectConfig = readProjectConfig();
 
@@ -27,14 +27,14 @@ function artifact(context) {
         project,
         version: '1.0.0',
         setting: getCompileOptions(projectConfig.setting),
-        onProgressUpdate(message) {
-          progress.report(message);
+        onProgressUpdate(message: string): void {
+          progress.report(message as any);
         },
       }, artifactZipPath);
-      
+
       open(artifactZipPath);
     });
   });
 }
 
-module.exports = artifact;
+export default artifact;

@@ -1,7 +1,7 @@
-const vscode = require('vscode');
-const renderHTML = require('../html/render');
+import * as vscode from 'vscode';
+import renderHTML from '../html/render';
 
-function showInputBox(options) {
+function showInputBox(options: Partial<vscode.InputBox>): Promise<string> {
   return new Promise(resolve => {
     const inputBox = vscode.window.createInputBox();
 
@@ -19,7 +19,7 @@ function showInputBox(options) {
   });
 };
 
-function openWebView(html, title, position = vscode.ViewColumn.One) {
+function openWebView(html: string, title: string, position = vscode.ViewColumn.One): vscode.WebviewPanel {
   const webviewPanel = vscode.window.createWebviewPanel(
     title, title,
     position,
@@ -34,7 +34,7 @@ function openWebView(html, title, position = vscode.ViewColumn.One) {
   return webviewPanel;
 }
 
-async function openURL(url, title) {
+async function openURL(url: string, title: string): Promise<vscode.WebviewPanel> {
   const html = await renderHTML('common', {
     url,
   });
@@ -42,15 +42,15 @@ async function openURL(url, title) {
   return openWebView(html, title);
 }
 
-function openDocument(path) {
-  return vscode.workspace.openTextDocument(path).then(document => vscode.window.showTextDocument(document, vscode.ViewColumn.One));
+function openDocument(path: string): Promise<vscode.TextEditor> {
+  return vscode.workspace.openTextDocument(path).then(document => vscode.window.showTextDocument(document, vscode.ViewColumn.One)) as Promise<vscode.TextEditor>;
 }
 
-function showSaveDialog(options) {
-  return vscode.window.showSaveDialog(options).then(result => result ? result.fsPath : '');
+function showSaveDialog(options: vscode.SaveDialogOptions): Promise<string> {
+  return vscode.window.showSaveDialog(options).then(result => result ? result.fsPath : '') as Promise<string>;
 }
 
-module.exports = {
+export {
   showInputBox,
   showSaveDialog,
   openURL,

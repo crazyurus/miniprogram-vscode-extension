@@ -1,7 +1,13 @@
-const vscode = require('vscode');
+import * as vscode from 'vscode';
+import Plugin from './base';
 
-class TreeDataProvider {
-  getChildren(element) {
+interface TreeElement {
+  command: string;
+  title: string;
+}
+
+class TreeDataProvider implements vscode.TreeDataProvider<TreeElement> {
+  getChildren(element?: TreeElement): TreeElement[] {
     if (!element) {
       return [
         {
@@ -54,7 +60,7 @@ class TreeDataProvider {
     return [];
   }
 
-  getTreeItem(element) {
+  getTreeItem(element: TreeElement): vscode.TreeItem {
     const treeItem = new vscode.TreeItem(element.title);
     treeItem.command = element;
 
@@ -62,20 +68,18 @@ class TreeDataProvider {
   }
 }
 
-function activate(context) {
-  vscode.commands.executeCommand('setContext', 'extensionActivated', true);
-  vscode.window.registerTreeDataProvider(
-    'miniprogram-view',
-    new TreeDataProvider(),
-  );
+class ViewPlugin extends Plugin {
+  activate(): void {
+    vscode.commands.executeCommand('setContext', 'extensionActivated', true);
+    vscode.window.registerTreeDataProvider(
+      'miniprogram-view',
+      new TreeDataProvider(),
+    );
+  }
 
+  deactivate(): void {
+    vscode.commands.executeCommand('setContext', 'extensionActivated', false);
+  }
 }
 
-function deactivate() {
-  vscode.commands.executeCommand('setContext', 'extensionActivated', false);
-}
-
-module.exports = {
-  activate,
-  deactivate,
-};
+export default new ViewPlugin();

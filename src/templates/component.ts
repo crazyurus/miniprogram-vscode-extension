@@ -1,4 +1,4 @@
-exports.js = `
+export const js = `
 Component({
   behaviors: [],
   properties: {
@@ -27,18 +27,18 @@ Component({
 });
 `
 
-exports.json = `
+export const json = `
 {
   "component": true,
   "usingComponents": {}
 }
 `;
 
-exports.wxml = `
+export const wxml = `
 <view>New Component</view>
 `;
 
-exports.wxss = `
+export const wxss = `
 :host {
 
 }

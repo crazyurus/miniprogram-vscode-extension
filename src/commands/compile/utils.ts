@@ -1,20 +1,31 @@
-const vscode = require('vscode');
+import * as vscode from 'vscode';
+import type { CompileOptions } from '../../types';
 
-function registerCommand(command, callback) {
-  return vscode.commands.registerCommand(command, async e => {
+function registerCommand(command: string, callback: (e: any) => void): void {
+  vscode.commands.registerCommand(command, async e => {
     try {
       await callback(e);
-    } catch (error) {
+    } catch (error: any) {
       vscode.window.showErrorMessage(error.message);
     }
   });
 }
 
-function getCIBot() {
+function getCIBot(): number {
   return 28;
 }
 
-function getCompileOptions(options) {
+function getCompileOptions(options: CompileOptions): {
+  es6: boolean;
+  es7: boolean;
+  minify: boolean;
+  autoPrefixWXSS: boolean;
+  minifyWXML: boolean;
+  minifyWXSS: boolean;
+  minifyJS: boolean;
+  codeProtect: boolean;
+  uploadWithSourceMap: boolean;
+} {
   return {
     es6: options.es6,
     es7: options.enhance,
@@ -28,13 +39,13 @@ function getCompileOptions(options) {
   };
 }
 
-function getTemporaryFileName(type, appid, ext) {
+function getTemporaryFileName(type: string, appid: string, ext: string): string {
   const timestamp = Date.now();
 
   return `${type}-${appid}-${timestamp}.${ext}`;
 }
 
-module.exports = {
+export {
   getCIBot,
   getCompileOptions,
   getTemporaryFileName,
