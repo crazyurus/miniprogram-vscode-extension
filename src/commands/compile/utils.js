@@ -1,3 +1,15 @@
+const vscode = require('vscode');
+
+function registerCommand(command, callback) {
+  return vscode.commands.registerCommand(command, async e => {
+    try {
+      await callback(e);
+    } catch (error) {
+      vscode.window.showErrorMessage(error.message);
+    }
+  });
+}
+
 function getCIBot() {
   return 28;
 }
@@ -26,4 +38,5 @@ module.exports = {
   getCIBot,
   getCompileOptions,
   getTemporaryFileName,
+  registerCommand,
 };

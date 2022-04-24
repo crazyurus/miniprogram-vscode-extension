@@ -2,15 +2,14 @@ const vscode = require('vscode');
 const open = require('open');
 const { readProjectConfig, createProject } = require('../../utils/project');
 const { showSaveDialog } = require('../../utils/ui');
-const { getCIBot, getTemporaryFileName } = require('./utils');
+const { getCIBot, getTemporaryFileName, registerCommand } = require('./utils');
 
 function sourceMap(context) {
-  vscode.commands.registerCommand('MiniProgram.commands.compile.sourceMap', async () => {
+  registerCommand('MiniProgram.commands.compile.sourceMap', async () => {
     const projectConfig = readProjectConfig();
 
     if (!projectConfig) {
-      vscode.window.showWarningMessage('未找到 project.config.json 文件');
-      return;
+      throw new Error('未找到 project.config.json 文件');
     }
 
     const sourceMapSavePath = await showSaveDialog({
@@ -29,19 +28,18 @@ function sourceMap(context) {
     }, async () => {
       const ci = require('miniprogram-ci');
       const project = new ci.Project(options);
+
       await ci.getDevSourceMap({
         project,
         robot: getCIBot(),
         sourceMapSavePath,
-      }).catch(error => {
-        vscode.window.showErrorMessage(error.message);
       });
 
-      const result = await vscode.window.showInformationMessage('最近上传版本的 SourceMap 保存成功', '查看 SourceMap');
-
-      if (result === '查看 SourceMap') {
-        open(sourceMapSavePath);
-      }
+      vscode.window.showInformationMessage('最近上传版本的 SourceMap 保存成功', '查看 SourceMap').then(result => {
+        if (result === '查看 SourceMap') {
+          open(sourceMapSavePath);
+        }
+      });
     });
   });
 }

@@ -1,15 +1,14 @@
 const vscode = require('vscode');
 const { readProjectConfig, createProject } = require('../../utils/project');
 const { showInputBox } = require('../../utils/ui');
-const { getCIBot, getCompileOptions } = require('./utils');
+const { getCIBot, getCompileOptions, registerCommand } = require('./utils');
 
 function upload(context) {
-  vscode.commands.registerCommand('MiniProgram.commands.compile.upload', async () => {
+  registerCommand('MiniProgram.commands.compile.upload', async () => {
     const projectConfig = readProjectConfig();
 
     if (!projectConfig) {
-      vscode.window.showWarningMessage('未找到 project.config.json 文件');
-      return;
+      throw new Error('未找到 project.config.json 文件');
     }
 
     const options = await createProject(context);
@@ -51,19 +50,15 @@ function upload(context) {
           progress.report(message);
         },
         robot: getCIBot(),
-      }).then(() => {
-        vscode.window.showInformationMessage('上传成功，可前往微信小程序后台提交审核并发布', '打开微信小程序后台').then(result => {
-          switch (result) {
-            case '打开微信小程序后台':
-              vscode.env.openExternal('https://mp.weixin.qq.com/');
-              break;
-          }
-        });
-
-        context.workspaceState.update('previousVersion', version);
-      }).catch(error => {
-        vscode.window.showErrorMessage(error.message);
       });
+
+      vscode.window.showInformationMessage('上传成功，可前往微信小程序后台提交审核并发布', '打开微信小程序后台').then(result => {
+        if (result === '打开微信小程序后台') {
+          vscode.env.openExternal('https://mp.weixin.qq.com/');
+        }
+      });
+
+      await context.workspaceState.update('previousVersion', version);
     });
   });
 }

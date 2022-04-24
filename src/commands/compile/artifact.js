@@ -3,15 +3,14 @@ const os = require('os');
 const path = require('path');
 const open = require('open');
 const { readProjectConfig, createProject } = require('../../utils/project');
-const { getCompileOptions, getTemporaryFileName } = require('./utils');
+const { getCompileOptions, getTemporaryFileName, registerCommand } = require('./utils');
 
 function artifact(context) {
-  vscode.commands.registerCommand('MiniProgram.commands.compile.artifact', async () => {
+  registerCommand('MiniProgram.commands.compile.artifact', async () => {
     const projectConfig = readProjectConfig();
 
     if (!projectConfig) {
-      vscode.window.showWarningMessage('未找到 project.config.json 文件');
-      return;
+      throw new Error('未找到 project.config.json 文件');
     }
 
     const options = await createProject(context);
@@ -23,6 +22,7 @@ function artifact(context) {
     }, async progress => {
       const ci = require('miniprogram-ci');
       const project = new ci.Project(options);
+
       await ci.getCompiledResult({
         project,
         version: '1.0.0',
@@ -30,9 +30,7 @@ function artifact(context) {
         onProgressUpdate(message) {
           progress.report(message);
         },
-      }, artifactZipPath).catch(error => {
-        vscode.window.showErrorMessage(error.message);
-      });
+      }, artifactZipPath);
       
       open(artifactZipPath);
     });

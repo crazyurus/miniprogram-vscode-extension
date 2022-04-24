@@ -3,11 +3,12 @@ const path = require('path');
 const fs = require('fs');
 const { updateJSON } = require('../utils/json');
 const { getAppConfigPath } = require('../utils/project');
+const { registerCommand } = require('./compile/utils');
 
 const pageTemplate = require('../templates/page');
 const componentTemplate = require('../templates/component');
 
-function create(type, value, uri) {
+async function create(type, value, uri) {
   const template = type === 'page' ? pageTemplate : componentTemplate;
   const name = type === 'page' ? '页面' : '组件';
 
@@ -15,11 +16,10 @@ function create(type, value, uri) {
     const filePath = path.join(uri.fsPath, `${value}.${ext}`);
 
     if (fs.existsSync(filePath)) {
-      vscode.window.showErrorMessage(name + ' ' + value + ' 已存在');
-      return;
+      throw new Error(name + ' ' + value + ' 已存在');
     }
 
-    fs.writeFileSync(filePath, template[ext].trim());
+    await fs.promises.writeFile(filePath, template[ext].trim());
   }
 
   if (type === 'page') {
@@ -30,8 +30,7 @@ function create(type, value, uri) {
       const pagePath = path.relative(projectPath, uri.fsPath).replace(path.sep, '/');
 
       if (pagePath.includes('..')) {
-        vscode.window.showErrorMessage('页面路径不能超过小程序根目录');
-        return;
+        throw new Error('页面路径不能超过小程序根目录');
       }
 
       updateJSON(appConfigFile, 'pages', pagePath + '/' + value, 'push');
@@ -47,36 +46,34 @@ function validate(name) {
 }
 
 function activate() {
-  vscode.commands.registerCommand('MiniProgram.commands.create.page', e => {
-    const uri = vscode.Uri.parse(e.fsPath);	
-    	
-    vscode.window.showInputBox({
+  registerCommand('MiniProgram.commands.create.page', async e => {
+    const uri = vscode.Uri.parse(e.fsPath);
+    const value = await vscode.window.showInputBox({
       prompt: '页面名称',
       placeHolder: '请输入页面名称，如：index',
       validateInput: validate,
-    }).then(value => {
-      if (value) {
-        create('page', value, uri);
-      }
     });
+
+    if (value) {
+      await create('page', value, uri);
+    }
   });
 
-  vscode.commands.registerCommand('MiniProgram.commands.create.component', e => {
-    const uri = vscode.Uri.parse(e.fsPath);	
-    	
-    vscode.window.showInputBox({
+  registerCommand('MiniProgram.commands.create.component', async e => {
+    const uri = vscode.Uri.parse(e.fsPath);
+    const value = await vscode.window.showInputBox({
       prompt: '组件名称',
       placeHolder: '请输入组件名称，如：input',
       validateInput: validate,
-    }).then(value => {
-      if (value) {
-        create('component', value, uri);
-      }
     });
+
+    if (value) {
+      await create('component', value, uri);
+    }
   });
 }
 
-function deactivate() {}
+function deactivate() { }
 
 module.exports = {
   activate,

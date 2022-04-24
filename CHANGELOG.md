@@ -11,6 +11,7 @@
 ### 优化
 - API 类型依赖不再出现在 `package.json`
 - 加快 Windows 下打开 IDE 的速度
+- 优化错误处理
 
 ### 修复
 - Windows 下创建页面 `app.json` 中路径错误

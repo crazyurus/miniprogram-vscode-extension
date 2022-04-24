@@ -40,7 +40,7 @@ function readProjectConfig() {
   return null;
 }
 
-function createProject(context) {
+async function createProject(context) {
   const privateKey = context.workspaceState.get('privateKey');
   const privateKeyPath = context.workspaceState.get('privateKeyPath'); // 废弃
   const rootPath = getCurrentFolderPath();
@@ -57,53 +57,48 @@ function createProject(context) {
   }
 
   if (privateKey) {
-    return Promise.resolve({
+    return {
       ...options,
       privateKey,
-    });
+    };
   }
 
   // TODO: 废弃
   if (privateKeyPath && fs.existsSync(privateKeyPath)) {
-    return Promise.resolve({
+    return {
       ...options,
       privateKeyPath,
-    });
+    };
   }
 
-  return new Promise((resolve, reject) => {
-    vscode.window.showInformationMessage('请选择代码上传密钥文件，代码上传密钥可以在微信小程序后台“开发”-“开发设置”功能生成并下载，并关闭 IP 白名单', {
+  const action = await vscode.window.showInformationMessage('请选择代码上传密钥文件，代码上传密钥可以在微信小程序后台“开发”-“开发设置”功能生成并下载，并关闭 IP 白名单', {
       modal: true,
-    }, '选择密钥文件', '查看详细说明').then(result => {
-      switch (result) {
-        case '选择密钥文件':
-          vscode.window.showOpenDialog({
-            canSelectMany: false,
-            filters: {
-              '代码上传密钥文件': ['key'],
-            },
-            openLabel: '选择',
-          }).then(result => {
-            if (Array.isArray(result)) {
-              const keyFile = result[0].fsPath;
-              const key = fs.readFileSync(keyFile, 'utf-8');
-              context.workspaceState.update('privateKey', key);
+    }, '选择密钥文件', '查看详细说明');
 
-              resolve({
-                ...options,
-                privateKey: key,
-              });
-            } else {
-              reject();
-            }
-          });
-          break;
-        case '查看详细说明':
-          vscode.env.openExternal('https://developers.weixin.qq.com/miniprogram/dev/devtools/ci.html');
-          break;
+  switch (action) {
+    case '选择密钥文件':
+      const result = await vscode.window.showOpenDialog({
+        canSelectMany: false,
+        filters: {
+          '代码上传密钥文件': ['key'],
+        },
+        openLabel: '选择',
+      });
+      if (Array.isArray(result)) {
+        const keyFile = result[0].fsPath;
+        const key = fs.readFileSync(keyFile, 'utf-8');
+        context.workspaceState.update('privateKey', key);
+
+        return {
+          ...options,
+          privateKey: key,
+        };
       }
-    });
-  });
+      break;
+    case '查看详细说明':
+      vscode.env.openExternal('https://developers.weixin.qq.com/miniprogram/dev/devtools/ci.html');
+      break;
+  }
 }
 
 module.exports = {

@@ -4,14 +4,14 @@ const fs = require('fs');
 const { getCurrentFolderPath } = require('../../utils/path');
 const { readProjectConfig, createProject } = require('../../utils/project');
 const { openWebView, openDocument } = require('../../utils/ui');
+const { registerCommand } = require('./utils');
 
 function analyseCode(context) {
-  vscode.commands.registerCommand('MiniProgram.commands.compile.analyse', async () => {
+  registerCommand('MiniProgram.commands.compile.analyse', async () => {
     const projectConfig = readProjectConfig();
 
     if (!projectConfig) {
-      vscode.window.showWarningMessage('未找到 project.config.json 文件');
-      return;
+      throw new Error('未找到 project.config.json 文件');
     }
 
     const viewerPath = path.join(__dirname, '..', '..', '..', 'analyse-viewer');

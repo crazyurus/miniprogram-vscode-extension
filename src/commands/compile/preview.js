@@ -5,20 +5,25 @@ const os = require('os');
 const { readProjectConfig, readAppConfig, createProject } = require('../../utils/project');
 const { openWebView } = require('../../utils/ui');
 const previewHTML = require('../../html/preview');
-const { getCIBot, getCompileOptions, getTemporaryFileName } = require('./utils');
+const { getCIBot, getCompileOptions, getTemporaryFileName, registerCommand } = require('./utils');
 
 function preview(context) {
-  vscode.commands.registerCommand('MiniProgram.commands.compile.preview', async () => {
+  registerCommand('MiniProgram.commands.compile.preview', async () => {
     const projectConfig = readProjectConfig();
 
     if (!projectConfig) {
-      vscode.window.showWarningMessage('未找到 project.config.json 文件');
-      return;
+      throw new Error('未找到 project.config.json 文件');
     }
 
     const options = await createProject(context);
     const tempImagePath = path.join(os.tmpdir(), getTemporaryFileName('qrcode', options.appid, 'jpg'));
-    const { pages } = readAppConfig(options.projectPath);
+    const appConfig = readAppConfig(options.projectPath);
+
+    if (!appConfig) {
+      throw new Error('未找到 app.json 文件');
+    }
+
+    const { pages } = appConfig;
     const pagePath = await vscode.window.showQuickPick(pages, {
       placeHolder: '选择需要预览的页面，默认为小程序首页',
     });
@@ -47,22 +52,15 @@ function preview(context) {
           progress.report(message);
         },
         robot: getCIBot(),
-      }).then(() => {
-        if (!fs.existsSync(tempImagePath)) {
-          vscode.window.showErrorMessage('构建失败');
-          return;
-        }
-
-        const base64 = fs.readFileSync(tempImagePath, 'utf-8');
-
-        vscode.window.showInformationMessage('构建完成');
-        openWebView(previewHTML({
-          base64,
-          appName,
-        }), '预览小程序');
-      }).catch(error => {
-        vscode.window.showErrorMessage(error.message);
       });
+
+      const base64 = await fs.promises.readFile(tempImagePath, 'utf-8');
+
+      vscode.window.showInformationMessage('构建完成');
+      openWebView(previewHTML({
+        base64,
+        appName,
+      }), '预览小程序');
     });
   });
 }

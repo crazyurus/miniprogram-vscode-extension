@@ -2,21 +2,20 @@ const vscode = require('vscode');
 const path = require('path');
 const fs = require('fs');
 const { readProjectConfig, createProject } = require('../../utils/project');
+const { registerCommand } = require('./utils');
 
 function packNPM(context) {
-  vscode.commands.registerCommand('MiniProgram.commands.compile.npm', async () => {
+  registerCommand('MiniProgram.commands.compile.npm', async () => {
     const projectConfig = readProjectConfig();
 
     if (!projectConfig) {
-      vscode.window.showWarningMessage('未找到 project.config.json 文件');
-      return;
+      throw new Error('未找到 project.config.json 文件');
     }
 
     const options = await createProject(context);
 
     if (!fs.existsSync(path.join(options.projectPath, 'package.json'))) {
-      vscode.window.showWarningMessage('未找到 package.json 文件');
-      return;
+      throw new Error('未找到 package.json 文件');
     }
 
     await vscode.window.withProgress({
@@ -26,12 +25,11 @@ function packNPM(context) {
     }, async () => {
       const ci = require('miniprogram-ci');
       const project = new ci.Project(options);
+
       const warning = await ci.packNpm(project, {
         reporter(info) {
           vscode.window.showInformationMessage(`构建完成，共用时 ${info.pack_time} ms，其中包含小程序依赖 ${info.miniprogram_pack_num} 项、其它依赖 ${info.other_pack_num} 项`);
         },
-      }).catch(error => {
-        vscode.window.showErrorMessage(error.message);
       });
 
       if (warning.length > 0) {
