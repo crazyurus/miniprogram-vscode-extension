@@ -2,6 +2,14 @@ const fs = require('fs');
 const path = require('path');
 const vscode = require('vscode');
 
+function getMiniProgramRootPath(rootPath, relativePath) {
+  if (relativePath) {
+    return path.resolve(rootPath, relativePath);
+  }
+
+  return rootPath;
+}
+
 function getCurrentFolderPath() {
   const rootPath = Array.isArray(vscode.workspace.workspaceFolders)
     ? vscode.workspace.workspaceFolders[0].uri.fsPath
@@ -26,4 +34,5 @@ function getProjectConfigPath(rootPath) {
 module.exports = {
   getCurrentFolderPath,
   getProjectConfigPath,
+  getMiniProgramRootPath,
 };

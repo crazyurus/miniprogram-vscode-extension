@@ -4,7 +4,7 @@ const fs = require('fs');
 const os = require('os');
 const { updateJSON } = require('../utils/json');
 const { getCurrentFolderPath, getProjectConfigPath } = require('../utils/path');
-const { readProjectConfig, createProject } = require('../utils/project');
+const { readProjectConfig, readAppConfig, createProject } = require('../utils/project');
 const { openWebView, showInputBox, openDocument } = require('../utils/ui');
 const { random } = require('../utils/math');
 const previewHTML = require('../html/preview');
@@ -94,8 +94,16 @@ function compile(context) {
     }
 
     const options = await createProject(context);
-    const timestamp = new Date().valueOf();
+    const timestamp = Date.now();
     const tempImagePath = path.join(os.tmpdir(), options.appid + timestamp + '-qrcode.jpg');
+    const { pages } = readAppConfig(options.projectPath);
+    const pagePath = await vscode.window.showQuickPick(pages, {
+      placeHolder: '选择需要预览的页面，默认为小程序首页',
+    });
+
+    if (!pagePath) {
+      return;
+    }
 
     await vscode.window.withProgress({
       title: '正在编译小程序',
@@ -112,6 +120,7 @@ function compile(context) {
         setting: getCompileOptions(projectConfig.setting),
         qrcodeFormat: 'base64',
         qrcodeOutputDest: tempImagePath,
+        pagePath,
         onProgressUpdate(message) {
           progress.report(message);
         },
