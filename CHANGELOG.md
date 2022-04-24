@@ -13,6 +13,7 @@
 ### 修复
 - Windows 下创建页面 `app.json` 中路径错误
 - 修复设置小程序 `miniprogramRoot` 未使用相对路径
+- 修复构建 npm 查找 `package.json` 逻辑
 
 ## [1.4.3] - 2022-4-23
 
