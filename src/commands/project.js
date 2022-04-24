@@ -33,7 +33,9 @@ function setCommands(context) {
       const idePath = installPath[platform];
 
       if (platform === 'win32') {
-        open(idePath);
+        const { execFile } = require('child_process');
+
+        execFile(idePath);
       } else {
         open.openApp(idePath);
       }
