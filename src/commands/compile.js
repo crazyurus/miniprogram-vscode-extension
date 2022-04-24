@@ -122,7 +122,7 @@ function compile(context) {
           return;
         }
 
-        const base64 = fs.readFileSync(tempImagePath, 'utf8');
+        const base64 = fs.readFileSync(tempImagePath, 'utf-8');
 
         vscode.window.showInformationMessage('构建完成');
         openWebView(previewHTML({

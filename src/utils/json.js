@@ -1,8 +1,12 @@
 const fs = require('fs');
 
 function readJSON(filePath) {
-  const content = fs.readFileSync(filePath, 'utf8');
-  return JSON.parse(content);
+  try {
+    const content = fs.readFileSync(filePath, 'utf-8');
+    return JSON.parse(content);
+  } catch {
+    return null;
+  }
 }
 
 function updateJSON(filePath, key, value, method = '') {

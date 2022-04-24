@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const vscode = require('vscode');
+const { readJSON } = require('../utils/json');
 const { getCurrentFolderPath } = require('../utils/path');
 
 function activate() {
@@ -11,7 +12,7 @@ function activate() {
     return;
   }
 
-  const content = JSON.parse(fs.readFileSync(packageJSONPath, 'utf-8'));
+  const content = readJSON(packageJSONPath);
   const library = '@types/wechat-miniprogram';
 
   if (
