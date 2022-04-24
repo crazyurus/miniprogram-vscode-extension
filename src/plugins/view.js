@@ -25,6 +25,10 @@ class TreeDataProvider {
           title: "分析代码静态依赖"
         },
         {
+          command: "MiniProgram.commands.compile.artifact",
+          title: "查看编译产物"
+        },
+        {
           command: "MiniProgram.commands.config.project",
           title: "查看项目配置"
         },

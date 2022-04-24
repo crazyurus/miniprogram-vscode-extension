@@ -71,6 +71,11 @@
       "category": "MiniProgram"
     },
     {
+      "command": "MiniProgram.commands.compile.artifact",
+      "title": "%commands.compile.artifact%",
+      "category": "MiniProgram"
+    },
+    {
       "command": "MiniProgram.commands.compile.preview",
       "title": "%commands.compile.preview%",
       "category": "MiniProgram"

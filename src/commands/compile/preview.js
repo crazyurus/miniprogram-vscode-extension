@@ -5,7 +5,7 @@ const os = require('os');
 const { readProjectConfig, readAppConfig, createProject } = require('../../utils/project');
 const { openWebView } = require('../../utils/ui');
 const previewHTML = require('../../html/preview');
-const { getCIBot, getCompileOptions } = require('./utils');
+const { getCIBot, getCompileOptions, getTemporaryFileName } = require('./utils');
 
 function preview(context) {
   vscode.commands.registerCommand('MiniProgram.commands.compile.preview', async () => {
@@ -17,8 +17,7 @@ function preview(context) {
     }
 
     const options = await createProject(context);
-    const timestamp = Date.now();
-    const tempImagePath = path.join(os.tmpdir(), options.appid + timestamp + '-qrcode.jpg');
+    const tempImagePath = path.join(os.tmpdir(), getTemporaryFileName('qrcode', options.appid, 'jpg'));
     const { pages } = readAppConfig(options.projectPath);
     const pagePath = await vscode.window.showQuickPick(pages, {
       placeHolder: '选择需要预览的页面，默认为小程序首页',

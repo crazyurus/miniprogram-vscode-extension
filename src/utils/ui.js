@@ -45,8 +45,13 @@ function openDocument(path) {
   return vscode.workspace.openTextDocument(path).then(document => vscode.window.showTextDocument(document, vscode.ViewColumn.One));
 }
 
+function showSaveDialog() {
+  return vscode.window.showSaveDialog().then(result => result.fsPath);
+}
+
 module.exports = {
   showInputBox,
+  showSaveDialog,
   openWebView,
   openDocument,
 };

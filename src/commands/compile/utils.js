@@ -18,7 +18,14 @@ function getCompileOptions(options) {
   };
 }
 
+function getTemporaryFileName(type, appid, ext) {
+  const timestamp = Date.now();
+
+  return `${type}-${appid}-${timestamp}.${ext}`;
+}
+
 module.exports = {
   getCIBot,
   getCompileOptions,
+  getTemporaryFileName,
 };

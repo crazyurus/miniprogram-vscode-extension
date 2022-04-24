@@ -3,6 +3,7 @@
   "commands.config.project": "View project configuration",
   "commands.compile.npm": "Build NPM",
   "commands.compile.analyse": "Analyze code static dependencies",
+  "commands.compile.artifact": "View mini program artifact",
   "commands.compile.preview": "Preview mini program",
   "commands.compile.upload": "Package and upload mini program",
   "commands.document": "View development documentation",

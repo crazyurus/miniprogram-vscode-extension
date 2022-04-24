@@ -4,6 +4,7 @@ const comipleCommands = [
   require('./npm'),
   require('./preview'),
   require('./upload'),
+  require('./artifact'),
 ];
 
 function activate(context) {
