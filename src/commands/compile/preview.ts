@@ -6,6 +6,7 @@ import { readProjectConfig, readAppConfig, createProject } from '../../utils/pro
 import { openWebView } from '../../utils/ui';
 import renderHTML from '../../utils/render';
 import { getCIBot, getCompileOptions, getTemporaryFileName, registerCommand } from './utils';
+import type { ProjectAttributes } from '../../types';
 
 function preview(context: vscode.ExtensionContext): void {
   registerCommand('MiniProgram.commands.compile.preview', async () => {
@@ -37,19 +38,20 @@ function preview(context: vscode.ExtensionContext): void {
       location: vscode.ProgressLocation.Notification,
       cancellable: true,
     }, async progress => {
-      const ci = require('miniprogram-ci');
+      const ci = await import('miniprogram-ci');
       const project = new ci.Project(options);
-      const { appName } = await project.attr();
+      const { appName } = await project.attr() as ProjectAttributes;
 
       await ci.preview({
         project,
+        version: '',
         desc: '来自 VSCode MiniProgram Extension',
         setting: getCompileOptions(projectConfig.setting),
         qrcodeFormat: 'base64',
         qrcodeOutputDest: tempImagePath,
         pagePath,
-        onProgressUpdate(message: string): void {
-          progress.report(message as any);
+        onProgressUpdate(message): void {
+          progress.report(typeof message === 'string' ? { message } : message);
         },
         robot: getCIBot(),
       });

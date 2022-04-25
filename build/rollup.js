@@ -20,5 +20,6 @@ export default {
   external: [
     'vscode',
     '_http_client',
+    'miniprogram-ci',
   ],
 };

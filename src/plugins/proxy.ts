@@ -2,11 +2,11 @@ import * as vscode from 'vscode';
 import Plugin from './base';
 
 class ProxyPlugin extends Plugin {
-  activate(): void {
-    const proxy = vscode.workspace.getConfiguration('http').get('proxy');
+  async activate(): Promise<void> {
+    const proxy = vscode.workspace.getConfiguration('http').get('proxy') as string;
 
     if (proxy) {
-      const ci = require('miniprogram-ci');
+      const ci = await import('miniprogram-ci');
 
       ci.proxy(proxy);
     }

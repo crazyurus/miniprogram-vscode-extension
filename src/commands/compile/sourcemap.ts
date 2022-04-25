@@ -26,7 +26,7 @@ function sourceMap(context: vscode.ExtensionContext): void {
       location: vscode.ProgressLocation.Window,
       cancellable: true,
     }, async () => {
-      const ci = require('miniprogram-ci');
+      const ci = await import('miniprogram-ci');
       const project = new ci.Project(options);
 
       await ci.getDevSourceMap({

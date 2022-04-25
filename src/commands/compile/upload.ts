@@ -38,7 +38,7 @@ function upload(context: vscode.ExtensionContext): void {
       location: vscode.ProgressLocation.Notification,
       cancellable: true,
     }, async progress => {
-      const ci = require('miniprogram-ci');
+      const ci = await import('miniprogram-ci');
       const project = new ci.Project(options);
 
       await ci.upload({
@@ -46,8 +46,8 @@ function upload(context: vscode.ExtensionContext): void {
         version,
         desc: description || '通过%20MiniProgram%20VSCode%20Extension%20上传',
         setting: getCompileOptions(projectConfig.setting),
-        onProgressUpdate(message: string): void {
-          progress.report(message as any);
+        onProgressUpdate(message): void {
+          progress.report(typeof message === 'string' ? { message } : message);
         },
         robot: getCIBot(),
       });

@@ -38,7 +38,7 @@ function analyseCode(context: vscode.ExtensionContext): void {
           break;
         case 'analyse':
           const options = await createProject(context);
-          const ci = require('miniprogram-ci');
+          const ci = await import('miniprogram-ci');
           const project = new ci.Project(options);
           const result = await ci.analyseCode(project);
 

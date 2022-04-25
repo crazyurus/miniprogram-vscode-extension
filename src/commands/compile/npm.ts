@@ -23,7 +23,7 @@ function packNPM(context: vscode.ExtensionContext): void {
       location: vscode.ProgressLocation.Notification,
       cancellable: true,
     }, async () => {
-      const ci = require('miniprogram-ci');
+      const ci = await import('miniprogram-ci');
       const project = new ci.Project(options);
 
       const warning = await ci.packNpm(project, {

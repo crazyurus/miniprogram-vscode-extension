@@ -7,7 +7,7 @@ import { readProjectConfig, createProject } from '../utils/project';
 import { openWebView, openDocument } from '../utils/ui';
 import renderHTML from '../utils/render';
 import { registerCommand } from './compile/utils';
-import type { WebviewMessage } from '../types';
+import type { WebviewMessage, ProjectAttributes } from '../types';
 
 function setStatusBar(): void {
   const projectConfig = readProjectConfig();
@@ -24,7 +24,7 @@ function setStatusBar(): void {
 
 function setCommands(context: vscode.ExtensionContext): void {
   // 打开 IDE
-  registerCommand('MiniProgram.commands.config.openIDE', () => {
+  registerCommand('MiniProgram.commands.config.openIDE', async () => {
     const installPath = {
       win32: 'C:\\Program Files (x86)\\Tencent\\微信web开发者工具\\微信开发者工具.exe',
       darwin: '/Applications/wechatwebdevtools.app',
@@ -35,7 +35,7 @@ function setCommands(context: vscode.ExtensionContext): void {
       const idePath = installPath[platform];
 
       if (platform === 'win32') {
-        const { execFile } = require('child_process');
+        const { execFile } = await import('child_process');
 
         execFile(idePath);
       } else {
@@ -54,10 +54,10 @@ function setCommands(context: vscode.ExtensionContext): void {
       throw new Error('未找到 project.config.json 文件');
     }
 
-    const ci = require('miniprogram-ci');
+    const ci = await import('miniprogram-ci');
     const options = await createProject(context);
     const project = new ci.Project(options);
-    const projectSetting = await project.attr();
+    const projectSetting = await project.attr() as ProjectAttributes;
     const panel = openWebView(await renderHTML('project', {
       name: projectSetting.appName,
       avatar: projectSetting.appImageUrl + '/0',

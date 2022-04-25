@@ -20,15 +20,15 @@ function artifact(context: vscode.ExtensionContext): void {
       location: vscode.ProgressLocation.Notification,
       cancellable: true,
     }, async progress => {
-      const ci = require('miniprogram-ci');
+      const ci = await import('miniprogram-ci');
       const project = new ci.Project(options);
 
       await ci.getCompiledResult({
         project,
         version: '1.0.0',
         setting: getCompileOptions(projectConfig.setting),
-        onProgressUpdate(message: string): void {
-          progress.report(message as any);
+        onProgressUpdate(message): void {
+          progress.report(typeof message === 'string' ? { message } : message);
         },
       }, artifactZipPath);
 
