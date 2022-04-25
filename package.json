@@ -527,7 +527,7 @@
     }
   },
   "activationEvents": [
-    "workspaceContains:project.config.json",
+    "workspaceContains:**/project.config.json",
     "onLanguage:wxml"
   ],
   "main": "./src/dev.js",

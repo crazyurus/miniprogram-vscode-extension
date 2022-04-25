@@ -10,15 +10,16 @@ import { registerCommand } from './compile/utils';
 import type { WebviewMessage, ProjectAttributes } from '../types';
 
 function setStatusBar(): void {
-  const projectConfig = readProjectConfig();
-
-  if (projectConfig) {
+  try {
+    const projectConfig = readProjectConfig();
     const item = vscode.window.createStatusBarItem(1, 24);
 
     item.text = `$(bookmark) ${projectConfig.projectname} (${projectConfig.appid})`;
     item.tooltip = '查看项目的详细配置';
     item.command = 'MiniProgram.commands.config.project';
     item.show();
+  } catch {
+    
   }
 }
 
@@ -49,11 +50,6 @@ function setCommands(context: vscode.ExtensionContext): void {
   // 项目详情
   registerCommand('MiniProgram.commands.config.project', async () => {
     const projectConfig = readProjectConfig();
-
-    if (!projectConfig) {
-      throw new Error('未找到 project.config.json 文件');
-    }
-
     const ci = await import('miniprogram-ci');
     const options = await createProject(context);
     const project = new ci.Project(options);

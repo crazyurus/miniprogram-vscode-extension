@@ -9,12 +9,7 @@ import { WebviewMessage } from '../../types';
 
 function analyseCode(context: vscode.ExtensionContext): void {
   registerCommand('MiniProgram.commands.compile.analyse', async () => {
-    const projectConfig = readProjectConfig();
-
-    if (!projectConfig) {
-      throw new Error('未找到 project.config.json 文件');
-    }
-
+    readProjectConfig();
     const viewerPath = getAnalyseViewerPath();
     let html = await fs.promises.readFile(path.join(viewerPath, 'index.html'), { encoding: 'utf-8' });
     const panel = openWebView('', '代码依赖分析', vscode.ViewColumn.One);

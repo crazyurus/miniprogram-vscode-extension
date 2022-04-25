@@ -7,11 +7,6 @@ import { getCIBot, getTemporaryFileName, registerCommand } from './utils';
 function sourceMap(context: vscode.ExtensionContext): void {
   registerCommand('MiniProgram.commands.compile.sourceMap', async () => {
     const projectConfig = readProjectConfig();
-
-    if (!projectConfig) {
-      throw new Error('未找到 project.config.json 文件');
-    }
-
     const sourceMapSavePath = await showSaveDialog({
       defaultUri: vscode.Uri.file(getTemporaryFileName('sourcemap', projectConfig.appid, 'zip')),
     });

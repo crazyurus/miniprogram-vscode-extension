@@ -8,11 +8,6 @@ import { getCompileOptions, getTemporaryFileName, registerCommand } from './util
 function artifact(context: vscode.ExtensionContext): void {
   registerCommand('MiniProgram.commands.compile.artifact', async () => {
     const projectConfig = readProjectConfig();
-
-    if (!projectConfig) {
-      throw new Error('未找到 project.config.json 文件');
-    }
-
     const options = await createProject(context);
     const artifactZipPath = path.join(os.tmpdir(), getTemporaryFileName('artifact', options.appid, 'zip'));
     await vscode.window.withProgress({

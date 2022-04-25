@@ -32,10 +32,6 @@ function getAppConfigPath(miniprogramPath?: string): string {
     const rootPath = getCurrentFolderPath();
     const projectConfig = readProjectConfig();
 
-    if (!projectConfig) {
-      return '';
-    }
-
     miniprogramPath = getMiniProgramRootPath(rootPath, projectConfig.miniprogramRoot);
   }
 
@@ -48,7 +44,7 @@ function readAppConfig(miniprogramPath: string): AppConfig | null {
   return appFilePath ? readJSON<AppConfig>(appFilePath) : null;
 }
 
-function readProjectConfig(): ProjectConfig | null {
+function readProjectConfig(): ProjectConfig {
   const rootPath = getCurrentFolderPath();
   const projectFilePath = getProjectConfigPath(rootPath);
 
@@ -57,12 +53,14 @@ function readProjectConfig(): ProjectConfig | null {
 
     if (config) {
       config.projectname = decodeURIComponent(config.projectname);
+
+      return config;
     }
 
-    return config;
+    throw new Error('project.config.json 文件解析失败');
   }
 
-  return null;
+  throw new Error('未找到 project.config.json 文件，请在 VSCode 设置页中配置小程序运行目录的相对路径');
 }
 
 async function createProject(context: vscode.ExtensionContext): Promise<Project> {
@@ -70,11 +68,6 @@ async function createProject(context: vscode.ExtensionContext): Promise<Project>
   const privateKeyPath = context.workspaceState.get('privateKeyPath') as string; // 废弃
   const rootPath = getCurrentFolderPath();
   const projectConfig = readProjectConfig();
-
-  if (!projectConfig) {
-    return Promise.reject('未找到 project.config.json 文件');
-  }
-
   const options = {
     appid: projectConfig.appid,
     type: (projectConfig.compileType === 'miniprogram' ? 'miniProgram' : 'miniProgramPlugin') as Project['type'],

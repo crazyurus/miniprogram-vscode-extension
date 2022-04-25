@@ -6,12 +6,7 @@ import { registerCommand } from './utils';
 
 function packNPM(context: vscode.ExtensionContext): void {
   registerCommand('MiniProgram.commands.compile.npm', async () => {
-    const projectConfig = readProjectConfig();
-
-    if (!projectConfig) {
-      throw new Error('未找到 project.config.json 文件');
-    }
-
+    readProjectConfig();
     const options = await createProject(context);
 
     if (!fs.existsSync(path.join(options.projectPath, 'package.json'))) {

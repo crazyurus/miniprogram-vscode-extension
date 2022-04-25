@@ -6,11 +6,6 @@ import { getCIBot, getCompileOptions, registerCommand } from './utils';
 function upload(context: vscode.ExtensionContext): void {
   registerCommand('MiniProgram.commands.compile.upload', async () => {
     const projectConfig = readProjectConfig();
-
-    if (!projectConfig) {
-      throw new Error('未找到 project.config.json 文件');
-    }
-
     const options = await createProject(context);
     const previousVersion = context.workspaceState.get('previousVersion');
     const version = await showInputBox({

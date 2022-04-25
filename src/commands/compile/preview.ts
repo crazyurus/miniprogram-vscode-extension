@@ -11,11 +11,6 @@ import type { ProjectAttributes } from '../../types';
 function preview(context: vscode.ExtensionContext): void {
   registerCommand('MiniProgram.commands.compile.preview', async () => {
     const projectConfig = readProjectConfig();
-
-    if (!projectConfig) {
-      throw new Error('未找到 project.config.json 文件');
-    }
-
     const options = await createProject(context);
     const tempImagePath = path.join(os.tmpdir(), getTemporaryFileName('qrcode', options.appid, 'jpg'));
     const appConfig = readAppConfig(options.projectPath);
