@@ -60,7 +60,7 @@ function readProjectConfig(): ProjectConfig {
     throw new Error('project.config.json 文件解析失败');
   }
 
-  throw new Error('未找到 project.config.json 文件，请在 VSCode 设置页中配置小程序运行目录的相对路径');
+  throw new Error('未找到 project.config.json 文件');
 }
 
 async function createProject(context: vscode.ExtensionContext): Promise<Project> {
