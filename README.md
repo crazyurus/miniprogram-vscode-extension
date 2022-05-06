@@ -76,6 +76,8 @@
 
 - [w-extension](https://github.com/masterZSH/w-extension)
 
+- [@tarojs/plugin-mini-ci](https://github.com/NervJS/taro/blob/next/packages/taro-plugin-mini-ci)
+
 部分功能的实现参考微信开发者工具 IDE
 
 ## License

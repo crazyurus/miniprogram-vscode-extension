@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import * as os from 'os';
 import * as path from 'path';
 import * as vscode from 'vscode';
 
@@ -35,7 +36,31 @@ function getProjectConfigPath(rootPath: string): string {
   return path.join(rootPath, 'project.config.json')
 }
 
+function getIDEPathInfo(): {
+  cliPath: string;
+  statusFile: string;
+} {
+  const isWindows = os.platform() === 'win32';
+  const devToolsInstallPath = isWindows ? 'C:\\Program Files (x86)\\Tencent\\微信web开发者工具' : '/Applications/wechatwebdevtools.app/Contents/MacOS';
+
+  if (!fs.existsSync(devToolsInstallPath)) {
+    throw new Error('未找到微信开发者工具 IDE');
+  }
+
+  const md5 = require('crypto').createHash('md5').update(devToolsInstallPath).digest('hex');
+  const devToolsStatusFile = path.join(os.homedir(), isWindows
+    ? `/AppData/Local/微信开发者工具/User Data/${md5}/Default/.ide-status`
+    : `/Library/Application Support/微信开发者工具/${md5}/Default/.ide-status`
+  );
+
+  return {
+    cliPath: path.join(devToolsInstallPath, isWindows ? 'cli.bat' : 'cli'),
+    statusFile: devToolsStatusFile,
+  };
+}
+
 export {
+  getIDEPathInfo,
   getAnalyseViewerPath,
   getCurrentFolderPath,
   getProjectConfigPath,

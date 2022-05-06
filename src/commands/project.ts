@@ -1,8 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
-import * as os from 'os';
 import open from 'open';
-import { getProjectConfigPath } from '../utils/path';
+import { getCurrentFolderPath, getProjectConfigPath, getIDEPathInfo } from '../utils/path';
 import { readProjectConfig, createProject } from '../utils/project';
 import { openWebView, openDocument } from '../utils/ui';
 import renderHTML from '../utils/render';
@@ -26,25 +25,25 @@ function setStatusBar(): void {
 function setCommands(context: vscode.ExtensionContext): void {
   // 打开 IDE
   registerCommand('MiniProgram.commands.config.openIDE', async () => {
-    const installPath = {
-      win32: 'C:\\Program Files (x86)\\Tencent\\微信web开发者工具\\微信开发者工具.exe',
-      darwin: '/Applications/wechatwebdevtools.app',
-    };
-    const platform = os.platform() as keyof typeof installPath;
+    const { cliPath, statusFile } = getIDEPathInfo();
+    const ideStatus = await fs.promises.readFile(statusFile, 'utf-8')
+    
+    if (ideStatus === 'Off') {
+      const result = await vscode.window.showWarningMessage('微信开发者工具的服务端口已关闭，请打开设置 — 安全设置，将服务端口开启', '查看详情');
 
-    if (installPath.hasOwnProperty(platform) && fs.existsSync(installPath[platform])) {
-      const idePath = installPath[platform];
-
-      if (platform === 'win32') {
-        const { execFile } = await import('child_process');
-
-        execFile(idePath);
-      } else {
-        open.openApp(idePath);
+      if (result === '查看详情') {
+        vscode.env.openExternal(vscode.Uri.parse('https://developers.weixin.qq.com/miniprogram/dev/devtools/cli.html'));
       }
-    } else {
-      throw new Error('未找到微信开发者工具 IDE');
+
+      return;
     }
+
+    const rootPath = getCurrentFolderPath();
+    require('child_process').execFile(cliPath, ['open', '--project', rootPath], (error: Error) => {
+      if (error) {
+        vscode.window.showErrorMessage(error.message);
+      }
+    });
   });
 
   // 项目详情
