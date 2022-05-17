@@ -2,7 +2,7 @@
   "name": "miniprogram-vscode-extension",
   "displayName": "微信小程序开发工具",
   "description": "提供小程序预览、打包上传、代码补全、语法高亮、项目模版等功能",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "icon": "assets/logo.png",
   "publisher": "crazyurus",
   "license": "GPL-3.0",
@@ -494,7 +494,8 @@
     ],
     "grammars": [
       {
-        "scopeName": "text.html.basic",
+        "language": "wxml",
+        "scopeName": "text.wxml.basic",
         "path": "./extensions/wxml-basics/syntaxes/wxml.tmLanguage.json",
         "embeddedLanguages": {
           "text.html": "html",
@@ -506,7 +507,7 @@
       },
       {
         "language": "wxml",
-        "scopeName": "text.html.derivative",
+        "scopeName": "text.wxml.derivative",
         "path": "./extensions/wxml-basics/syntaxes/wxml-derivative.tmLanguage.json",
         "embeddedLanguages": {
           "text.html": "html",
@@ -533,7 +534,7 @@
   "main": "./src/dev.js",
   "dependencies": {
     "ejs": "^3.1.7",
-    "miniprogram-ci": "^1.8.12",
+    "miniprogram-ci": "^1.8.18",
     "open": "^8.4.0"
   },
   "devDependencies": {

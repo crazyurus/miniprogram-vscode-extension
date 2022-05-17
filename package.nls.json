@@ -12,16 +12,6 @@
   "commands.management": "Open WeChat Management Platform",
   "displayName": "MiniProgram Extension",
   "description": "Provide preview, package upload, code completion, syntax highlighting, project templates and other functions for mini program",
-  "a": [
-    {
-      "language": "wxml",
-      "scopeName": "text.wxml",
-      "path": "./extensions/wxml-basics/syntaxes/wxml.tmLanguage.json",
-      "embeddedLanguages": {
-        "source.js": "javascript"
-      }
-    }
-  ],
   "wxml.customData.desc": "A list of relative file paths pointing to JSON files following the [custom data format](https://github.com/microsoft/vscode-html-languageservice/blob/master/docs/customData.md).\n\nVS Code loads custom data on startup to enhance its HTML support for the custom HTML tags, attributes and attribute values you specify in the JSON files.\n\nThe file paths are relative to workspace and only workspace folder settings are considered.",
   "wxml.format.enable.desc": "Enable/disable default HTML formatter.",
   "wxml.format.wrapLineLength.desc": "Maximum amount of characters per line (0 = disable).",

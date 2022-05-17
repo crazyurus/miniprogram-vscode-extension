@@ -5,8 +5,8 @@
 		"Once accepted there, we are happy to receive an update request."
 	],
 	"version": "https://github.com/textmate/html.tmbundle/commit/0c3d5ee54de3a993f747f54186b73a4d2d3c44a2",
-	"name": "HTML",
-	"scopeName": "text.html.basic",
+	"name": "WXML",
+	"scopeName": "text.wxml.basic",
 	"injections": {
 		"R:text.html - (comment.block, text.html meta.embedded, meta.tag.*.*.html, meta.tag.*.*.*.html, meta.tag.*.*.*.*.html)": {
 			"comment": "Uses R: to ensure this matches after any other injections.",
@@ -20,7 +20,7 @@
 	},
 	"patterns": [
 		{
-		  "include": "#wxml-interpolations"
+			"include": "#wxml-interpolations"
 		},
 		{
 			"include": "#xml-processing"
@@ -117,7 +117,7 @@
 											"name": "string.quoted.double.html",
 											"patterns": [
 												{
-												  "include": "#wxml-interpolations"
+													"include": "#wxml-interpolations"
 												},
 												{
 													"include": "#entities"
@@ -410,7 +410,7 @@
 							"name": "string.quoted.double.html",
 							"patterns": [
 								{
-								  "include": "#wxml-interpolations"
+									"include": "#wxml-interpolations"
 								},
 								{
 									"include": "#entities"
@@ -433,7 +433,7 @@
 							"name": "string.quoted.single.html",
 							"patterns": [
 								{
-								  "include": "#wxml-interpolations"
+									"include": "#wxml-interpolations"
 								},
 								{
 									"include": "#entities"
@@ -1723,10 +1723,10 @@
 							]
 						},
 						{
-						  "include": "#tags-invalid"
+							"include": "#tags-invalid"
 						},
 						{
-						  "include": "#wxml-interpolations"
+							"include": "#wxml-interpolations"
 						}
 					]
 				}
@@ -1735,7 +1735,7 @@
 		"tags-invalid": {
 			"patterns": [
 				{
-				  "include": "#wxml-interpolations"
+					"include": "#wxml-interpolations"
 				},
 				{
 					"begin": "(</?)((\\w[^\\s>]*))(?<!/)",
@@ -1762,7 +1762,7 @@
 							"include": "#attribute"
 						},
 						{
-						  "include": "#wxml-interpolations"
+							"include": "#wxml-interpolations"
 						}
 					]
 				}
@@ -1771,7 +1771,7 @@
 		"tags-valid": {
 			"patterns": [
 				{
-				  "include": "#wxml-interpolations"
+					"include": "#wxml-interpolations"
 				},
 				{
 					"begin": "(^[ \\t]+)?(?=<(?i:style)\\b(?!-))",
@@ -1788,7 +1788,7 @@
 					},
 					"patterns": [
 						{
-						  "include": "#wxml-interpolations"
+							"include": "#wxml-interpolations"
 						},
 						{
 							"begin": "(?i)(<)(style)(?=\\s|/?>)",
@@ -1837,7 +1837,7 @@
 											"include": "#attribute"
 										},
 										{
-										  "include": "#wxml-interpolations"
+											"include": "#wxml-interpolations"
 										}
 									]
 								},
@@ -1850,7 +1850,7 @@
 											"include": "source.css"
 										},
 										{
-										  "include": "#wxml-interpolations"
+											"include": "#wxml-interpolations"
 										}
 									]
 								}
@@ -1858,7 +1858,6 @@
 						}
 					]
 				},
-
 				{
 					"begin": "(?i)(<)(wxs)\\b(?=\\s/>)",
 					"beginCaptures": {
@@ -1876,11 +1875,12 @@
 						}
 					},
 					"name": "meta.tag.other.$2.end.html",
-					"patterns": [{
-						"include": "#tag-stuff"
-					}]
+					"patterns": [
+						{
+							"include": "#tag-stuff"
+						}
+					]
 				},
-
 				{
 					"begin": "(^[ \\t]+)?(?=<(?i:wxs)\\b(?![^>]*/>))",
 					"beginCaptures": {
@@ -2695,22 +2695,29 @@
 				}
 			]
 		},
-
 		"wxml-interpolations": {
-			"patterns": [{
-				"begin": "\\{\\{\\{?",
-				"beginCaptures": [{
-					"name": "punctuation.definition.generic.begin.html"
-				}],
-				"end": "\\}\\}\\}?",
-				"endCaptures": [{
-					"name": "punctuation.definition.generic.end.html"
-				}],
-				"name": "expression.embbeded.wxml",
-				"patterns": [{
-					"include": "source.js"
-				}]
-			}]
+			"patterns": [
+				{
+					"begin": "\\{\\{\\{?",
+					"beginCaptures": [
+						{
+							"name": "punctuation.definition.generic.begin.html"
+						}
+					],
+					"end": "\\}\\}\\}?",
+					"endCaptures": [
+						{
+							"name": "punctuation.definition.generic.end.html"
+						}
+					],
+					"name": "expression.embbeded.wxml",
+					"patterns": [
+						{
+							"include": "source.js"
+						}
+					]
+				}
+			]
 		}
 	}
 }

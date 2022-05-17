@@ -1,5 +1,10 @@
 # 更新日志
 
+## [1.4.7] - 2022-5-17
+
+### 修复
+- 修复插件启动后影响 HTML 部分语法的显示 [#25](https://github.com/crazyurus/miniprogram-vscode-extension/issues/25)
+
 ## [1.4.6] - 2022-5-7
 
 ### 优化
@@ -83,11 +88,11 @@
 ## [1.3.6] - 2020-4-26
 ### 修复
 - 打开非小程序项目时不再启动插件
-- `privateKeyPath` Windows 下路径错误，感谢 @veecam 的反馈
+- `privateKeyPath` Windows 下路径错误 [#9](https://github.com/crazyurus/miniprogram-vscode-extension/issues/9)
 
 ## [1.3.5] - 2020-4-23
 ### 修复
-- `miniprogramRoot` 不支持相对路径，感谢 @chatterzhao 的反馈
+- `miniprogramRoot` 不支持相对路径 [#8](https://github.com/crazyurus/miniprogram-vscode-extension/issues/8)
 
 ## [1.3.4] - 2020-4-20
 ### 修复
@@ -104,7 +109,7 @@
 
 ## [1.3.1] - 2020-4-16
 ### 文档
-- 更新文档中的 Issue 和 PR 链接，感谢 @chatterzhao 的反馈
+- 更新文档中的 Issue 和 PR 链接 
 
 ## [1.3.0] - 2020-4-15
 ### 新增
