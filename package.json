@@ -43,6 +43,7 @@
   },
   "scripts": {
     "build": "rollup -c ./build/rollup.js",
+    "build:asar": "asar pack ./node_modules ./dist/node_modules.asar",
     "vscode:prepublish": "node ./build/vsce.js"
   },
   "enableApiProposals": true,
@@ -536,7 +537,7 @@
     "workspaceContains:**/project.config.json",
     "onLanguage:wxml"
   ],
-  "main": "./src/dev.js",
+  "main": "./src/entry/development.js",
   "dependencies": {
     "debounce": "^1.2.1",
     "ejs": "^3.1.7",
@@ -552,6 +553,7 @@
     "@types/debounce": "^1.2.1",
     "@types/ejs": "^3.1.0",
     "@types/vscode": "^1.25.0",
+    "asar": "^3.1.0",
     "rollup": "^2.70.2",
     "rollup-plugin-terser": "^7.0.2",
     "ts-node": "^10.7.0",

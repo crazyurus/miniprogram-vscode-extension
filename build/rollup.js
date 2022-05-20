@@ -13,13 +13,16 @@ export default {
   plugins: [
     typescript(),
     commonjs(),
-    node(),
+    node({
+      preferBuiltins: true,
+    }),
     json(),
     terser(),
   ],
   external: [
     'vscode',
-    '_http_client',
+    'stream/web',
+    'util/types',
     'miniprogram-ci',
   ],
 };
