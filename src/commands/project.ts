@@ -26,7 +26,7 @@ function setCommands(context: vscode.ExtensionContext): void {
   // 打开 IDE
   registerCommand('MiniProgram.commands.config.openIDE', async () => {
     const { cliPath, statusFile } = getIDEPathInfo();
-    const ideStatus = await fs.promises.readFile(statusFile, 'utf-8')
+    const ideStatus = await fs.promises.readFile(statusFile, 'utf-8');
     
     if (ideStatus === 'Off') {
       const result = await vscode.window.showWarningMessage('微信开发者工具的服务端口已关闭，请打开设置 — 安全设置，将服务端口开启', '查看详情');
@@ -39,7 +39,7 @@ function setCommands(context: vscode.ExtensionContext): void {
     }
 
     const rootPath = getCurrentFolderPath();
-    require('child_process').execFile(cliPath, ['open', '--project', rootPath], (error: Error) => {
+    require('child_process').exec(`"${cliPath}" open --project "${rootPath}"`, (error: Error) => {
       if (error) {
         vscode.window.showErrorMessage(error.message);
       }
