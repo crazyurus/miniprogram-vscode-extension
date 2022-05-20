@@ -4,7 +4,7 @@ import * as https from 'https';
 import { openURL } from '../utils/ui';
 
 function activate(): void {
-  vscode.commands.registerCommand('MiniProgram.commands.document', () => {
+  vscode.commands.registerCommand('MiniProgram.commands.document.open', () => {
     const server = http.createServer((request, response) => {
       https.get('https://developers.weixin.qq.com' + request.url, result => {
         let body = '';
@@ -30,6 +30,10 @@ function activate(): void {
         });
       }
     });
+  });
+
+  vscode.commands.registerCommand('MiniProgram.commands.document.search', () => {
+    // TODO
   });
 
   vscode.commands.registerCommand('MiniProgram.commands.management', () => {

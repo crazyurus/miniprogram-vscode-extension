@@ -139,8 +139,13 @@
         "category": "MiniProgram"
       },
       {
-        "command": "MiniProgram.commands.document",
-        "title": "%commands.document%",
+        "command": "MiniProgram.commands.document.open",
+        "title": "%commands.document.open%",
+        "category": "MiniProgram"
+      },
+      {
+        "command": "MiniProgram.commands.document.search",
+        "title": "%commands.document.search%",
         "category": "MiniProgram"
       },
       {
