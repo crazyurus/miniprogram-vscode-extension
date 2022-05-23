@@ -24,6 +24,8 @@ function activate(context: vscode.ExtensionContext): void {
   vscode.commands.registerCommand('MiniProgram.commands.document.search', async () => {
     const picker = vscode.window.createQuickPick<SearchResult>();
     picker.placeholder = '支持 API、服务端、架构文档内容搜索';
+    picker.matchOnDescription = true;
+    picker.matchOnDetail = true;
     picker.onDidChangeValue(debounce(async (value: string) => {
       if (value.length > 0) {
         picker.items = await getSearchResult(value);
