@@ -10,6 +10,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
+
+      - name: Asar
+        run: |
+          npm install asar -g
+          npm ci --omit=dev
+          npm run build:asar
         
       - name: NPM Install
         run: |
@@ -18,10 +24,6 @@ jobs:
       - name: Build
         run: |
           npm run build
-
-      - name: Asar
-        run: |
-          npm run build:asar
 
       - name: Deploy
         uses: lannonbr/vsce-action@3.0.0
