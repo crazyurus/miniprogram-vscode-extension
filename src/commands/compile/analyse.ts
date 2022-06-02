@@ -12,6 +12,7 @@ class AnalyseCodeCommand extends Command {
     this.register('MiniProgram.commands.compile.analyse', async () => {
       readProjectConfig();
       const viewerPath = getAnalyseViewerPath();
+      const options = await createProject(context);
       let html = await fs.promises.readFile(path.join(viewerPath, 'index.html'), { encoding: 'utf-8' });
       const panel = openWebView('', '代码依赖分析', vscode.ViewColumn.One);
       html = html.replace(/vscode:\/\//g, panel.webview.asWebviewUri(vscode.Uri.file(viewerPath)).toString() + '/');
@@ -33,7 +34,6 @@ class AnalyseCodeCommand extends Command {
   
             break;
           case 'analyse':
-            const options = await createProject(context);
             const ci = await import('miniprogram-ci');
             const project = new ci.Project(options);
             const result = await ci.analyseCode(project);
