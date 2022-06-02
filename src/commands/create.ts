@@ -1,9 +1,9 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
+import Command from './base';
 import { updateJSON } from '../utils/json';
 import { getAppConfigPath } from '../utils/project';
-import { registerCommand } from './compile/utils';
 
 import * as pageTemplate from '../templates/page';
 import * as componentTemplate from '../templates/component';
@@ -45,37 +45,34 @@ function validate(name: string): string | null {
   return '名称只能包含数字、字母、中划线';
 }
 
-function activate(): void {
-  registerCommand('MiniProgram.commands.create.page', async (e: vscode.Uri) => {
-    const uri = vscode.Uri.parse(e.fsPath);
-    const value = await vscode.window.showInputBox({
-      prompt: '页面名称',
-      placeHolder: '请输入页面名称，如：index',
-      validateInput: validate,
+class CreateCommand extends Command {
+  activate(): void {
+    this.register('MiniProgram.commands.create.page', async (e: vscode.Uri) => {
+      const uri = vscode.Uri.parse(e.fsPath);
+      const value = await vscode.window.showInputBox({
+        prompt: '页面名称',
+        placeHolder: '请输入页面名称，如：index',
+        validateInput: validate,
+      });
+  
+      if (value) {
+        await create('page', value, uri);
+      }
     });
-
-    if (value) {
-      await create('page', value, uri);
-    }
-  });
-
-  registerCommand('MiniProgram.commands.create.component', async (e: vscode.Uri) => {
-    const uri = vscode.Uri.parse(e.fsPath);
-    const value = await vscode.window.showInputBox({
-      prompt: '组件名称',
-      placeHolder: '请输入组件名称，如：input',
-      validateInput: validate,
+  
+    this.register('MiniProgram.commands.create.component', async (e: vscode.Uri) => {
+      const uri = vscode.Uri.parse(e.fsPath);
+      const value = await vscode.window.showInputBox({
+        prompt: '组件名称',
+        placeHolder: '请输入组件名称，如：input',
+        validateInput: validate,
+      });
+  
+      if (value) {
+        await create('component', value, uri);
+      }
     });
-
-    if (value) {
-      await create('component', value, uri);
-    }
-  });
+  }
 }
 
-function deactivate(): void { }
-
-export {
-  activate,
-  deactivate,
-};
+export default new CreateCommand();

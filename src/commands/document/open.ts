@@ -1,10 +1,12 @@
-import * as vscode from 'vscode';
+import Command from '../base';
 import { createServer } from './utils';
 
-function activate(context: vscode.ExtensionContext): void {
-  vscode.commands.registerCommand('MiniProgram.commands.document.open', () => {
-    createServer('https://developers.weixin.qq.com/miniprogram/dev/framework/', '微信开发文档');
-  });
+class OpenDocumentCommand extends Command {
+  activate(): void {
+    this.register('MiniProgram.commands.document.open', () => {
+      createServer('https://developers.weixin.qq.com/miniprogram/dev/framework/', '微信开发文档');
+    });
+  }
 }
 
-export default activate;
+export default new OpenDocumentCommand();

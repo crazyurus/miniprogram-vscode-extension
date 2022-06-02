@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { fetch } from 'undici';
 import { debounce } from 'debounce';
+import Command from '../base';
 import { createServer } from './utils';
 
 interface SearchResult {
@@ -20,25 +21,27 @@ async function getSearchResult(query: string): Promise<SearchResult[]> {
   }));
 }
 
-function activate(context: vscode.ExtensionContext): void {
-  vscode.commands.registerCommand('MiniProgram.commands.document.search', async () => {
-    const picker = vscode.window.createQuickPick<SearchResult>();
-    picker.placeholder = '支持 API、服务端、架构文档内容搜索';
-    picker.matchOnDescription = true;
-    picker.matchOnDetail = true;
-    picker.onDidChangeValue(debounce(async (value: string) => {
-      if (value.length > 0) {
-        picker.items = await getSearchResult(value);
-      } else {
-        picker.items = [];
-      }
-    }, 500));
-    picker.onDidChangeSelection(items => {
-      createServer(items[0].url, items[0].label);
+class SearchDocumentCommand extends Command {
+  activate(): void {
+    this.register('MiniProgram.commands.document.search', async () => {
+      const picker = vscode.window.createQuickPick<SearchResult>();
+      picker.placeholder = '支持 API、服务端、架构文档内容搜索';
+      picker.matchOnDescription = true;
+      picker.matchOnDetail = true;
+      picker.onDidChangeValue(debounce(async (value: string) => {
+        if (value.length > 0) {
+          picker.items = await getSearchResult(value);
+        } else {
+          picker.items = [];
+        }
+      }, 500));
+      picker.onDidChangeSelection(items => {
+        createServer(items[0].url, items[0].label);
+      });
+  
+      picker.show();
     });
-
-    picker.show();
-  });
+  }
 }
 
-export default activate;
+export default new SearchDocumentCommand();

@@ -1,32 +1,21 @@
-import * as vscode from 'vscode';
+import Module from './base';
+import CommandModule from './commands';
+import ViewPlugin from './plugins/view';
+import ExtensionPlugin from './plugins/extension';
+import TypeScriptPlugin from './plugins/typescript';
+import ProxyPlugin from './plugins/proxy';
 
-import * as CommandPlugin from './commands';
-import ViewPlugin from'./plugins/view';
-import ExtensionPlugin from'./plugins/extension';
-import TypeScriptPlugin from'./plugins/typescript';
-import ProxyPlugin from'./plugins/proxy';
-
-const plugins = [
-  ViewPlugin,
-  CommandPlugin.create,
-  CommandPlugin.compile,
-  CommandPlugin.project,
-  CommandPlugin.document,
-  CommandPlugin.storage,
-  ExtensionPlugin,
-  TypeScriptPlugin,
-  ProxyPlugin,
-];
-
-function activate(context: vscode.ExtensionContext): void {
-  plugins.forEach(plugin => plugin.activate(context));
+class EntryModule extends Module {
+  dependencies = [
+    ViewPlugin,
+    CommandModule,
+    ExtensionPlugin,
+    TypeScriptPlugin,
+    ProxyPlugin
+  ];
 }
 
-function deactivate(): void {
-  plugins.forEach(plugin => plugin.deactivate());
-}
+const entry = new EntryModule();
 
-export {
-  activate,
-  deactivate,
-};
+export const activate = entry.activate.bind(entry);
+export const deactivate = entry.deactivate.bind(entry);

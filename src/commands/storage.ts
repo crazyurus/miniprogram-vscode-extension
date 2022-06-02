@@ -1,17 +1,15 @@
 import * as vscode from 'vscode';
+import Command from './base';
 
-function activate(context: vscode.ExtensionContext): void {
-  vscode.commands.registerCommand('MiniProgram.commands.storage.clear', () => {
-    context.workspaceState.update('privateKey', '');
-    context.workspaceState.update('privateKeyPath', '');
-    context.workspaceState.update('previousVersion', '');
-    vscode.window.showInformationMessage('清除成功');
-  });
+class StorageCommand extends Command {
+  activate(context: vscode.ExtensionContext): void {
+    this.register('MiniProgram.commands.storage.clear', () => {
+      context.workspaceState.update('privateKey', '');
+      context.workspaceState.update('privateKeyPath', '');
+      context.workspaceState.update('previousVersion', '');
+      vscode.window.showInformationMessage('清除成功');
+    });
+  }
 }
 
-function deactivate(): void { }
-
-export {
-  activate,
-  deactivate,
-};
+export default new StorageCommand();

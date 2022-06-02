@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import Plugin from './base';
+import Plugin from '../base';
 
 interface TreeElement {
   command: string;

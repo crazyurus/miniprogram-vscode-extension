@@ -1,29 +1,22 @@
-import * as vscode from 'vscode';
-import analyse from './analyse';
-import directory  from './directory';
-import npm from './npm';
-import preview from './preview';
-import upload from './upload';
-import artifact from './artifact';
-import sourcemap from './sourcemap';
+import Command from '../base';
+import AnalyseCodeCommand from './analyse';
+import CompileDirectoryCommand  from './directory';
+import NPMCommand from './npm';
+import PreviewCommand from './preview';
+import UploadCommand from './upload';
+import ArtifactCommand from './artifact';
+import SourceMapCommand from './sourcemap';
 
-const comipleCommands = [
-  analyse,
-  directory,
-  npm,
-  preview,
-  upload,
-  artifact,
-  sourcemap
-];
-
-function activate(context: vscode.ExtensionContext): void {
-  comipleCommands.forEach(command => command(context));
+class CompileCommand extends Command {
+  dependencies = [
+    AnalyseCodeCommand,
+    CompileDirectoryCommand,
+    NPMCommand,
+    PreviewCommand,
+    UploadCommand,
+    ArtifactCommand,
+    SourceMapCommand
+  ];
 }
 
-function deactivate(): void {}
-
-export {
-  activate,
-  deactivate,
-};
+export default new CompileCommand();

@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
 import { getCurrentFolderPath } from '../utils/path';
-import Plugin from './base';
+import Plugin from '../base';
 
 class TypeScriptPlugin extends Plugin {
   activate(): void {

@@ -33,23 +33,6 @@ async function saveMiniprogramProject(): Promise<void> {
   vscode.window.showInformationMessage('设置成功，请重新尝试之前的操作');
 }
 
-function registerCommand(command: string, callback: (e: any) => void): void {
-  vscode.commands.registerCommand(command, async e => {
-    try {
-      await callback(e);
-    } catch (error: any) {
-      if (error.message === '未找到 project.config.json 文件') {
-        const result = await vscode.window.showErrorMessage('未找到 project.config.json 文件，请手动选择', '选择文件');
-        if (result === '选择文件') {
-          saveMiniprogramProject();
-        }
-      } else {
-        vscode.window.showErrorMessage(error.message);
-      }
-    }
-  });
-}
-
 function getCIBot(): number {
   return 28;
 }
@@ -88,5 +71,5 @@ export {
   getCIBot,
   getCompileOptions,
   getTemporaryFileName,
-  registerCommand,
+  saveMiniprogramProject,
 };

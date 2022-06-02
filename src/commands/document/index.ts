@@ -1,21 +1,14 @@
-import * as vscode from 'vscode';
-import open from './open';
-import search from './search';
-import management from './management';
+import Command from '../base';
+import OpenDocumentCommand from './open';
+import SearchDocumentCommand from './search';
+import ManagementCommand from './management';
 
-const documentCommands = [
-  open,
-  search,
-  management
-];
-
-function activate(context: vscode.ExtensionContext): void {
-  documentCommands.forEach(command => command(context));
+class DocumentCommand extends Command {
+  dependencies = [
+    OpenDocumentCommand,
+    SearchDocumentCommand,
+    ManagementCommand
+  ];
 }
 
-function deactivate(): void {}
-
-export {
-  activate,
-  deactivate,
-};
+export default new DocumentCommand();
