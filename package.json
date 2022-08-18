@@ -543,7 +543,7 @@
     "ejs": "^3.1.7",
     "miniprogram-ci": "^1.8.25",
     "open": "^8.4.0",
-    "undici": "^5.8.0"
+    "undici": "^5.8.2"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^22.0.0",
