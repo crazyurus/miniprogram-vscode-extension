@@ -11,19 +11,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
+      - name: Global Dependencies
+        run: |
+          npm install pnpm asar -g
+
       - name: Asar
         run: |
-          npm install asar -g
-          npm ci --omit=dev
-          npm run build:asar
-        
+          pnpm install --frozen-lockfile --prod --shamefully-hoist
+          pnpm run build:asar
+
       - name: NPM Install
         run: |
-          npm ci
+          pnpm install --frozen-lockfile
 
       - name: Build
         run: |
-          npm run build
+          pnpm run build
 
       - name: Deploy
         uses: lannonbr/vsce-action@3.0.0
