@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import Command from '../base';
 import { readProjectConfig, createProject } from '../../utils/project';
 import { showInputBox } from '../../utils/ui';
-import { getCIBot, getCompileOptions } from './utils';
+import { getCIBot, getThreads, getCompileOptions } from './utils';
 
 class UploadCommand extends Command {
   activate(context: vscode.ExtensionContext): void {
@@ -47,6 +47,7 @@ class UploadCommand extends Command {
             progress.report(typeof message === 'string' ? { message } : message);
           },
           robot: getCIBot(),
+          threads: getThreads(),
         });
 
         vscode.window.showInformationMessage('上传成功，可前往微信小程序后台提交审核并发布', '打开微信小程序后台').then(result => {

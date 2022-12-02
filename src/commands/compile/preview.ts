@@ -6,7 +6,7 @@ import Command from '../base';
 import { readProjectConfig, readAppConfig, createProject } from '../../utils/project';
 import { openWebView } from '../../utils/ui';
 import renderHTML from '../../utils/render';
-import { getCIBot, getCompileOptions, getTemporaryFileName } from './utils';
+import { getCIBot, getThreads, getCompileOptions, getTemporaryFileName } from './utils';
 import type { ProjectAttributes } from '../../types';
 
 class PreviewCommand extends Command {
@@ -51,6 +51,7 @@ class PreviewCommand extends Command {
             progress.report(typeof message === 'string' ? { message } : message);
           },
           robot: getCIBot(),
+          threads: getThreads(),
         });
 
         const base64 = await fs.promises.readFile(tempImagePath, 'utf-8');

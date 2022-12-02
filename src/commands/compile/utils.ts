@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
+import * as os from 'os';
 import * as path from 'path';
 import { getCurrentFolderPath } from '../../utils/path';
 import { updateJSON } from '../../utils/json';
@@ -37,6 +38,10 @@ function getCIBot(): number {
   return 28;
 }
 
+function getThreads(): number {
+  return os.cpus().length * 2;
+}
+
 function getCompileOptions(options: CompileOptions): {
   es6: boolean;
   es7: boolean;
@@ -69,6 +74,7 @@ function getTemporaryFileName(type: string, appid: string, ext: string): string 
 
 export {
   getCIBot,
+  getThreads,
   getCompileOptions,
   getTemporaryFileName,
   saveMiniprogramProject,
