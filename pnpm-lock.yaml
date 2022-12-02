@@ -12,7 +12,7 @@ specifiers:
   asar: ^3.2.0
   debounce: ^1.2.1
   ejs: ^3.1.8
-  miniprogram-ci: ^1.8.35
+  miniprogram-ci: ^1.9.3
   open: ^8.4.0
   rollup: ^2.79.0
   rollup-plugin-terser: ^7.0.2
@@ -23,7 +23,7 @@ specifiers:
 dependencies:
   debounce: 1.2.1
   ejs: 3.1.8
-  miniprogram-ci: 1.8.35
+  miniprogram-ci: 1.9.3
   open: 8.4.0
   undici: 5.10.0
 
@@ -4073,8 +4073,8 @@ packages:
     resolution: {integrity: sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==}
     dev: false
 
-  /miniprogram-ci/1.8.35:
-    resolution: {integrity: sha512-Pzv9I5SR+yVGztwoz9/3CesEBlb1jgbVv8AJB7QLzZiYHOU+NebwaRKfMumarJAEHzMVFOJmKaQA8bXDFprLtA==}
+  /miniprogram-ci/1.9.3:
+    resolution: {integrity: sha512-pPDpRXfbq6QFTwlv3AJNRbCAUtMp910rvNMr4mzi6ozPAwMh0Xgd9xlgBLY7H5woLBbvzWTvir9gLhFpSRMYbA==}
     hasBin: true
     dependencies:
       '@babel/core': 7.12.3
@@ -4807,6 +4807,7 @@ packages:
 
   /readdir-scoped-modules/1.1.0:
     resolution: {integrity: sha512-asaikDeqAQg7JifRsZn1NJZXo9E+VwlyCfbkZhwyISinqk5zNS6266HS5kah6P0SaQKGF6SkNnZVHUzHFYxYDw==}
+    deprecated: This functionality has been moved to @npmcli/fs
     dependencies:
       debuglog: 1.0.1
       dezalgo: 1.0.4
