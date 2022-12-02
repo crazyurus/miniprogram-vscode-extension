@@ -2,7 +2,7 @@
 
 ![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/crazyurus.miniprogram-vscode-extension) ![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/crazyurus.miniprogram-vscode-extension)
 
-提供预览、打包上传、代码补全、语法高亮、依赖分析、项目模版等功能，部分功能仍在开发中。
+提供预览、打包上传、代码补全、语法高亮、依赖分析、项目模版等功能。
 
 ![微信小程序开发工具](https://sf3-cn.feishucdn.com/obj/eden-cn/eseh7nupevhps/miniprogram-vscode-extension/analyse-viewer.png)
 
@@ -42,10 +42,10 @@
 
 ### 组件支持
 
-- 支持点击自定义组件跳转到对应文件
+- 支持点击自定义组件标签跳转到对应文件
 - 支持点击绑定的函数名跳转到对应函数定义
 
-### 项目模板及代码片段
+### 项目模板
 
 > 开发中
 
@@ -62,7 +62,7 @@
 
 ## 反馈
 
-> 精力有限，Issue 会定期处理
+> 精力有限，Issue 和 Pull Request 会定期处理
 
 [创建 Issue](https://github.com/crazyurus/miniprogram-vscode-extension/issues)
 
@@ -82,7 +82,9 @@
 
 - [@tarojs/plugin-mini-ci](https://github.com/NervJS/taro/blob/next/packages/taro-plugin-mini-ci)
 
-部分功能的实现参考微信开发者工具 IDE
+- [minapp-comp-definition](https://github.com/wjf2016/minapp-comp-definition)
+
+部分功能的实现参考了微信开发者工具 IDE
 
 ## License
 

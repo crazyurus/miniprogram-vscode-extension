@@ -4,6 +4,7 @@ import ViewPlugin from './plugins/view';
 import ExtensionPlugin from './plugins/extension';
 import TypeScriptPlugin from './plugins/typescript';
 import ProxyPlugin from './plugins/proxy';
+import ComponentPlugin from './plugins/component';
 
 class EntryModule extends Module {
   dependencies = [
@@ -11,7 +12,8 @@ class EntryModule extends Module {
     CommandModule,
     ExtensionPlugin,
     TypeScriptPlugin,
-    ProxyPlugin
+    ProxyPlugin,
+    ComponentPlugin
   ];
 }
 
