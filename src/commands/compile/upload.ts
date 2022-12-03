@@ -41,7 +41,7 @@ class UploadCommand extends Command {
         await ci.upload({
           project,
           version,
-          desc: description || '通过%20MiniProgram%20VSCode%20Extension%20上传',
+          desc: description || '通过 MiniProgram VSCode Extension 上传',
           setting: getCompileOptions(projectConfig.setting),
           onProgressUpdate(message): void {
             progress.report(typeof message === 'string' ? { message } : message);

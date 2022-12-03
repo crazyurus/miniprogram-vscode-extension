@@ -103,8 +103,6 @@ class ComponentPlugin extends Plugin {
               }
             }
 
-            componentPath = componentPath.replace('/', path.sep);
-
             const result = path.join(filePath, '..', `${componentPath}.js`);
 
             return new vscode.Location(

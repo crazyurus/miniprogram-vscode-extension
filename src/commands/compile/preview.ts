@@ -42,7 +42,7 @@ class PreviewCommand extends Command {
         await ci.preview({
           project,
           version: '',
-          desc: '来自 VSCode MiniProgram Extension',
+          desc: '通过 MiniProgram VSCode Extension 上传',
           setting: getCompileOptions(projectConfig.setting),
           qrcodeFormat: 'base64',
           qrcodeOutputDest: tempImagePath,
