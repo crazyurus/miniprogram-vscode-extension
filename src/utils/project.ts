@@ -24,7 +24,6 @@ interface Project {
   projectPath: string;
   ignores: string[];
   privateKey?: string;
-  privateKeyPath?: string;
 }
 
 function getAppConfigPath(miniprogramPath?: string): string {
@@ -65,7 +64,6 @@ function readProjectConfig(): ProjectConfig {
 
 async function createProject(context: vscode.ExtensionContext): Promise<Project> {
   const privateKey = context.workspaceState.get('privateKey') as string;
-  const privateKeyPath = context.workspaceState.get('privateKeyPath') as string; // 废弃
   const rootPath = getCurrentFolderPath();
   const projectConfig = readProjectConfig();
   const options = {
@@ -79,14 +77,6 @@ async function createProject(context: vscode.ExtensionContext): Promise<Project>
     return {
       ...options,
       privateKey,
-    };
-  }
-
-  // TODO: 废弃
-  if (privateKeyPath && fs.existsSync(privateKeyPath)) {
-    return {
-      ...options,
-      privateKeyPath,
     };
   }
 
