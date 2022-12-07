@@ -178,6 +178,12 @@
           "description": "小程序运行目录的相对路径，适用于 Taro、Uni 等框架需指定编译后的产物目录。请在工作区配置此选项",
           "scope": "machine-overridable"
         },
+        "miniprogram.idePath": {
+          "type": "string",
+          "default": "",
+          "description": "小程序IDE自定义路径",
+          "scope": "machine-overridable"
+        },
         "universal-path-intellisense.extensionOnImport": {
           "type": "boolean",
           "default": true,

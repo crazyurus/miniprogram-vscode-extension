@@ -20,6 +20,7 @@ function getCurrentFolderPath(): string {
     ? vscode.workspace.workspaceFolders[0].uri.fsPath
     : '';
   const config = vscode.workspace.getConfiguration('miniprogram').get('miniprogramPath') as string;
+  const configIdePath = vscode.workspace.getConfiguration('miniprogram').get('idePath') as string;
 
   if (config) {
     const miniprogramPath = path.resolve(rootPath, config);
@@ -41,7 +42,7 @@ function getIDEPathInfo(): {
   statusFile: string;
 } {
   const isWindows = os.platform() === 'win32';
-  const devToolsInstallPath = isWindows ? 'C:\\Program Files (x86)\\Tencent\\微信web开发者工具' : '/Applications/wechatwebdevtools.app/Contents/MacOS';
+  const devToolsInstallPath = configIdePath ? configIdePath : isWindows ? 'C:\\Program Files (x86)\\Tencent\\微信web开发者工具' : '/Applications/wechatwebdevtools.app/Contents/MacOS';
 
   if (!fs.existsSync(devToolsInstallPath)) {
     throw new Error('未找到微信开发者工具 IDE');
