@@ -181,7 +181,7 @@
         "miniprogram.idePath": {
           "type": "string",
           "default": "",
-          "description": "小程序IDE自定义路径",
+          "description": "微信开发者工具 IDE 的安装路径，若安装时自定义了路径，请配置此选项",
           "scope": "machine"
         },
         "universal-path-intellisense.extensionOnImport": {
