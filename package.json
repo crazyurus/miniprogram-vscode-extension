@@ -182,7 +182,7 @@
           "type": "string",
           "default": "",
           "description": "小程序IDE自定义路径",
-          "scope": "machine-overridable"
+          "scope": "machine"
         },
         "universal-path-intellisense.extensionOnImport": {
           "type": "boolean",
@@ -543,7 +543,7 @@
     "workspaceContains:**/project.config.json",
     "onLanguage:wxml"
   ],
-  "main": "./src/entry/development.js",
+  "main": "./dist/extension/entry.js",
   "dependencies": {
     "debounce": "^1.2.1",
     "ejs": "^3.1.8",
