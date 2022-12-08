@@ -543,7 +543,7 @@
     "workspaceContains:**/project.config.json",
     "onLanguage:wxml"
   ],
-  "main": "./dist/extension/entry.js",
+  "main": "./src/entry/development.js",
   "dependencies": {
     "debounce": "^1.2.1",
     "ejs": "^3.1.8",
