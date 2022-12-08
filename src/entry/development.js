@@ -1,8 +1,4 @@
-const path = require('path');
-
-require('ts-node').register({
-  cwd: path.resolve(__dirname, '..', '..'),
-});
+require('ts-node').register();
 
 const extension = require('../index');
 

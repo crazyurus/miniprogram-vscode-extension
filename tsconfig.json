@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "CommonJS",
+    "module": "esnext",
     "declaration": false,
     "removeComments": false,
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
-    "useUnknownInCatchVariables": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "typeRoots": [
