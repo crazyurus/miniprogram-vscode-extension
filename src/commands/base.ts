@@ -7,7 +7,7 @@ class Command extends Module {
     vscode.commands.registerCommand(command, async e => {
       try {
         await callback(e);
-      } catch (error: any) {
+      } catch (error) {
         if (error.message === '未找到 project.config.json 文件') {
           const result = await vscode.window.showErrorMessage('未找到 project.config.json 文件，请手动选择', '选择文件');
           if (result === '选择文件') {
