@@ -1,6 +1,6 @@
 # 微信小程序开发工具
 
-![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/crazyurus.miniprogram-vscode-extension) ![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/crazyurus.miniprogram-vscode-extension)
+![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/crazyurus.miniprogram-vscode-extension) ![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/crazyurus.miniprogram-vscode-extension) ![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/crazyurus.miniprogram-vscode-extension)
 
 提供预览、打包上传、代码补全、语法高亮、依赖分析、项目模版等功能。
 
@@ -66,7 +66,7 @@
 
 [创建 Issue](https://github.com/crazyurus/miniprogram-vscode-extension/issues)
 
-[欢迎 PR](https://github.com/crazyurus/miniprogram-vscode-extension/pulls)
+[欢迎 Pull Request](https://github.com/crazyurus/miniprogram-vscode-extension/pulls)
 
 [Email: crazyurus@vip.qq.com](mailto:crazyurus@vip.qq.com)
 
