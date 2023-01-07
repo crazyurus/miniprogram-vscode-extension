@@ -43,7 +43,8 @@ class UploadCommand extends Command {
           version,
           desc: description || '通过 MiniProgram VSCode Extension 上传',
           setting: getCompileOptions(projectConfig.setting),
-          onProgressUpdate(message): void {
+          allowIgnoreUnusedFiles: projectConfig.ignoreUploadUnusedFiles,
+          onProgressUpdate(message: string | { message: string }): void {
             progress.report(typeof message === 'string' ? { message } : message);
           },
           robot: getCIBot(),

@@ -547,7 +547,7 @@
   "dependencies": {
     "debounce": "^1.2.1",
     "ejs": "^3.1.8",
-    "miniprogram-ci": "^1.9.3",
+    "miniprogram-ci": "^1.9.5",
     "open": "^8.4.0",
     "undici": "^5.10.0"
   },

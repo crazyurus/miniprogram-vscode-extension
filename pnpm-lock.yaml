@@ -12,7 +12,7 @@ specifiers:
   asar: ^3.2.0
   debounce: ^1.2.1
   ejs: ^3.1.8
-  miniprogram-ci: ^1.9.3
+  miniprogram-ci: ^1.9.5
   open: ^8.4.0
   rollup: ^2.79.0
   rollup-plugin-terser: ^7.0.2
@@ -23,7 +23,7 @@ specifiers:
 dependencies:
   debounce: 1.2.1
   ejs: 3.1.8
-  miniprogram-ci: 1.9.3
+  miniprogram-ci: 1.9.5
   open: 8.4.0
   undici: 5.10.0
 
@@ -4073,8 +4073,8 @@ packages:
     resolution: {integrity: sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==}
     dev: false
 
-  /miniprogram-ci/1.9.3:
-    resolution: {integrity: sha512-pPDpRXfbq6QFTwlv3AJNRbCAUtMp910rvNMr4mzi6ozPAwMh0Xgd9xlgBLY7H5woLBbvzWTvir9gLhFpSRMYbA==}
+  /miniprogram-ci/1.9.5:
+    resolution: {integrity: sha512-Fqe8PCc+5VUVOiZAdr2glMZnGz2O5MMYkS+OkT8KKq8WF1AFZLNbIkqmHXQ7/ZvlGgrUW6UpEMKpT5ZfMEF7Mg==}
     hasBin: true
     dependencies:
       '@babel/core': 7.12.3

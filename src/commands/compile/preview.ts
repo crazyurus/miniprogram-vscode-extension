@@ -47,7 +47,8 @@ class PreviewCommand extends Command {
           qrcodeFormat: 'base64',
           qrcodeOutputDest: tempImagePath,
           pagePath,
-          onProgressUpdate(message): void {
+          allowIgnoreUnusedFiles: projectConfig.ignoreUploadUnusedFiles,
+          onProgressUpdate(message: string | { message: string }): void {
             progress.report(typeof message === 'string' ? { message } : message);
           },
           robot: getCIBot(),

@@ -16,6 +16,7 @@ interface ProjectConfig {
   miniprogramRoot?: string;
   compileType?: 'miniprogram' | 'plugin';
   setting: CompileOptions;
+  ignoreUploadUnusedFiles: boolean;
 }
 
 interface Project {
