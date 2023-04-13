@@ -1,5 +1,7 @@
 import * as vscode from 'vscode';
+import * as os from 'os';
 import * as fs from 'fs';
+import { exec, execFile } from 'child_process';
 import open from 'open';
 import Command from './base';
 import { getCurrentFolderPath, getProjectConfigPath, getIDEPathInfo } from '../utils/path';
@@ -26,7 +28,8 @@ class ProjectCommand extends Command {
   setCommands(context: vscode.ExtensionContext): void {
     // 打开 IDE
     this.register('MiniProgram.commands.config.openIDE', async () => {
-      const { cliPath, statusFile } = getIDEPathInfo();
+      const { cliPath, exePath, statusFile } = getIDEPathInfo();
+      const platform = os.platform();
       let ideStatus = 'Off';
 
       if (fs.existsSync(statusFile)) {
@@ -34,17 +37,26 @@ class ProjectCommand extends Command {
       }
 
       if (ideStatus === 'Off') {
-        const result = await vscode.window.showWarningMessage('微信开发者工具的服务端口已关闭，请打开设置 — 安全设置，将服务端口开启', '查看详情');
+        const result = await vscode.window.showWarningMessage('微信开发者工具的服务端口已关闭，请打开设置 — 安全设置，将服务端口开启', '继续打开', '查看详情');
 
         if (result === '查看详情') {
           vscode.env.openExternal(vscode.Uri.parse('https://developers.weixin.qq.com/miniprogram/dev/devtools/cli.html'));
+        }
+
+        if (result === '继续打开') {
+          if (platform === 'win32') {
+            execFile(exePath);
+          } else {
+            open.openApp(exePath);
+          }
         }
 
         return;
       }
 
       const rootPath = getCurrentFolderPath();
-      require('child_process').exec(`"${cliPath}" open --project "${rootPath}"`, (error: Error) => {
+
+      exec(`"${cliPath}" open --project "${rootPath}"`, (error: Error | null) => {
         if (error) {
           vscode.window.showErrorMessage(error.message);
         }
