@@ -32,7 +32,7 @@ class TreeDataProvider implements vscode.TreeDataProvider<TreeElement> {
         title: '构建 NPM'
       },
       {
-        command: 'MiniProgram.commands.compile.analyse',
+        command: 'MiniProgram.commands.compile.analyze',
         title: '分析代码静态依赖'
       },
       {

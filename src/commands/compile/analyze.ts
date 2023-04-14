@@ -2,16 +2,16 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
 import Command from '../base';
-import { getCurrentFolderPath, getAnalyseViewerPath } from '../../utils/path';
+import { getCurrentFolderPath, getAnalyzeViewerPath } from '../../utils/path';
 import { readProjectConfig, createProject } from '../../utils/project';
 import { openWebView, openDocument } from '../../utils/ui';
 import { WebviewMessage } from '../../types';
 
-class AnalyseCodeCommand extends Command {
+class AnalyzeCodeCommand extends Command {
   activate(context: vscode.ExtensionContext): void {
-    this.register('MiniProgram.commands.compile.analyse', async () => {
+    this.register('MiniProgram.commands.compile.analyze', async () => {
       readProjectConfig();
-      const viewerPath = getAnalyseViewerPath();
+      const viewerPath = getAnalyzeViewerPath();
       const options = await createProject(context);
       let html = await fs.promises.readFile(path.join(viewerPath, 'index.html'), { encoding: 'utf-8' });
       const panel = openWebView('', '代码依赖分析', vscode.ViewColumn.One);
@@ -62,4 +62,4 @@ class AnalyseCodeCommand extends Command {
 }
 
 
-export default new AnalyseCodeCommand();
+export default new AnalyzeCodeCommand();

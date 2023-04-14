@@ -5,7 +5,7 @@ import * as crypto from 'crypto';
 import * as vscode from 'vscode';
 import { readJSON } from './json';
 
-function getAnalyseViewerPath(): string {
+function getAnalyzeViewerPath(): string {
   return path.join(__dirname, '..', '..', 'extensions', 'analyse-viewer');
 }
 
@@ -51,9 +51,16 @@ function getIDEPathInfo(): {
     throw new Error('未找到微信开发者工具 IDE');
   }
 
-  const versionFilePath = path.join(devToolsInstallPath, isWindows ? 'version' : 'Resources/version');
-  const { latestNw } = readJSON(versionFilePath) || {};
-  const md5 = crypto.createHash('md5').update(devToolsInstallPath + latestNw).digest('hex');
+  const versionFilePath = path.join(devToolsInstallPath, isWindows ? 'version' : '../Resources/version');
+  let version = '';
+
+  if (fs.existsSync(versionFilePath)) {
+    const { latestNw } = readJSON(versionFilePath) || {};
+
+    version = latestNw;
+  }
+
+  const md5 = crypto.createHash('md5').update(devToolsInstallPath + version).digest('hex');
   const devToolsStatusFile = path.join(os.homedir(), isWindows
     ? `/AppData/Local/微信开发者工具/User Data/${md5}/Default/.ide-status`
     : `/Library/Application Support/微信开发者工具/${md5}/Default/.ide-status`
@@ -68,7 +75,7 @@ function getIDEPathInfo(): {
 
 export {
   getIDEPathInfo,
-  getAnalyseViewerPath,
+  getAnalyzeViewerPath,
   getCurrentFolderPath,
   getProjectConfigPath,
   getMiniProgramRootPath,

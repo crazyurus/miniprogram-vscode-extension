@@ -115,8 +115,8 @@
         "category": "MiniProgram"
       },
       {
-        "command": "MiniProgram.commands.compile.analyse",
-        "title": "%commands.compile.analyse%",
+        "command": "MiniProgram.commands.compile.analyze",
+        "title": "%commands.compile.analyze%",
         "category": "MiniProgram"
       },
       {

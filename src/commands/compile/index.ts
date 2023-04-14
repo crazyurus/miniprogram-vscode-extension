@@ -1,5 +1,5 @@
 import Command from '../base';
-import AnalyseCodeCommand from './analyse';
+import AnalyzeCodeCommand from './analyze';
 import CompileDirectoryCommand  from './directory';
 import NPMCommand from './npm';
 import PreviewCommand from './preview';
@@ -9,7 +9,7 @@ import SourceMapCommand from './sourcemap';
 
 class CompileCommand extends Command {
   dependencies = [
-    AnalyseCodeCommand,
+    AnalyzeCodeCommand,
     CompileDirectoryCommand,
     NPMCommand,
     PreviewCommand,

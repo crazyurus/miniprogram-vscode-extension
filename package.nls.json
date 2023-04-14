@@ -2,7 +2,7 @@
   "commands.config.openIDE": "Open WeChat Developer Tools",
   "commands.config.project": "View Project Configuration",
   "commands.compile.npm": "Build NPM",
-  "commands.compile.analyse": "Analyze Code Static Dependencies",
+  "commands.compile.analyze": "Analyze Code Static Dependencies",
   "commands.compile.artifact": "View MiniProgram Artifact",
   "commands.compile.sourceMap": "Download the SourceMap of the Most Recently Uploaded Version",
   "commands.compile.preview": "Preview MiniProgram",
