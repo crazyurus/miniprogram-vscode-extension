@@ -42,7 +42,7 @@
   "window-enablePullDownRefresh": {
     "prefix": "enablePullDownRefresh",
     "body": [
-      "\"enablePullDownRefresh\": \"${1:false}\""
+      "\"enablePullDownRefresh\": ${1:true}"
     ],
     "description": "是否开启下拉刷新。"
   },
@@ -64,7 +64,7 @@
       "\t\"navigationBarTitleText\": \"${3:title}\",",
       "\t\"backgroundColor\": \"${4:#eeeeee}\",",
       "\t\"backgroundTextStyle\": \"${5:light}\",",
-      "\t\"enablePullDownRefresh\": \"${6:false}\"",
+      "\t\"enablePullDownRefresh\": ${6:true}",
       "}"
     ],
     "description": "设置默认页面的窗口表现。"
@@ -86,7 +86,7 @@
   "ext-extEnable": {
     "prefix": "extEnable",
     "body": [
-      "\"extEnable\": \"${1:true}\""
+      "\"extEnable\": ${1:true}"
     ],
     "description": "开发平台小程序。"
   },
