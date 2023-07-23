@@ -48,6 +48,12 @@
   },
   "enableApiProposals": true,
   "contributes": {
+    "typescriptServerPlugins": [
+      {
+        "name": "typescript-miniprogram-plugin",
+        "enableForWorkspaceTypeScriptVersions": true
+      }
+    ],
     "themes": [
       {
         "label": "WeChat Dark",
