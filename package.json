@@ -434,17 +434,7 @@
       },
       {
         "fileMatch": [
-          "*.json",
-          "!/settings.json",
-          "!/config.json",
-          "!/app.json",
-          "!/ext.json",
-          "!/game.json",
-          "!/plugin.json",
-          "!/project.config.json",
-          "!/sitemap.json",
-          "!/container.config.json",
-          "!/.eslintrc.*"
+          "pages/**/*.json"
         ],
         "url": "https://dldir1.qq.com/WechatWebDev/plugins/editor/wechat-miniprogram_wx-json/1.0.0/page_component.schema.json"
       },
