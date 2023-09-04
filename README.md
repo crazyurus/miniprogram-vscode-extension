@@ -3,7 +3,7 @@
 ![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/crazyurus.miniprogram-vscode-extension) ![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/crazyurus.miniprogram-vscode-extension) ![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/crazyurus.miniprogram-vscode-extension)
 ![publish](https://github.com/crazyurus/miniprogram-vscode-extension/actions/workflows/build.yml/badge.svg)
 
-提供预览、打包上传、代码补全、语法高亮、依赖分析、项目模版等功能。
+提供预览、打包上传、代码补全、语法高亮、依赖分析、项目模版等功能。可以在面板的底部“微信小程序”处使用，如下图所示。
 
 ![微信小程序开发工具](https://sf3-cn.feishucdn.com/obj/eden-cn/eseh7nupevhps/miniprogram-vscode-extension/analyse-viewer.png)
 
