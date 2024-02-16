@@ -14,8 +14,8 @@ dependencies:
     specifier: ^8.4.2
     version: 8.4.2
   undici:
-    specifier: ^5.26.2
-    version: 5.26.2
+    specifier: ^5.28.3
+    version: 5.28.3
 
 devDependencies:
   '@rollup/plugin-commonjs':
@@ -5675,8 +5675,8 @@ packages:
     hasBin: true
     dev: false
 
-  /undici@5.26.2:
-    resolution: {integrity: sha512-a4PDLQgLTPHVzOK+x3F79/M4GtyYPl+aX9AAK7aQxpwxDwCqkeZCScy7Gk5kWT3JtdFq1uhO3uZJdLtHI4dK9A==}
+  /undici@5.28.3:
+    resolution: {integrity: sha512-3ItfzbrhDlINjaP0duwnNsKpDQk3acHI3gVJ1z4fmwMK31k5G9OVIAMLSIaP6w4FaGkaAkN6zaQO9LUvZ1t7VA==}
     engines: {node: '>=14.0'}
     dependencies:
       '@fastify/busboy': 2.0.0
