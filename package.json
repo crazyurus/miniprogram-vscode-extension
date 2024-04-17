@@ -126,6 +126,11 @@
         "category": "MiniProgram"
       },
       {
+        "command": "MiniProgram.commands.compile.quality",
+        "title": "%commands.compile.quality%",
+        "category": "MiniProgram"
+      },
+      {
         "command": "MiniProgram.commands.compile.artifact",
         "title": "%commands.compile.artifact%",
         "category": "MiniProgram"

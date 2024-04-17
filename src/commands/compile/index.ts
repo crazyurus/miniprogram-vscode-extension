@@ -1,21 +1,23 @@
 import Command from '../base';
-import AnalyzeCodeCommand from './analyze';
-import CompileDirectoryCommand  from './directory';
+import AnalyzeCommand from './analyze';
+import CompileDirectoryCommand from './directory';
 import NPMCommand from './npm';
 import PreviewCommand from './preview';
 import UploadCommand from './upload';
 import ArtifactCommand from './artifact';
 import SourceMapCommand from './sourcemap';
+import QualityCommand from './quality';
 
 class CompileCommand extends Command {
   dependencies = [
-    AnalyzeCodeCommand,
+    AnalyzeCommand,
     CompileDirectoryCommand,
     NPMCommand,
     PreviewCommand,
     UploadCommand,
     ArtifactCommand,
-    SourceMapCommand
+    SourceMapCommand,
+    QualityCommand,
   ];
 }
 

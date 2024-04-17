@@ -3,6 +3,7 @@
   "commands.config.project": "View Project Configuration",
   "commands.compile.npm": "Build NPM",
   "commands.compile.analyze": "Analyze Code Static Dependencies",
+  "commands.compile.quality": "Analyze Code Quality",
   "commands.compile.artifact": "View MiniProgram Artifact",
   "commands.compile.sourceMap": "Download the SourceMap of the Most Recently Uploaded Version",
   "commands.compile.preview": "Preview MiniProgram",

@@ -7,6 +7,7 @@
   "commands.compile.artifact": "查看小程序编译产物",
   "commands.compile.sourceMap": "下载最近上传版本的 SourceMap",
   "commands.compile.analyze": "分析代码静态依赖",
+  "commands.compile.quality": "分析代码质量",
   "commands.compile.preview": "预览小程序",
   "commands.compile.upload": "打包并上传小程序",
   "commands.document.open": "查看开发文档",

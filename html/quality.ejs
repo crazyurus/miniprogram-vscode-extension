@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      html {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+      body {
+        height: 100%;
+        width: 60%;
+        margin: 0 auto;
+        line-height: 1.5;
+        user-select: none;
+      }
+
+      .form {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      p {
+        margin: 8px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form">
+      <% items.forEach(item => {%>
+      <details open>
+        <summary><%= item.success ? '✅' : '❌' %> <%= item.name %></summary>
+        <p><%= item.text %></p>
+        <p><%= JSON.stringify(item.detail) %></p>
+        <p><a href="<%= item.docURL %>">查看教程</a></p>
+      </details>
+      <% }) %>
+    </div>
+  </body>
+</html>
