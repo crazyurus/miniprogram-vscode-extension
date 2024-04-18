@@ -12,7 +12,7 @@ async function saveMiniprogramProject(): Promise<void> {
     defaultUri: vscode.Uri.file(rootPath),
     canSelectMany: false,
     filters: {
-      '项目配置文件': ['json'],
+      项目配置文件: ['json'],
     },
     openLabel: '选择',
   });
@@ -29,7 +29,11 @@ async function saveMiniprogramProject(): Promise<void> {
     await fs.promises.mkdir(vscodePath);
   }
 
-  await updateJSON(path.join(vscodePath, 'settings.json'), 'miniprogram.miniprogramPath', relativePath);
+  await updateJSON(
+    path.join(vscodePath, 'settings.json'),
+    'miniprogram.miniprogramPath',
+    relativePath
+  );
 
   vscode.window.showInformationMessage('设置成功，请重新尝试之前的操作');
 }
@@ -52,6 +56,8 @@ function getCompileOptions(options: CompileOptions): {
   minifyJS: boolean;
   codeProtect: boolean;
   uploadWithSourceMap: boolean;
+  disableUseStrict: boolean;
+  compileWorklet: boolean;
 } {
   return {
     es6: options.es6,
@@ -63,10 +69,16 @@ function getCompileOptions(options: CompileOptions): {
     minifyJS: options.minified,
     codeProtect: options.uglifyFileName,
     uploadWithSourceMap: options.uploadWithSourceMap,
+    disableUseStrict: options.disableUseStrict,
+    compileWorklet: options.compileWorklet,
   };
 }
 
-function getTemporaryFileName(type: string, appid: string, ext: string): string {
+function getTemporaryFileName(
+  type: string,
+  appid: string,
+  ext: string
+): string {
   const timestamp = Date.now();
 
   return `${type}-${appid}-${timestamp}.${ext}`;

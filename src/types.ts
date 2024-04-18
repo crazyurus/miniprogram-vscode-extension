@@ -16,6 +16,8 @@ export interface CompileOptions {
   minifyWXML: boolean;
   uglifyFileName: boolean;
   uploadWithSourceMap: boolean;
+  disableUseStrict: boolean;
+  compileWorklet: boolean;
 }
 
 export interface ProjectAttributes extends IProjectAttr {
