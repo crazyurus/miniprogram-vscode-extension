@@ -25,6 +25,12 @@
 
       p {
         margin: 8px 0;
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+
+      .title {
+        font-weight: bold;
       }
     </style>
   </head>
@@ -32,7 +38,10 @@
     <div class="form">
       <% items.forEach(item => {%>
       <details open>
-        <summary><%= item.success ? '✅' : '❌' %> <%= item.name %></summary>
+        <summary>
+          <%= item.success ? '✅' : '❌' %>
+          <span class="title"><%= item.name %></span>
+        </summary>
         <p><%= item.text %></p>
         <p><%= JSON.stringify(item.detail) %></p>
         <p><a href="<%= item.docURL %>">查看教程</a></p>
