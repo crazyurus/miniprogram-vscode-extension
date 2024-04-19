@@ -9,17 +9,19 @@ import * as pageTemplate from '../templates/page';
 import * as componentTemplate from '../templates/component';
 
 async function create(type: 'page' | 'component', value: string, uri: vscode.Uri): Promise<void> {
-  const template: Record<string, string> = type === 'page' ? pageTemplate : componentTemplate;
   const name = type === 'page' ? '页面' : '组件';
 
-  for (let ext in template) {
-    const filePath = path.join(uri.fsPath, `${value}.${ext}`);
+  const generateTemplateFile = async () => {
+    const template: Record<string, string> = type === 'page' ? pageTemplate : componentTemplate;
+    for (let ext in template) {
+      const filePath = path.join(uri.fsPath, `${value}.${ext}`);
 
-    if (fs.existsSync(filePath)) {
-      throw new Error(name + ' ' + value + ' 已存在');
+      if (fs.existsSync(filePath)) {
+        throw new Error(name + ' ' + value + ' 已存在');
+      }
+
+      await fs.promises.writeFile(filePath, template[ext].trim());
     }
-
-    await fs.promises.writeFile(filePath, template[ext].trim());
   }
 
   if (type === 'page') {
@@ -33,8 +35,13 @@ async function create(type: 'page' | 'component', value: string, uri: vscode.Uri
         throw new Error('页面路径不能超过小程序根目录');
       }
 
+      // 先判断再生成
+      await generateTemplateFile()
       await updateJSON(appConfigFile, 'pages', pagePath + '/' + value, 'push');
     }
+  } else {
+    // 组件直接生成
+    generateTemplateFile()
   }
 
   vscode.window.showInformationMessage(name + ' ' + value + ' 创建成功');
@@ -48,7 +55,6 @@ function validate(name: string): string | null {
 class CreateCommand extends Command {
   activate(): void {
     this.register('MiniProgram.commands.create.page', async (e: vscode.Uri) => {
-      const uri = vscode.Uri.parse(e.fsPath);
       const value = await vscode.window.showInputBox({
         prompt: '页面名称',
         placeHolder: '请输入页面名称，如：index',
@@ -56,12 +62,11 @@ class CreateCommand extends Command {
       });
   
       if (value) {
-        await create('page', value, uri);
+        await create('page', value, e);
       }
     });
   
     this.register('MiniProgram.commands.create.component', async (e: vscode.Uri) => {
-      const uri = vscode.Uri.parse(e.fsPath);
       const value = await vscode.window.showInputBox({
         prompt: '组件名称',
         placeHolder: '请输入组件名称，如：input',
@@ -69,7 +74,7 @@ class CreateCommand extends Command {
       });
   
       if (value) {
-        await create('component', value, uri);
+        await create('component', value, e);
       }
     });
   }

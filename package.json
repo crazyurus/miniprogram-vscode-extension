@@ -90,6 +90,16 @@
           "command": "MiniProgram.commands.create.component",
           "group": "file"
         }
+      ],
+      "commandPalette": [
+        {
+          "command": "MiniProgram.commands.create.page",
+          "when": "false"
+        },
+        {
+          "command": "MiniProgram.commands.create.component",
+          "when": "false"
+        }
       ]
     },
     "commands": [
