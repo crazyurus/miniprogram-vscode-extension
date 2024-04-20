@@ -13,7 +13,7 @@ jobs:
 
       - name: Global Dependencies
         run: |
-          npm install pnpm asar -g
+          npm install pnpm@9.0.4 asar -g
 
       - name: Asar
         run: |
