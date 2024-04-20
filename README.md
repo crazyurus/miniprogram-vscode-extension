@@ -59,8 +59,6 @@
 
 ## 反馈
 
-> 精力有限，Issue 和 Pull Request 会定期处理
-
 [创建 Issue](https://github.com/crazyurus/miniprogram-vscode-extension/issues)
 
 [欢迎 Pull Request](https://github.com/crazyurus/miniprogram-vscode-extension/pulls)
