@@ -41,7 +41,7 @@ async function create(type: 'page' | 'component', value: string, uri: vscode.Uri
     }
   } else {
     // 组件直接生成
-    generateTemplateFile()
+    await generateTemplateFile()
   }
 
   vscode.window.showInformationMessage(name + ' ' + value + ' 创建成功');
