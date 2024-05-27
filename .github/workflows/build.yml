@@ -13,20 +13,21 @@ jobs:
 
       - name: Global Dependencies
         run: |
-          npm install pnpm@9.0.4 asar -g
+          corepack install
+          npm install asar -g
 
       - name: Asar
         run: |
-          pnpm install --frozen-lockfile --prod
-          pnpm run build:asar
+          corepack pnpm install --frozen-lockfile --prod
+          npm run build:asar
 
       - name: NPM Install
         run: |
-          pnpm install --frozen-lockfile
+          corepack pnpm install --frozen-lockfile
 
       - name: Build
         run: |
-          pnpm run build
+          npm run build
 
       - name: Deploy
         uses: lannonbr/vsce-action@3.0.0
