@@ -1,5 +1,6 @@
-const Module = require('module');
-const path = require('path');
+/* eslint-disable @typescript-eslint/no-var-requires */
+const Module = require('node:module');
+const path = require('node:path');
 const asarPath = path.join(__dirname, '..', 'node_modules.asar');
 const nodeModulesPath = path.join(__dirname, '..', '..', 'node_modules');
 const originalResolveLookupPaths = Module._resolveLookupPaths;
@@ -19,6 +20,7 @@ Module._resolveLookupPaths = function (moduleName, parent) {
   return paths;
 };
 
+// eslint-disable-next-line n/no-missing-require
 const extension = require('./index');
 
 module.exports = extension;

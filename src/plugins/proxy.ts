@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+
 import Plugin from '../base';
 
 class ProxyPlugin extends Plugin {

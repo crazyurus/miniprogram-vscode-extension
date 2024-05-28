@@ -1,18 +1,12 @@
 import Module from '../base';
-import CreateCommand from './create';
 import CompileCommand from './compile';
-import ProjectCommand from './project';
+import CreateCommand from './create';
 import DocumentCommand from './document';
+import ProjectCommand from './project';
 import StorageCommand from './storage';
 
 class CommandModule extends Module {
-  dependencies = [
-    CreateCommand,
-    CompileCommand,
-    ProjectCommand,
-    DocumentCommand,
-    StorageCommand
-  ];
+  dependencies = [CreateCommand, CompileCommand, ProjectCommand, DocumentCommand, StorageCommand];
 }
 
 export default new CommandModule();

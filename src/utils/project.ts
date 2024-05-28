@@ -1,9 +1,10 @@
-import * as fs from 'fs'
-import * as path from 'path'
+import fs from 'node:fs';
+import path from 'node:path';
 import * as vscode from 'vscode';
-import { readJSON } from './json';
-import { getCurrentFolderPath, getProjectConfigPath, getMiniProgramRootPath } from './path';
+
 import type { CompileOptions } from '../types';
+import { readJSON } from './json';
+import { getCurrentFolderPath, getMiniProgramRootPath, getProjectConfigPath } from './path';
 
 interface AppConfig {
   pages: string[];
@@ -71,51 +72,51 @@ async function createProject(context: vscode.ExtensionContext): Promise<Project>
     appid: projectConfig.appid,
     type: (projectConfig.compileType === 'miniprogram' ? 'miniProgram' : 'miniProgramPlugin') as Project['type'],
     projectPath: getMiniProgramRootPath(rootPath, projectConfig.miniprogramRoot),
-    ignores: ['node_modules/**/*'],
+    ignores: ['node_modules/**/*']
   };
 
   if (privateKey) {
     return {
       ...options,
-      privateKey,
+      privateKey
     };
   }
 
-  const action = await vscode.window.showInformationMessage('请选择代码上传密钥文件，代码上传密钥可以在微信小程序后台“开发”-“开发设置”功能生成并下载，并关闭 IP 白名单', {
-    modal: true,
-  }, '选择密钥文件', '查看详细说明');
+  const action = await vscode.window.showInformationMessage(
+    '请选择代码上传密钥文件，代码上传密钥可以在微信小程序后台“开发”-“开发设置”功能生成并下载，并关闭 IP 白名单',
+    {
+      modal: true
+    },
+    '选择密钥文件',
+    '查看详细说明'
+  );
 
   switch (action) {
-    case '选择密钥文件':
-      const result = await vscode.window.showOpenDialog({
-        canSelectMany: false,
-        filters: {
-          '代码上传密钥文件': ['key'],
-        },
-        openLabel: '选择',
-      });
-      if (Array.isArray(result)) {
-        const keyFile = result[0].fsPath;
-        const key = await fs.promises.readFile(keyFile, 'utf-8');
-        context.workspaceState.update('privateKey', key);
+  case '选择密钥文件':
+    const result = await vscode.window.showOpenDialog({
+      canSelectMany: false,
+      filters: {
+        代码上传密钥文件: ['key']
+      },
+      openLabel: '选择'
+    });
+    if (Array.isArray(result)) {
+      const keyFile = result[0].fsPath;
+      const key = await fs.promises.readFile(keyFile, 'utf-8');
+      context.workspaceState.update('privateKey', key);
 
-        return {
-          ...options,
-          privateKey: key,
-        };
-      }
-      break;
-    case '查看详细说明':
-      vscode.env.openExternal(vscode.Uri.parse('https://developers.weixin.qq.com/miniprogram/dev/devtools/ci.html'));
-      break;
+      return {
+        ...options,
+        privateKey: key
+      };
+    }
+    break;
+  case '查看详细说明':
+    vscode.env.openExternal(vscode.Uri.parse('https://developers.weixin.qq.com/miniprogram/dev/devtools/ci.html'));
+    break;
   }
 
   return Promise.reject();
 }
 
-export {
-  getAppConfigPath,
-  readAppConfig,
-  readProjectConfig,
-  createProject,
-};
+export { getAppConfigPath, readAppConfig, readProjectConfig, createProject };

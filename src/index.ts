@@ -1,18 +1,12 @@
 import Module from './base';
 import CommandModule from './commands';
-import ViewPlugin from './plugins/view';
+import ComponentPlugin from './plugins/component';
 import ExtensionPlugin from './plugins/extension';
 import ProxyPlugin from './plugins/proxy';
-import ComponentPlugin from './plugins/component';
+import ViewPlugin from './plugins/view';
 
 class EntryModule extends Module {
-  dependencies = [
-    ViewPlugin,
-    CommandModule,
-    ExtensionPlugin,
-    ProxyPlugin,
-    ComponentPlugin
-  ];
+  dependencies = [ViewPlugin, CommandModule, ExtensionPlugin, ProxyPlugin, ComponentPlugin];
 }
 
 const entry = new EntryModule();

@@ -16,7 +16,10 @@
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
-    "n/exports-style": ["error", "module.exports"]
+    "n/exports-style": ["error", "module.exports"],
+    "n/no-missing-import": "off",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "no-case-declarations": "warn"
   },
   "ignorePatterns": ["extensions/*.js"]
 }

@@ -1,10 +1,11 @@
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import * as vscode from 'vscode';
-import * as fs from 'fs';
-import * as os from 'os';
-import * as path from 'path';
-import { getCurrentFolderPath } from '../../utils/path';
-import { updateJSON } from '../../utils/json';
+
 import type { CompileOptions } from '../../types';
+import { updateJSON } from '../../utils/json';
+import { getCurrentFolderPath } from '../../utils/path';
 
 async function saveMiniprogramProject(): Promise<void> {
   const rootPath = getCurrentFolderPath();
@@ -12,9 +13,9 @@ async function saveMiniprogramProject(): Promise<void> {
     defaultUri: vscode.Uri.file(rootPath),
     canSelectMany: false,
     filters: {
-      项目配置文件: ['json'],
+      项目配置文件: ['json']
     },
-    openLabel: '选择',
+    openLabel: '选择'
   });
 
   if (!Array.isArray(files)) {
@@ -29,11 +30,7 @@ async function saveMiniprogramProject(): Promise<void> {
     await fs.promises.mkdir(vscodePath);
   }
 
-  await updateJSON(
-    path.join(vscodePath, 'settings.json'),
-    'miniprogram.miniprogramPath',
-    relativePath
-  );
+  await updateJSON(path.join(vscodePath, 'settings.json'), 'miniprogram.miniprogramPath', relativePath);
 
   vscode.window.showInformationMessage('设置成功，请重新尝试之前的操作');
 }
@@ -70,24 +67,14 @@ function getCompileOptions(options: CompileOptions): {
     codeProtect: options.uglifyFileName,
     uploadWithSourceMap: options.uploadWithSourceMap,
     disableUseStrict: options.disableUseStrict,
-    compileWorklet: options.compileWorklet,
+    compileWorklet: options.compileWorklet
   };
 }
 
-function getTemporaryFileName(
-  type: string,
-  appid: string,
-  ext: string
-): string {
+function getTemporaryFileName(type: string, appid: string, ext: string): string {
   const timestamp = Date.now();
 
   return `${type}-${appid}-${timestamp}.${ext}`;
 }
 
-export {
-  getCIBot,
-  getThreads,
-  getCompileOptions,
-  getTemporaryFileName,
-  saveMiniprogramProject,
-};
+export { getCIBot, getThreads, getCompileOptions, getTemporaryFileName, saveMiniprogramProject };

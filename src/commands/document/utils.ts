@@ -1,5 +1,6 @@
-import * as http from 'http';
+import http from 'node:http';
 import { fetch } from 'undici';
+
 import { openURL } from '../../utils/ui';
 
 export function createServer(url: string, title: string): void {

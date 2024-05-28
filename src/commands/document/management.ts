@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+
 import Command from '../base';
 
 class ManagementCommand extends Command {
@@ -7,6 +8,6 @@ class ManagementCommand extends Command {
       vscode.env.openExternal(vscode.Uri.parse('https://mp.weixin.qq.com/'));
     });
   }
-} 
+}
 
 export default new ManagementCommand();

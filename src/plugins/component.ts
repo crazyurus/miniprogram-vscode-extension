@@ -1,5 +1,6 @@
+import path from 'node:path';
 import * as vscode from 'vscode';
-import * as path from 'path';
+
 import Plugin from '../base';
 import { readJSON } from '../utils/json';
 import { getCurrentFolderPath } from '../utils/path';
@@ -46,7 +47,7 @@ const wxTags = [
   'ad',
   'official-account',
   'open-data',
-  'web-view',
+  'web-view'
 ];
 
 class ComponentPlugin extends Plugin {
@@ -57,20 +58,14 @@ class ComponentPlugin extends Plugin {
           {
             scheme: 'file',
             language: 'wxml',
-            pattern: '**/*.wxml',
-          },
+            pattern: '**/*.wxml'
+          }
         ],
         {
-          provideDefinition(
-            doc: vscode.TextDocument,
-            position: vscode.Position
-          ) {
+          provideDefinition(doc: vscode.TextDocument, position: vscode.Position) {
             const lineText = doc.lineAt(position).text;
-            const wordRange = doc.getWordRangeAtPosition(
-              position,
-              /[\w|\-]+\b/
-            );
-            const tag = (lineText.match(/(?<=<\/?)[\w|\-]+\b/) || [])[0];
+            const wordRange = doc.getWordRangeAtPosition(position, /[\w|-]+\b/);
+            const tag = (lineText.match(/(?<=<\/?)[\w|-]+\b/) || [])[0];
             const word = doc.getText(wordRange);
 
             if (!tag) {
@@ -105,11 +100,8 @@ class ComponentPlugin extends Plugin {
 
             const result = path.join(filePath, '..', `${componentPath}.js`);
 
-            return new vscode.Location(
-              vscode.Uri.file(result),
-              new vscode.Position(0, 0)
-            );
-          },
+            return new vscode.Location(vscode.Uri.file(result), new vscode.Position(0, 0));
+          }
         }
       )
     );

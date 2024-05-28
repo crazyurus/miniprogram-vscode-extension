@@ -1,10 +1,9 @@
 import * as vscode from 'vscode';
 
-import Command from '../base';
-
 import { createProject } from '../../utils/project';
-import { openWebView } from '../../utils/ui';
 import renderHTML from '../../utils/render';
+import { openWebView } from '../../utils/ui';
+import Command from '../base';
 
 class QualityCommand extends Command {
   activate(context: vscode.ExtensionContext): void {
@@ -16,7 +15,7 @@ class QualityCommand extends Command {
 
       openWebView(
         await renderHTML('quality', {
-          items: result,
+          items: result
         }),
         '代码质量',
         vscode.ViewColumn.Active

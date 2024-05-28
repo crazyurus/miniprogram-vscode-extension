@@ -1,14 +1,10 @@
 import Command from '../base';
+import ManagementCommand from './management';
 import OpenDocumentCommand from './open';
 import SearchDocumentCommand from './search';
-import ManagementCommand from './management';
 
 class DocumentCommand extends Command {
-  dependencies = [
-    OpenDocumentCommand,
-    SearchDocumentCommand,
-    ManagementCommand
-  ];
+  dependencies = [OpenDocumentCommand, SearchDocumentCommand, ManagementCommand];
 }
 
 export default new DocumentCommand();

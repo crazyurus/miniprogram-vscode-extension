@@ -1,4 +1,4 @@
-import * as fs from 'fs';
+import fs from 'node:fs';
 
 function readJSON<T extends Record<string, any>>(filePath: string): T | null {
   try {
@@ -13,7 +13,6 @@ function updateJSON(filePath: string, key: string, value: any, method: string = 
   const appConfig = readJSON(filePath) || {};
 
   if (method) {
-    // @ts-ignore
     appConfig[key][method](value);
   } else {
     appConfig[key] = value;
@@ -22,7 +21,4 @@ function updateJSON(filePath: string, key: string, value: any, method: string = 
   return fs.promises.writeFile(filePath, JSON.stringify(appConfig, null, 2));
 }
 
-export {
-  readJSON,
-  updateJSON,
-};
+export { readJSON, updateJSON };
