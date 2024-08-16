@@ -2,4 +2,3 @@ node_modules
 .bak
 *.vsix
 dist
-*.asar

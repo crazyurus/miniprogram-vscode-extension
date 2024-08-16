@@ -2,7 +2,8 @@
 .github
 build
 src
+commitlint.config.js
 tsconfig.json
-node_modules
+patches
 .vsix
 .npmrc

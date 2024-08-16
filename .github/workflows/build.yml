@@ -14,12 +14,7 @@ jobs:
       - name: Global Dependencies
         run: |
           corepack install
-           npm install @electron/asar husky -g
-
-      - name: Asar
-        run: |
-          corepack pnpm install --frozen-lockfile --prod
-          npm run build:asar
+          npm install husky -g
 
       - name: NPM Install
         run: |
@@ -31,6 +26,6 @@ jobs:
 
       - name: Deploy
         run: |
-          npx vsce publish -p $VSCE_TOKEN --no-dependencies
+          vsce publish -p $VSCE_TOKEN --no-dependencies
         env:
           VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
