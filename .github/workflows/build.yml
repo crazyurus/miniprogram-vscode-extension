@@ -18,6 +18,8 @@ jobs:
 
       - name: NPM Install
         run: |
+          corepack pnpm install --frozen-lockfile --prod
+          cp -r node_modules ./dist/node_modules
           corepack pnpm install --frozen-lockfile
 
       - name: Build

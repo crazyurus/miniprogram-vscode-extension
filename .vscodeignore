@@ -7,3 +7,4 @@ tsconfig.json
 patches
 .vsix
 .npmrc
+node_modules
