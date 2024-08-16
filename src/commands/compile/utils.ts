@@ -3,7 +3,6 @@ import os from 'node:os';
 import path from 'node:path';
 import * as vscode from 'vscode';
 
-import type { CompileOptions } from '../../types';
 import { updateJSON } from '../../utils/json';
 import { getCurrentFolderPath } from '../../utils/path';
 
@@ -43,38 +42,10 @@ function getThreads(): number {
   return os.cpus().length * 2;
 }
 
-function getCompileOptions(options: CompileOptions): {
-  es6: boolean;
-  es7: boolean;
-  minify: boolean;
-  autoPrefixWXSS: boolean;
-  minifyWXML: boolean;
-  minifyWXSS: boolean;
-  minifyJS: boolean;
-  codeProtect: boolean;
-  uploadWithSourceMap: boolean;
-  disableUseStrict: boolean;
-  compileWorklet: boolean;
-} {
-  return {
-    es6: options.es6,
-    es7: options.enhance,
-    minify: options.minified,
-    autoPrefixWXSS: options.postcss,
-    minifyWXML: options.minified || options.minifyWXSS,
-    minifyWXSS: options.minified || options.minifyWXML,
-    minifyJS: options.minified,
-    codeProtect: options.uglifyFileName,
-    uploadWithSourceMap: options.uploadWithSourceMap,
-    disableUseStrict: options.disableUseStrict,
-    compileWorklet: options.compileWorklet
-  };
-}
-
 function getTemporaryFileName(type: string, appid: string, ext: string): string {
   const timestamp = Date.now();
 
   return `${type}-${appid}-${timestamp}.${ext}`;
 }
 
-export { getCIBot, getThreads, getCompileOptions, getTemporaryFileName, saveMiniprogramProject };
+export { getCIBot, getThreads, getTemporaryFileName, saveMiniprogramProject };

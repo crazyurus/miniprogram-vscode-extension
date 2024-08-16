@@ -3,14 +3,13 @@ import path from 'node:path';
 import open from 'open';
 import * as vscode from 'vscode';
 
-import { createProject, readProjectConfig } from '../../utils/project';
+import { createProject } from '../../utils/project';
 import Command from '../base';
-import { getCompileOptions, getTemporaryFileName } from './utils';
+import { getTemporaryFileName } from './utils';
 
 class ArtifactCommand extends Command {
   activate(context: vscode.ExtensionContext): void {
     this.register('MiniProgram.commands.compile.artifact', async () => {
-      const projectConfig = readProjectConfig();
       const options = await createProject(context);
       const artifactZipPath = path.join(os.tmpdir(), getTemporaryFileName('artifact', options.appid, 'zip'));
       await vscode.window.withProgress(
@@ -27,7 +26,9 @@ class ArtifactCommand extends Command {
             {
               project,
               version: '1.0.0',
-              setting: getCompileOptions(projectConfig.setting),
+              setting: {
+                useProjectConfig: true
+              },
               onProgressUpdate(message): void {
                 progress.report(typeof message === 'string' ? { message } : message);
               }

@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 import { createProject, readProjectConfig } from '../../utils/project';
 import { showInputBox } from '../../utils/ui';
 import Command from '../base';
-import { getCIBot, getCompileOptions, getThreads } from './utils';
+import { getCIBot, getThreads } from './utils';
 
 class UploadCommand extends Command {
   activate(context: vscode.ExtensionContext): void {
@@ -45,7 +45,9 @@ class UploadCommand extends Command {
             project,
             version,
             desc: description || '通过 MiniProgram VSCode Extension 上传',
-            setting: getCompileOptions(projectConfig.setting),
+            setting: {
+              useProjectConfig: true
+            },
             allowIgnoreUnusedFiles: projectConfig.ignoreUploadUnusedFiles,
             onProgressUpdate(message: string | { message: string }): void {
               progress.report(typeof message === 'string' ? { message } : message);

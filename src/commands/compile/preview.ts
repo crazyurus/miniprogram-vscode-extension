@@ -8,7 +8,7 @@ import { createProject, readAppConfig, readProjectConfig } from '../../utils/pro
 import renderHTML from '../../utils/render';
 import { openWebView } from '../../utils/ui';
 import Command from '../base';
-import { getCIBot, getCompileOptions, getTemporaryFileName, getThreads } from './utils';
+import { getCIBot, getTemporaryFileName, getThreads } from './utils';
 
 class PreviewCommand extends Command {
   activate(context: vscode.ExtensionContext): void {
@@ -46,7 +46,9 @@ class PreviewCommand extends Command {
             project,
             version: '',
             desc: '通过 MiniProgram VSCode Extension 上传',
-            setting: getCompileOptions(projectConfig.setting),
+            setting: {
+              useProjectConfig: true
+            },
             qrcodeFormat: 'base64',
             qrcodeOutputDest: tempImagePath,
             pagePath,
