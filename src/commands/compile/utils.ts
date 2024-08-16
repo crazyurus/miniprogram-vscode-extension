@@ -35,7 +35,9 @@ async function saveMiniprogramProject(): Promise<void> {
 }
 
 function getCIBot(): number {
-  return 28;
+  const config = vscode.workspace.getConfiguration('miniprogram').get('ciBot');
+
+  return config ? Number(config) : 28;
 }
 
 function getThreads(): number {

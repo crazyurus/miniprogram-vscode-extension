@@ -203,8 +203,14 @@
         "miniprogram.idePath": {
           "type": "string",
           "default": "",
-          "description": "微信开发者工具 IDE 的安装路径，若安装时自定义了路径，请配置此选项",
+          "description": "微信开发者工具 IDE 的安装目录。若安装时自定义了文件夹路径，请配置此选项",
           "scope": "machine"
+        },
+        "miniprogram.ciBot": {
+          "type": "string",
+          "default": "28",
+          "description": "指定微信小程序构建的 CI Bot 编号，范围 1-30",
+          "scope": "resource"
         },
         "universal-path-intellisense.extensionOnImport": {
           "type": "boolean",
