@@ -2,7 +2,7 @@
   "name": "miniprogram-vscode-extension",
   "displayName": "微信小程序开发工具",
   "description": "提供小程序预览、打包上传、代码补全、语法高亮、项目模版等功能",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "icon": "assets/logo.png",
   "publisher": "crazyurus",
   "license": "GPL-3.0",

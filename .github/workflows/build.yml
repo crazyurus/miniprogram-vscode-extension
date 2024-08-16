@@ -19,6 +19,7 @@ jobs:
       - name: NPM Install
         run: |
           corepack pnpm install --frozen-lockfile --prod
+          mkdir ./dist
           cp -r node_modules ./dist/node_modules
           corepack pnpm install --frozen-lockfile
 
@@ -28,6 +29,6 @@ jobs:
 
       - name: Deploy
         run: |
-          vsce publish -p $VSCE_TOKEN --no-dependencies
+          npx vsce publish -p $VSCE_TOKEN --no-dependencies
         env:
           VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
