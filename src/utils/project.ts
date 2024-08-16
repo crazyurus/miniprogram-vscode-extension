@@ -2,7 +2,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import * as vscode from 'vscode';
 
-import type { CompileOptions } from '../types';
 import { readJSON } from './json';
 import { getCurrentFolderPath, getMiniProgramRootPath, getProjectConfigPath } from './path';
 
@@ -16,7 +15,6 @@ interface ProjectConfig {
   libVersion: string;
   miniprogramRoot?: string;
   compileType?: 'miniprogram' | 'plugin';
-  setting: CompileOptions;
   ignoreUploadUnusedFiles: boolean;
 }
 

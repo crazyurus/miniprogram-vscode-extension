@@ -49,7 +49,7 @@ class UploadCommand extends Command {
               useProjectConfig: true
             },
             allowIgnoreUnusedFiles: projectConfig.ignoreUploadUnusedFiles,
-            onProgressUpdate(message: string | { message: string }): void {
+            onProgressUpdate(message): void {
               progress.report(typeof message === 'string' ? { message } : message);
             },
             robot: getCIBot(),

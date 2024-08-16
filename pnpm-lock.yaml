@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  miniprogram-ci@2.0.9:
+    hash: tfxe44fgcixrnmckclhfauhmr4
+    path: patches/miniprogram-ci@2.0.9.patch
+
 importers:
 
   .:
@@ -16,7 +21,7 @@ importers:
         version: 3.1.10
       miniprogram-ci:
         specifier: ^2.0.9
-        version: 2.0.9(eslint@8.57.0)
+        version: 2.0.9(patch_hash=tfxe44fgcixrnmckclhfauhmr4)(eslint@8.57.0)
       open:
         specifier: ^8.4.2
         version: 8.4.2
@@ -30,6 +35,9 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^19.2.2
         version: 19.2.2
+      '@electron/asar':
+        specifier: ^3.2.10
+        version: 3.2.10
       '@ianvs/prettier-plugin-sort-imports':
         specifier: ^4.2.1
         version: 4.2.1(prettier@3.2.5)
@@ -66,9 +74,6 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^6.19.0
         version: 6.21.0(eslint@8.57.0)(typescript@5.4.5)
-      asar:
-        specifier: ^3.2.0
-        version: 3.2.0
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
@@ -932,6 +937,11 @@ packages:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
 
+  '@electron/asar@3.2.10':
+    resolution: {integrity: sha512-mvBSwIBUeiRscrCeJE1LwctAriBj65eUDm0Pc11iE5gRwzkmsdbS7FnZ1XUWjpSeQWL1L5g12Fc/SchPM9DUOw==}
+    engines: {node: '>=10.12.0'}
+    hasBin: true
+
   '@eslint-community/eslint-utils@4.4.0':
     resolution: {integrity: sha512-1/sA4dwrzBAyeUoQ6oxahHKmrZvsnLCg4RfxW3ZFGGmQkSNQPFNLV9CUEFQP1x9EYXHTo5p6xdhZM1Ne9p/AfA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -1385,9 +1395,6 @@ packages:
   '@types/estree@1.0.0':
     resolution: {integrity: sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==}
 
-  '@types/glob@7.2.0':
-    resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
-
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
@@ -1396,9 +1403,6 @@ packages:
 
   '@types/long@4.0.2':
     resolution: {integrity: sha512-MqTGEo5bj5t157U6fA/BiDynNkn0YknVdh48CMPkTSpFTVmvao5UQmm7uEF6xBEo7qIMAlY/JSleYaE6VOdpaA==}
-
-  '@types/minimatch@5.1.2':
-    resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}
 
   '@types/node@18.7.18':
     resolution: {integrity: sha512-m+6nTEOadJZuTPkKR/SYK3A2d7FZrgElol9UP1Kae90VVU4a6mxnPuLiIW1m4Cq4gZ/nWb9GrdVXJCoCazDAbg==}
@@ -1605,12 +1609,6 @@ packages:
 
   asap@2.0.6:
     resolution: {integrity: sha512-BSHWgDSAiKs50o2Re8ppvp3seVHXSRM44cdSsT9FfNEUUZLOGWVCsiWaRPWM1Znn+mqZ1OfVZ3z3DWEzSp7hRA==}
-
-  asar@3.2.0:
-    resolution: {integrity: sha512-COdw2ZQvKdFGFxXwX3oYh2/sOsJWJegrdJCGxnN4MZ7IULgRBp9P6665aqj9z1v9VwP4oP1hRBojRDQ//IGgAg==}
-    engines: {node: '>=10.12.0'}
-    deprecated: Please use @electron/asar moving forward.  There is no API change, just a package name change
-    hasBin: true
 
   asn1@0.2.6:
     resolution: {integrity: sha512-ix/FxPn0MDjeyJ7i/yoHGFt/EX6LyNbxSEhPPXODPL+KB0VPk86UYfL0lMdy+KCnv+fmvIzySwaK5COwqVbWTQ==}
@@ -2015,9 +2013,6 @@ packages:
 
   chroma-js@2.6.0:
     resolution: {integrity: sha512-BLHvCB9s8Z1EV4ethr6xnkl/P2YRFOGqfgvuMG/MyCbZPrTA+NeiByY6XvgF0zP4/2deU2CXnWyMa3zu1LqQ3A==}
-
-  chromium-pickle-js@0.2.0:
-    resolution: {integrity: sha512-1R5Fho+jBq0DDydt+/vHWj5KJNJCKdARKOCwZUen84I5BreWoLqRLANH1U87eJy1tiASPtMnGqJJq0ZsLoRPOw==}
 
   clean-css@4.2.4:
     resolution: {integrity: sha512-EJUDT7nDVFDvaQgAo2G/PJvxmp1o/c6iXLbswsBbUFXi1Nr+AjA2cKmfbKDMjMvzEe75g3P6JkaDDAKk96A85A==}
@@ -4914,7 +4909,7 @@ snapshots:
       '@babel/helper-validator-identifier': 7.24.6
       chalk: 2.4.2
       js-tokens: 4.0.0
-      picocolors: 1.0.0
+      picocolors: 1.0.1
 
   '@babel/parser@7.21.4':
     dependencies:
@@ -5688,6 +5683,12 @@ snapshots:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
 
+  '@electron/asar@3.2.10':
+    dependencies:
+      commander: 5.1.0
+      glob: 7.2.3
+      minimatch: 3.1.2
+
   '@eslint-community/eslint-utils@4.4.0(eslint@8.57.0)':
     dependencies:
       eslint: 8.57.0
@@ -6011,7 +6012,7 @@ snapshots:
     dependencies:
       '@jridgewell/set-array': 1.1.2
       '@jridgewell/sourcemap-codec': 1.4.14
-      '@jridgewell/trace-mapping': 0.3.18
+      '@jridgewell/trace-mapping': 0.3.25
 
   '@jridgewell/gen-mapping@0.3.5':
     dependencies:
@@ -6216,12 +6217,6 @@ snapshots:
 
   '@types/estree@1.0.0': {}
 
-  '@types/glob@7.2.0':
-    dependencies:
-      '@types/minimatch': 5.1.2
-      '@types/node': 18.7.18
-    optional: true
-
   '@types/json-schema@7.0.15': {}
 
   '@types/keyv@3.1.4':
@@ -6229,9 +6224,6 @@ snapshots:
       '@types/node': 18.7.18
 
   '@types/long@4.0.2': {}
-
-  '@types/minimatch@5.1.2':
-    optional: true
 
   '@types/node@18.7.18': {}
 
@@ -6463,15 +6455,6 @@ snapshots:
   array-union@2.1.0: {}
 
   asap@2.0.6: {}
-
-  asar@3.2.0:
-    dependencies:
-      chromium-pickle-js: 0.2.0
-      commander: 5.1.0
-      glob: 7.2.3
-      minimatch: 3.1.2
-    optionalDependencies:
-      '@types/glob': 7.2.0
 
   asn1@0.2.6:
     dependencies:
@@ -7196,8 +7179,6 @@ snapshots:
       fsevents: 2.3.2
 
   chroma-js@2.6.0: {}
-
-  chromium-pickle-js@0.2.0: {}
 
   clean-css@4.2.4:
     dependencies:
@@ -8565,7 +8546,7 @@ snapshots:
 
   minimist@1.2.8: {}
 
-  miniprogram-ci@2.0.9(eslint@8.57.0):
+  miniprogram-ci@2.0.9(patch_hash=tfxe44fgcixrnmckclhfauhmr4)(eslint@8.57.0):
     dependencies:
       '@babel/code-frame': 7.22.10
       '@babel/compat-data': 7.22.9

@@ -572,6 +572,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
+    "@electron/asar": "^3.2.10",
     "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-json": "^4.1.0",
@@ -584,7 +585,6 @@
     "@types/vscode": "^1.25.0",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
     "@typescript-eslint/parser": "^6.19.0",
-    "asar": "^3.2.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-n": "^17.7.0",
@@ -596,5 +596,10 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   },
-  "packageManager": "pnpm@9.7.1"
+  "packageManager": "pnpm@9.7.1",
+  "pnpm": {
+    "patchedDependencies": {
+      "miniprogram-ci@2.0.9": "patches/miniprogram-ci@2.0.9.patch"
+    }
+  }
 }
