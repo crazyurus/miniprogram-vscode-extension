@@ -1,5 +1,6 @@
 import os from 'node:os';
 import path from 'node:path';
+import * as ci from 'miniprogram-ci';
 import open from 'open';
 import * as vscode from 'vscode';
 
@@ -19,7 +20,6 @@ class ArtifactCommand extends Command {
           cancellable: true
         },
         async progress => {
-          const ci = await import('miniprogram-ci');
           const project = new ci.Project(options);
 
           await ci.getCompiledResult(

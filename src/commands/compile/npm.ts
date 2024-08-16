@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import * as ci from 'miniprogram-ci';
 import * as vscode from 'vscode';
 
 import { createProject, readProjectConfig } from '../../utils/project';
@@ -22,7 +23,6 @@ class NPMCommand extends Command {
           cancellable: true
         },
         async () => {
-          const ci = await import('miniprogram-ci');
           const project = new ci.Project(options);
 
           const warning = (await ci.packNpm(project, {

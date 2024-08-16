@@ -1,3 +1,4 @@
+import * as ci from 'miniprogram-ci';
 import * as vscode from 'vscode';
 
 import { createProject, readProjectConfig } from '../../utils/project';
@@ -38,7 +39,6 @@ class UploadCommand extends Command {
           cancellable: true
         },
         async progress => {
-          const ci = await import('miniprogram-ci');
           const project = new ci.Project(options);
 
           await ci.upload({

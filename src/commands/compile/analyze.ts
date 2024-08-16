@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import * as ci from 'miniprogram-ci';
 import * as vscode from 'vscode';
 
 import { WebviewMessage } from '../../types';
@@ -35,7 +36,6 @@ class AnalyzeCommand extends Command {
 
           break;
         case 'analyse':
-          const ci = await import('miniprogram-ci');
           const project = new ci.Project(options);
           const result = await ci.analyseCode(project);
 

@@ -1,3 +1,4 @@
+import * as ci from 'miniprogram-ci';
 import open from 'open';
 import * as vscode from 'vscode';
 
@@ -26,7 +27,6 @@ class SourceMapCommand extends Command {
           cancellable: true
         },
         async () => {
-          const ci = await import('miniprogram-ci');
           const project = new ci.Project(options);
 
           await ci.getDevSourceMap({

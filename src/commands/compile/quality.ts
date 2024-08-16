@@ -1,3 +1,4 @@
+import * as ci from 'miniprogram-ci';
 import * as vscode from 'vscode';
 
 import { createProject } from '../../utils/project';
@@ -8,7 +9,6 @@ import Command from '../base';
 class QualityCommand extends Command {
   activate(context: vscode.ExtensionContext): void {
     this.register('MiniProgram.commands.compile.quality', async () => {
-      const ci = await import('miniprogram-ci');
       const options = await createProject(context);
       const project = new ci.Project(options);
       const result = await ci.checkCodeQuality(project);

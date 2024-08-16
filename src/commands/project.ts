@@ -1,6 +1,7 @@
 import { exec, execFile } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
+import * as ci from 'miniprogram-ci';
 import open from 'open';
 import * as vscode from 'vscode';
 
@@ -73,7 +74,6 @@ class ProjectCommand extends Command {
     // 项目详情
     this.register('MiniProgram.commands.config.project', async () => {
       const projectConfig = readProjectConfig();
-      const ci = await import('miniprogram-ci');
       const options = await createProject(context);
       const project = new ci.Project(options);
       const projectSetting = (await project.attr()) as ProjectAttributes;

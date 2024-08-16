@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
+import * as ci from 'miniprogram-ci';
 import * as vscode from 'vscode';
 
 import type { ProjectAttributes } from '../../types';
@@ -38,7 +39,6 @@ class PreviewCommand extends Command {
           cancellable: true
         },
         async progress => {
-          const ci = await import('miniprogram-ci');
           const project = new ci.Project(options);
           const { appName } = (await project.attr()) as ProjectAttributes;
 
