@@ -590,7 +590,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   },
-  "packageManager": "pnpm@9.7.1",
+  "packageManager": "pnpm@9.10.0",
   "pnpm": {
     "patchedDependencies": {
       "miniprogram-ci@2.0.9": "patches/miniprogram-ci@2.0.9.patch"

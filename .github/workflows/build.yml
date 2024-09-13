@@ -13,15 +13,14 @@ jobs:
 
       - name: Global Dependencies
         run: |
-          corepack install
-          npm install husky -g
+          corepack enable
 
       - name: NPM Install
         run: |
-          corepack pnpm install --frozen-lockfile --prod
+          pnpm install --frozen-lockfile --prod --ignore-scripts
           mkdir ./dist
           cp -r node_modules ./dist/node_modules
-          corepack pnpm install --frozen-lockfile
+          pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Build
         run: |
