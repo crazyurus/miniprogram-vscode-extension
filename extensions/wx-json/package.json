@@ -39,12 +39,20 @@
         "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/project.config.schema.json"
       },
       {
+        "fileMatch": "project.private.config.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/project.private.config.schema.json"
+      },
+      {
         "fileMatch": "sitemap.json",
         "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/sitemap.schema.json"
       },
       {
         "fileMatch": "container.config.json",
         "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/container.config.schema.json"
+      },
+      {
+        "fileMatch": "theme.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/theme.schema.json"
       },
       {
         "fileMatch": [
@@ -58,7 +66,9 @@
           "!/project.config.json",
           "!/sitemap.json",
           "!/container.config.json",
-          "!/.eslintrc.*"
+          "!/.eslintrc.*",
+          "!project.private.config.json",
+          "!/theme.json"
         ],
         "url": "https://dldir1.qq.com/WechatWebDev/plugins/editor/wechat-miniprogram_wx-json/1.0.0/page_component.schema.json"
       }

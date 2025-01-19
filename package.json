@@ -452,6 +452,10 @@
         "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/project.config.schema.json"
       },
       {
+        "fileMatch": "project.private.config.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/project.private.config.schema.json"
+      },
+      {
         "fileMatch": "sitemap.json",
         "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/sitemap.schema.json"
       },
@@ -460,18 +464,26 @@
         "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/container.config.schema.json"
       },
       {
+        "fileMatch": "theme.json",
+        "url": "https://dldir1.qq.com/WechatWebDev/editor-extension/wx-json/theme.schema.json"
+      },
+      {
         "fileMatch": [
-          "pages/**/*.json"
+          "*.json",
+          "!/settings.json",
+          "!/config.json",
+          "!/app.json",
+          "!/ext.json",
+          "!/game.json",
+          "!/plugin.json",
+          "!/project.config.json",
+          "!/sitemap.json",
+          "!/container.config.json",
+          "!/.eslintrc.*",
+          "!project.private.config.json",
+          "!/theme.json"
         ],
         "url": "https://dldir1.qq.com/WechatWebDev/plugins/editor/wechat-miniprogram_wx-json/1.0.0/page_component.schema.json"
-      },
-      {
-        "fileMatch": "*.wxml-data.json",
-        "url": "https://raw.githubusercontent.com/microsoft/vscode-html-languageservice/master/docs/customData.schema.json"
-      },
-      {
-        "fileMatch": "package.json",
-        "url": "./extensions/wxml-language-features/schemas/package.schema.json"
       }
     ],
     "snippets": [
